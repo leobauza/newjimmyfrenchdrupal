@@ -1,0 +1,21 @@
+/* app/globals/etc (disposable testing area/documentation scss) */
+.element-invisible {
+  display: none;
+}
+
+#admin-menu-wrapper {
+  ul {
+    font-size: 100%;
+  }
+  .dropdown > li > ul {
+
+  }
+}
+
+#admin-menu {
+  .dropdown {
+    li {
+      line-height: 1.2em;
+    }
+  }
+}

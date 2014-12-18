@@ -1,0 +1,24 @@
+name = JF
+description = The Jimmy French theme
+core = 7.x
+regions[header]          = 'Header'
+regions[navigation]      = 'Navigation'
+regions[highlighted]     = 'Highlighted'
+regions[help]            = 'Help'
+regions[content]         = 'Content'
+regions[footer]          = 'Footer'
+
+;css
+stylesheets[all][] = assets/css/styles.css
+
+
+;js
+;scripts[] = assets/js/script.js
+
+;settings
+;settings[company_name] = 'my company name'
+;settings[company_address] = 'my company address'
+;settings[company_phone] = '555-5555'
+;settings[company_fax] = '555-5555'
+;settings[facebook_link] = ''
+;settings[linkedin_link] = ''

@@ -1,0 +1,16 @@
+/**
+ * Config
+ * Variables and utilities
+ */
+@import 'config/vars',
+        'config/utils';
+
+/**
+ * Core
+ * Base styles
+ */
+@import 'core/reset',
+        'core/layout',
+        'core/list',
+        'core/form',
+        'core/table';
