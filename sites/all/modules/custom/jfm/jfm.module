@@ -1,16 +1,16 @@
 <?php
 /**
  * @file
- * jf module file
+ * jfm module file
  */
 
-require_once 'jf.core.inc';
+require_once 'jfm.core.inc';
 
-function jf_theme($existing, $type, $theme, $path) {
+function jfm_theme($existing, $type, $theme, $path) {
   $theme = array(
     'social_bar' => array(
       'template' => 'social-bar',
-      'path' => drupal_get_path('module', 'jf') . '/tpl'
+      'path' => drupal_get_path('module', 'jfm') . '/tpl'
     ),
   );
 
@@ -20,8 +20,8 @@ function jf_theme($existing, $type, $theme, $path) {
 /**
  *  Implements hook_block_info()
  */
-function jf_block_info() {
-  module_load_include('inc', 'jf', 'inc/block.info');
+function jfm_block_info() {
+  module_load_include('inc', 'jfm', 'inc/block.info');
   $blocks = array();
   $blocks['social_bar'] = getSocialBarInfo();
 
@@ -30,8 +30,8 @@ function jf_block_info() {
 /**
  *  Implements hook_block_view()
  */
-function jf_block_view($delta = '') {
-  module_load_include('inc', 'jf', 'inc/block.view');
+function jfm_block_view($delta = '') {
+  module_load_include('inc', 'jfm', 'inc/block.view');
   $block = array();
   $block['content'] = getThemeSocialBar($delta);
   return $block;
