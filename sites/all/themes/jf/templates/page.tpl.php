@@ -10,35 +10,15 @@ LOGO HEADER
 
 -->
 <header>
-  <nav class="site-nav nav-horizontal">
-    <!-- navigation region -->
-    <?php print render($page['navigation']); ?>
-    <?php if (!empty($site_name)): ?>
-      <h1 id="brand">
-        <a href="<?php print $front_page; ?>" title="<?php print t('Home'); ?>"><?php print $site_name; ?></a>
-      </h1>
-    <?php endif; ?>
-  </nav>
-  <!-- header region -->
-  <?php print render($page['header']); ?>
-
+  <div>Grid Nav</div>
+  <?php if (!empty($site_name)): ?>
+    <h1 id="brand">
+      <a href="<?php print $front_page; ?>" title="<?php print t('Home'); ?>"><?php print $site_name; ?></a>
+    </h1>
+  <?php endif; ?>
+  <div>infolink</div>
 </header>
 
-<!--
-
-BREADCRUMBS
-
--->
-<?php if ($breadcrumb == 100): ?>
-  <div id="breadcrumb"><?php print $breadcrumb; ?></div>
-<?php endif; ?>
-
-
-<!--
-
-MESSAGES
-
- -->
 <?php print $messages; ?>
 
 <section class="main-content">
