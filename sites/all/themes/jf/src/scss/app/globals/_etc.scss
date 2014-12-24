@@ -19,3 +19,13 @@
     }
   }
 }
+
+.nav-tabs {
+  @extend %group;
+  li {
+    float: left;
+  }
+  a {
+
+  }
+}
