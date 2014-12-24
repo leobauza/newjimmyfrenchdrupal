@@ -1,0 +1,38 @@
+<?php
+/**
+ * @file
+ * jf module file
+ */
+
+require_once 'jf.core.inc';
+
+function jf_theme($existing, $type, $theme, $path) {
+  $theme = array(
+    'social_bar' => array(
+      'template' => 'social-bar',
+      'path' => drupal_get_path('module', 'jf') . '/tpl'
+    ),
+  );
+
+  return $theme;
+
+}
+/**
+ *  Implements hook_block_info()
+ */
+function jf_block_info() {
+  module_load_include('inc', 'jf', 'inc/block.info');
+  $blocks = array();
+  $blocks['social_bar'] = getSocialBarInfo();
+
+  return $blocks;
+}
+/**
+ *  Implements hook_block_view()
+ */
+function jf_block_view($delta = '') {
+  module_load_include('inc', 'jf', 'inc/block.view');
+  $block = array();
+  $block['content'] = getThemeSocialBar($delta);
+  return $block;
+}
