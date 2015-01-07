@@ -35,8 +35,8 @@
  * base rows
  */
 //grid
-$global_columns: 12;
-$global_gutter: 3.183;
+$global_columns: 10;
+$global_gutter: 3.39622;
 
 @mixin rows($gutter: 3.183, $columns: 12) {
   width:100%;
@@ -78,7 +78,14 @@ $global_gutter: 3.183;
  */
 
 .row-fluid {
+  @extend %group;
   @include rows($global_gutter, $global_columns);
+
+  $col_width: (99.9998 / $global_columns);
+  $col_remainder: ($global_gutter/$global_columns) * 1;
+  $padding: ($col_width * 1 - $global_gutter + $col_remainder) * 1%;
+  padding: 0px $padding;
+  width: 100% - ($padding*2);
 
   &> [class*="span"] {
     &.l {

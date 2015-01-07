@@ -13,3 +13,6 @@ require_once __DIR__ . '/includes/alter.inc';
 require_once __DIR__ . '/includes/preprocess.inc';
 require_once __DIR__ . '/includes/theme.inc';
 require_once __DIR__ . '/includes/menu.inc';
+
+// core class
+require_once __DIR__ . '/jf.core.inc';
