@@ -5,9 +5,10 @@
  */
 
 $jf = new jfNodeClass();
-// dpm($node);
+dpm($node);
 $fields = $jf->getFieldValues($node, array(
   'field_intro_image',
+  'body', // intro paragraph
   'field_case_study_template',
   'field_content_row',
 ));
@@ -29,7 +30,7 @@ $intro_img = file_create_url($fields['field_intro_image']['uri']);
   <h2><?php print $title; ?></h2>
 <?php print render($title_suffix); ?>
 <img src="<?php print $intro_img; ?>" alt="<?php print $title; ?>" />
-
+<?php print $fields['body']['value']; ?>
 <?php if ($fields['field_case_study_template']['value'] === 'full' ) : ?>
   <?php require_once __DIR__ . "/../partials/rows.tpl.inc"; ?>
 <?php else : ?>
