@@ -12,6 +12,6 @@ function jf_js_alter (&$js) {
     $jquery_path = '/' . drupal_get_path('theme', 'jf') . '/assets/js/jquery.min.js';
     $js['misc/jquery.js']['data'] = $jquery_path;
     $js['misc/jquery.js']['version'] = '1.9.1';
-    $js['misc/jquery.js']['type'] = 'external';
+    //$js['misc/jquery.js']['type'] = 'external';
   }
 }

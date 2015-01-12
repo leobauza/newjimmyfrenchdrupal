@@ -32,7 +32,7 @@ $layout_classes = array();
 
     <?php elseif ( isset($row['field_image_two']) && isset($row['field_row_text']) ): ?>
 
-      <article class="span6">
+      <article class="span4">
         <?php print $row['field_row_text']['value']; ?>
       </article>
       <aside class="span6">

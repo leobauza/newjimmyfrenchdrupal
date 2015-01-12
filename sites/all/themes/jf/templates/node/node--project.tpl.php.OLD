@@ -3,16 +3,13 @@
  * @file
  * Project nodes
  */
-
 $jf = new jfNodeClass();
-dpm($node);
 $fields = $jf->getFieldValues($node, array(
   'field_intro_image',
   'body', // intro paragraph
   'field_case_study_template',
   'field_content_row',
 ));
-
 // field collection
 $content_rows = $jf->loadCollectionItems($fields['field_content_row'], array(
   'field_image_one',

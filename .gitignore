@@ -7,3 +7,4 @@ sites/*/private
 .sass-cache
 .jshintrc
 node_modules
+todo.md
