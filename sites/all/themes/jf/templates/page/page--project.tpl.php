@@ -3,6 +3,7 @@
  * @file
  * Project Pages
  */
+
 ?>
 
 <header>
@@ -26,7 +27,6 @@
     <?php print render($tabs); ?>
   <?php endif; ?>
 
-  <!-- DISPLAYS MESSAGES AND STUFF -->
   <?php if (!empty($page['help'])): ?>
     <div class="well"><?php print render($page['help']); ?></div>
   <?php endif; ?>
@@ -36,25 +36,29 @@
   <?php endif; ?>
   <?php //print render($page['content']); ?>
 
-  <?php print render($title_prefix); ?>
-    <h2><?php print $title; ?></h2>
-  <?php print render($title_suffix); ?>
-  <?php if ($fields['field_subtitle']): ?>
-    <p><?php print $fields['field_subtitle']['value']; ?></p>
-  <?php endif; ?>
-  <img src="<?php print $intro_img; ?>" alt="<?php print $title; ?>" />
+  <header class="content__header">
+    <?php print render($title_prefix); ?>
+      <h2><?php print $title; ?></h2>
+    <?php print render($title_suffix); ?>
+    <?php if ($fields['field_subtitle']): ?>
+      <p><?php print $fields['field_subtitle']['value']; ?></p>
+    <?php endif; ?>
+      <img src="<?php print $intro_img; ?>" alt="<?php print $title; ?>" />
 
-  <?php
-    if (isset($fields['body'])) {
-      print $fields['body']['value'];
-    }
-  ?>
+    <?php
+      if (isset($fields['body'])) {
+        print $fields['body']['value'];
+      }
+    ?>
+  </header>
 
-  <?php if ($fields['field_case_study_template']['value'] === 'full' ) : ?>
-    <?php require_once __DIR__ . "/../partials/rows.tpl.inc"; ?>
-  <?php else : ?>
-    <?php require_once __DIR__ . "/../partials/rows--basic.tpl.inc"; ?>
-  <?php endif; ?>
+  <section class="content__rows" style="background-color: <?php if (isset($fields['field_background_colour']['value'])) print "#" . $fields['field_background_colour']['value']; ?>">
+    <?php if ($fields['field_case_study_template']['value'] === 'full' ) : ?>
+      <?php require_once __DIR__ . "/../partials/rows.tpl.inc"; ?>
+    <?php else : ?>
+      <?php require_once __DIR__ . "/../partials/rows--basic.tpl.inc"; ?>
+    <?php endif; ?>
+  </section>
 
 
 

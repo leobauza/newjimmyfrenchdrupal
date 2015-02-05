@@ -14,12 +14,14 @@ function jf_preprocess_page(&$vars) {
   if (isset($vars['node']) && $vars['node']->type === 'project') {
     $node = $vars['node'];
     $jf = new jfBaseClass();
+
     $fields = $jf->getFieldValues($node, array(
       'field_subtitle',
       'field_intro_image',
       'body', // intro paragraph
       'field_case_study_template',
       'field_content_row',
+      'field_background_colour',
     ));
     // field collection
     if (isset($fields['field_content_row']['value'])) {
