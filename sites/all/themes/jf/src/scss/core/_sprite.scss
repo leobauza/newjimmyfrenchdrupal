@@ -8,26 +8,36 @@ SCSS variables are information about icon's compiled state, stored under its ori
 The large array-like variables contain all information about a single icon
 $icon-home: x y offset_x offset_y width height total_width total_height image_path;
 */
-$icon_twitter_footer-x: 24px;
-$icon_twitter_footer-y: 0px;
-$icon_twitter_footer-offset-x: -24px;
-$icon_twitter_footer-offset-y: 0px;
+$icon_grid-x: 0px;
+$icon_grid-y: 0px;
+$icon_grid-offset-x: 0px;
+$icon_grid-offset-y: 0px;
+$icon_grid-width: 26px;
+$icon_grid-height: 26px;
+$icon_grid-total-width: 50px;
+$icon_grid-total-height: 48px;
+$icon_grid-image: '../img/sprite.png?v=1';
+$icon_grid: 0px 0px 0px 0px 26px 26px 50px 48px '../img/sprite.png?v=1';
+$icon_twitter_footer-x: 0px;
+$icon_twitter_footer-y: 31px;
+$icon_twitter_footer-offset-x: 0px;
+$icon_twitter_footer-offset-y: -31px;
 $icon_twitter_footer-width: 21px;
 $icon_twitter_footer-height: 17px;
-$icon_twitter_footer-total-width: 45px;
-$icon_twitter_footer-total-height: 18px;
+$icon_twitter_footer-total-width: 50px;
+$icon_twitter_footer-total-height: 48px;
 $icon_twitter_footer-image: '../img/sprite.png?v=1';
-$icon_twitter_footer: 24px 0px -24px 0px 21px 17px 45px 18px '../img/sprite.png?v=1';
-$logo_dribbble_footer-x: 0px;
+$icon_twitter_footer: 0px 31px 0px -31px 21px 17px 50px 48px '../img/sprite.png?v=1';
+$logo_dribbble_footer-x: 31px;
 $logo_dribbble_footer-y: 0px;
-$logo_dribbble_footer-offset-x: 0px;
+$logo_dribbble_footer-offset-x: -31px;
 $logo_dribbble_footer-offset-y: 0px;
 $logo_dribbble_footer-width: 19px;
 $logo_dribbble_footer-height: 18px;
-$logo_dribbble_footer-total-width: 45px;
-$logo_dribbble_footer-total-height: 18px;
+$logo_dribbble_footer-total-width: 50px;
+$logo_dribbble_footer-total-height: 48px;
 $logo_dribbble_footer-image: '../img/sprite.png?v=1';
-$logo_dribbble_footer: 0px 0px 0px 0px 19px 18px 45px 18px '../img/sprite.png?v=1';
+$logo_dribbble_footer: 31px 0px -31px 0px 19px 18px 50px 48px '../img/sprite.png?v=1';
 
 /*
 The provided mixins are intended to be used with the array-like variables

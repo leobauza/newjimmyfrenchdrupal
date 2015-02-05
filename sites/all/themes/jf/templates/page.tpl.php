@@ -4,20 +4,8 @@
  * page.tpl.php
  */
 ?>
-<!--
 
-LOGO HEADER
-
--->
-<header>
-  <div>Grid Nav</div>
-  <?php if (!empty($site_name)): ?>
-    <h1 id="brand">
-      <a href="<?php print $front_page; ?>" title="<?php print t('Home'); ?>"><?php print $site_name; ?></a>
-    </h1>
-  <?php endif; ?>
-  <div>infolink</div>
-</header>
+<?php require_once __DIR__ . "/../partials/header.tpl.inc"; ?>
 
 <?php print $messages; ?>
 

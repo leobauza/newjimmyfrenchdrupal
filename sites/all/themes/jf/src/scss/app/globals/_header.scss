@@ -1,3 +1,39 @@
 /* app/globals/header */
 .site__header {
+  position: relative;
+  padding: 38px 0px;
+}
+
+#brand {
+  text-transform: uppercase;
+  text-align: center;
+  letter-spacing: 1px;
+  a {
+    display: block;
+    color: $white;
+  }
+}
+
+.nav__toggle {
+  position: fixed;
+  left: 100px;
+  top: 41px;
+  display: block;
+  @include sprite($icon_grid);
+  text-indent: -9999px;
+}
+
+.info__toggle {
+  position: absolute;
+  right: 100px;
+  top: 50px;
+  font-size: 14px;
+  font-weight: 700;
+  text-transform: uppercase;
+  color: $white;
+  letter-spacing: 1px;
+  &:hover {
+    color: $white;
+    text-decoration: none;
+  }
 }
