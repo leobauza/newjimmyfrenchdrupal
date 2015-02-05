@@ -11,6 +11,34 @@ function jf_preprocess_page(&$vars) {
     $vars['theme_hook_suggestions'][] = 'page__' . $nodetype;
   }
 
+  if (isset($vars['node']) && $vars['is_front']) {
+    $node = $vars['node'];
+    $jf = new jfBaseClass();
+
+    $projects_view = $jf->getView('projects', 'block');
+    $projects = array();
+    foreach ($projects_view as $key => $project) {
+
+      if (isset($project->field_field_thumbnail[0])) {
+        $thumb_url = file_create_url($project->field_field_thumbnail[0]['raw']['uri']);
+      } else {
+        $thumb_url = NULL;
+      }
+
+      $node_url = drupal_get_path_alias('node/' . $project->nid);
+
+      $projects[$key] = array(
+        'url' => $node_url,
+        'title' => $project->node_title,
+        'thumbnail' => $thumb_url,
+      );
+
+    }
+
+    $vars['projects'] = $projects;
+
+  }
+
   if (isset($vars['node']) && $vars['node']->type === 'project') {
     $node = $vars['node'];
     $jf = new jfBaseClass();
