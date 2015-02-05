@@ -42,16 +42,21 @@ $focus_border: rgba(82, 168, 236, 0.8);
 $text_colour: #3e3e3e;
 $litetext_colour: lighten($text_colour, 50);
 
-//alets
+//alerts
 $default: Greyscale(25);
 $info: $link_colour;
 $success: #5cb85c;
 $warning: #f0ad4e;
 $error: #d9534f;
 
+// fonts
 $base_size: 63.7%;
+@include font-face('Canaro', '../fonts/canaro-book-webfont');
+@include font-face('Canaro', '../fonts/canaro-semibold-webfont', 600, normal);
+@include font-face('Canaro', '../fonts/canaro-light-webfont', 300, normal);
+
 $display: "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif;
-$sans_serif: "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif;
+$sans_serif: "Canaro", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif;
 $serif: "Georgia", "Times New Roman", Times, serif;
 $code: Menlo,Monaco,Consolas,"Courier New",monospace;
 //$serif: "Palatino Linotype", "Book Antiqua", Palatino, serif;

@@ -7,7 +7,7 @@
 #brand {
   text-transform: uppercase;
   text-align: center;
-  letter-spacing: 1px;
+  letter-spacing: 4px;
   a {
     display: block;
     color: $white;
@@ -21,6 +21,9 @@
   display: block;
   @include sprite($icon_grid);
   text-indent: -9999px;
+  .admin-menu & {
+    top: (41 + 29) + px;
+  }
 }
 
 .info__toggle {
@@ -28,10 +31,10 @@
   right: 100px;
   top: 50px;
   font-size: 14px;
-  font-weight: 700;
+  font-weight: 600;
   text-transform: uppercase;
   color: $white;
-  letter-spacing: 1px;
+  letter-spacing: 2px;
   &:hover {
     color: $white;
     text-decoration: none;

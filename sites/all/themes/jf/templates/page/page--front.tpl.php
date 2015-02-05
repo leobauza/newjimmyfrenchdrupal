@@ -29,7 +29,9 @@
   <?php // print render($page['content']); ?>
 
   <h2>right now thinking of outputting 3 times and using mediaqueries to show at diff widths...</h2>
-
+  <p>
+    some random text...
+  </p>
   <section class="grid">
 
     <h3>Split in 2 for tablets and big mobile screens</h3>

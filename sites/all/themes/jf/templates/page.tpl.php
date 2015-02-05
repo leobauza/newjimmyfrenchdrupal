@@ -5,7 +5,7 @@
  */
 ?>
 
-<?php require_once __DIR__ . "/../partials/header.tpl.inc"; ?>
+<?php require_once __DIR__ . "/partials/header.tpl.inc"; ?>
 
 <?php print $messages; ?>
 
