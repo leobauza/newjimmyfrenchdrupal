@@ -4,7 +4,7 @@ $white: #fff;
 $black: #000;
 
 //gen
-$brand: #8790A5;
+$brand: #39ccd3;
 $brand_alt: darken($brand, 10);
 $body_bg: $white;
 
@@ -39,7 +39,7 @@ $focus_border: rgba(82, 168, 236, 0.8);
 
 
 //boxes and text
-$text_colour: ColourConstructor(80, $white);
+$text_colour: #3e3e3e;
 $litetext_colour: lighten($text_colour, 50);
 
 //alets

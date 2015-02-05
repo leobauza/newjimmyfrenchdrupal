@@ -20,13 +20,40 @@
   }
 }
 
+/**
+ * Drupal Tabs
+ */
 .nav-tabs {
   @extend %group;
-  @include resetList(0px, 0px);
+  @include resetList(0px, 10px);
   li {
     float: left;
+    margin-right: 2px;
   }
   a {
-
+    @include borderRadius();
+    background: $brand;
+    color: $white;
+    display: block;
+    padding: 5px 10px;
+    font-weight: 700;
+    font-size: 1.2em;
+    &:hover {
+      text-decoration: none;
+      background: darken($brand, 10);
+    }
   }
 }
+
+/**
+ * Drupal Login
+ */
+#user-login {
+  width: 280px;
+  padding: 20px;
+  margin: 0 auto;
+  .form-item {
+    margin: 0 0 20px;
+  }
+}
+

@@ -1,7 +1,7 @@
 /* app/components/btn */
 %btn{ //placeholder selector!
   @include inlineBlock(20);
-  @include marpad(0 0 20px, 10px 15px);
+  @include marpad(0 0 20px, 26px 20px);
   @include borderRadius(5px);
   color: $white;
   border: 1px solid darken($default, 10);
@@ -32,13 +32,16 @@
 }
 .btn--main {
   @extend %btn;
-  @include gradient($brand, lighten($brand, 2));
-  border-color: darken($brand, 10);
+  display: block;
+  background: $brand;
+  border: none;
+  margin: 0 auto;
   &:hover, &.active {
-    background: darken($brand, 10);
+    background: darken($brand, 5);
+    border: none;
   }
   &:focus {
-    border: 1px solid darken($brand, 10);
+    border: none;
   }
 }
 .btn--info {

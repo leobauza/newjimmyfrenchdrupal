@@ -6,13 +6,13 @@
 }
 
 %callout {
-  @include marpad(0 0 10px, 15px);
+  @include marpad(0 auto 10px, 15px);
   @include borderRadius(5px);
   font-size: 1.4em;
 }
 
 //callout types
-.callout--default {
+.callout--default, .messages.status {
   @extend %callout;
   @include calloutSetup($default);
 }
@@ -28,15 +28,21 @@
   @extend %callout;
   @include calloutSetup($success);
 }
-.callout--warning {
+.callout--warning, .messages.warning {
   @extend %callout;
   @include calloutSetup($warning);
 }
-.callout--error {
+.callout--error, .messages.error {
   @extend %callout;
   @include calloutSetup($error);
 }
 
+.messages {
+  width: 90%;
+  .placeholder {
+    font-weight: 700;
+  }
+}
 
 //notes (like callouts but different)
 @mixin noteSetup ($color, $lper: 34, $dper: 30, $bper: 20) {

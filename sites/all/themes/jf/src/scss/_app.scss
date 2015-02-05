@@ -1,4 +1,12 @@
 /**
+ * Components
+ * Do not have JS interactions attached
+ */
+@import 'app/components/btn',
+        'app/components/callout',
+        'app/components/listgroup',
+        'app/components/box';
+/**
  * Globals
  * Header, footer, and general styles. Etc is a sandbox file.
  */
@@ -8,11 +16,3 @@
         'app/globals/site';
 
 
-/**
- * Components
- * Do not have JS interactions attached
- */
-@import 'app/components/btn',
-        'app/components/callout',
-        'app/components/listgroup',
-        'app/components/box';

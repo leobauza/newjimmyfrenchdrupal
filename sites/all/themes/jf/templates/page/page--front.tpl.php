@@ -4,11 +4,7 @@
  * page.tpl.php
  */
 ?>
-<!--
 
-LOGO HEADER
-
--->
 <header>
   <div>Grid Nav</div>
   <?php if (!empty($site_name)): ?>
