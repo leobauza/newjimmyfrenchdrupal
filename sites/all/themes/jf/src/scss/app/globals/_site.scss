@@ -1,1 +1,33 @@
 /* app/globals/site */
+
+// flex grid
+.grid {
+  @include flexbox();
+  flex-wrap: wrap;
+  // justify-content: center;
+}
+.grid__item {
+  @include flex(1 0 33.3333333%);
+  max-width: 33.333333%;
+  img {
+    display: block;
+    width: 100%;
+  }
+}
+
+// Large Screens
+@media (min-width: 79.5em) { // 1272px (div by 16)
+
+  .grid__item {
+    @include flex(1 0 25%);
+    max-width: 25%;
+  }
+
+}
+
+// Portrait
+@media (max-width: 59.9375em) { // 959px (div by 16)
+
+
+
+}
