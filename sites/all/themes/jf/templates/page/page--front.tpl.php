@@ -62,10 +62,4 @@
 </section>
 
 
-<footer class="footer container">
-  <?php
-    //print theme_get_setting('company_phone');
-  ?>
-  <p>&copy; Copyright <?php print date("Y"); ?></p>
-  <?php print render($page['footer']); ?>
-</footer>
+<?php require_once __DIR__ . "/../partials/footer.tpl.inc"; ?>

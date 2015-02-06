@@ -4,6 +4,7 @@
 .grid {
   @include flexbox();
   flex-wrap: wrap;
+  background: $offwhite;
   // justify-content: center;
 }
 .grid__item {

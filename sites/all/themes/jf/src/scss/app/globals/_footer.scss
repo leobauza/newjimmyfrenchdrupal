@@ -1,3 +1,38 @@
 /* app/globals/footer */
 .site__footer {
+  @extend %group;
+  background: $white;
+  padding-top: 20px;
+  padding-bottom: 18px;
+  .copy {
+    float: left;
+    margin: 0;
+    font-weight: 600;
+    font-size: 1.2em;
+  }
+}
+.footer__social {
+  float: right;
+  ul {
+    @extend %group;
+    @include resetList(0, 0);
+    li {
+      float: left;
+      margin: 0px 0px 0px 45px;
+    }
+    a {
+      display: block;
+      @include square(20px, 20px);
+      text-indent: -9999px;
+    }
+    .twitter {
+      @include sprite($icon_twitter_footer);
+    }
+    .dribbble {
+      @include sprite($icon_dribbble_footer);
+    }
+    .instagram {
+      @include sprite($icon_instagram_footer);
+    }
+  }
 }
