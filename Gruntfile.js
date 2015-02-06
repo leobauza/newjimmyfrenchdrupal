@@ -53,22 +53,22 @@ module.exports = function(grunt) {
     //   }
     // },
 
-    // browserify: {
-    //   js: {
-    //     src:  ['sites/all/themes/aiada/assets/src/app.js'],
-    //     dest: 'sites/all/themes/aiada/assets/js/main.js'
-    //   }
-    // },
+    browserify: {
+      js: {
+        src:  ['sites/all/themes/jf/src/js/app.js'],
+        dest: 'sites/all/themes/jf/assets/js/main.js'
+      }
+    },
 
     watch: {
       sass: {
         files: ['sites/all/themes/jf/src/scss/**'],
         tasks: ['sass:dev']
+      },
+      js: {
+        files: ['sites/all/themes/jf/src/**'],
+        tasks: ['browserify:js']
       }
-      // js: {
-      //   files: ['sites/all/themes/aiada/assets/src/**'],
-      //   tasks: ['browserify:js']
-      // }
     }
 
   });
@@ -76,7 +76,7 @@ module.exports = function(grunt) {
   grunt.loadNpmTasks('grunt-contrib-sass');
   grunt.loadNpmTasks('grunt-contrib-watch');
   grunt.loadNpmTasks('grunt-spritesmith');
-  //grunt.loadNpmTasks('grunt-browserify');
+  grunt.loadNpmTasks('grunt-browserify');
   grunt.registerTask('default', ['watch']);
   // grunt.registerTask('build-sprite', ['sprite:buildSprite', 'copy:buildSprite', 'tinypng:buildSprite']);
   grunt.registerTask('build-sprite', ['sprite:all']);

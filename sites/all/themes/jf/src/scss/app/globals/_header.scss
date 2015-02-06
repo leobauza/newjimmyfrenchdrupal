@@ -1,7 +1,14 @@
 /* app/globals/header */
 .site__header {
-  position: relative;
+  position: absolute;
   padding: 38px 0px;
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 100;
+  .admin-menu & {
+    top: 29px;
+  }
 }
 
 #brand {

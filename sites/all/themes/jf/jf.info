@@ -13,7 +13,7 @@ stylesheets[all][] = assets/css/styles.css
 
 
 ;js
-;scripts[] = assets/js/script.js
+scripts[] = assets/js/main.js
 
 ;settings
 ;settings[company_name] = 'my company name'

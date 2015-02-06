@@ -16,6 +16,25 @@
   }
 }
 
+// hero
+.site__hero {
+  position: relative;
+  z-index: 0;
+  a {
+    display: block;
+  }
+  img {
+    display: block;
+    width: 100%;
+  }
+  .nav-tabs {
+    position: absolute;
+    bottom: 10px;
+    left: 10px;
+    z-index: 100;
+  }
+}
+
 // Large Screens
 @media (min-width: 79.5em) { // 1272px (div by 16)
 

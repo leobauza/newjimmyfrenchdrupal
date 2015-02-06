@@ -15,6 +15,7 @@ function jf_preprocess_page(&$vars) {
     $node = $vars['node'];
     $jf = new jfBaseClass();
 
+    // View
     $projects_view = $jf->getView('projects', 'block');
     $projects = array();
     foreach ($projects_view as $key => $project) {
@@ -36,6 +37,16 @@ function jf_preprocess_page(&$vars) {
     }
 
     $vars['projects'] = $projects;
+
+    // Fields
+    $fields = $jf->getFieldValues($node, array(
+      'field_intro_image',
+      'field_url',
+    ));
+
+    $intro_img = file_create_url($fields['field_intro_image']['uri']);
+    $vars['intro_url'] = $fields['field_url'];
+    $vars['intro_img'] = $intro_img;
 
   }
 
