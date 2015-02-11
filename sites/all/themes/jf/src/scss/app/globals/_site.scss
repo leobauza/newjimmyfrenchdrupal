@@ -33,6 +33,18 @@
     left: 10px;
     z-index: 100;
   }
+  svg {
+    visibility: hidden;
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+  }
+  &.animate {
+    svg {
+      visibility: visible;
+    }
+  }
 }
 
 // Large Screens

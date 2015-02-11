@@ -15,7 +15,14 @@
   <?php endif; ?>
 
   <section class="site__hero">
-    <svg version="1.1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 170 116.3" xml:space="preserve">
+
+    <svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="92 84 439 276" enable-background="new 92 84 439 276" xml:space="preserve">
+      <path fill="none" stroke="#000000" stroke-miterlimit="10" d="M107,122 262,104 278,222 176,269 174,179 107,168 117,220 149,288 240,288 211,348 "/>
+      <polygon fill="none" stroke="#000000" stroke-miterlimit="10" points="324,135 519,163 468,226 324,166 "/>
+      <path fill="none" stroke="#000000" stroke-miterlimit="10" d="M302.5,267 324,312 340,235 308,241 "/>
+    </svg>
+
+    <!-- <svg version="1.1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 170 116.3" xml:space="preserve">
       <path
         fill="none"
         stroke="#fff"
@@ -24,7 +31,7 @@
         stroke-dasharray="800.00 800.00"
         stroke-dashoffset="0.00"
       />
-    </svg>
+    </svg> -->
     <a href="<?php print $intro_url['value']; ?>" class="hero__feature">
       <img src="<?php print $intro_img; ?>" alt="" />
     </a>
