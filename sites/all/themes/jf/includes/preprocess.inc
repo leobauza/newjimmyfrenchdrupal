@@ -11,9 +11,32 @@ function jf_preprocess_page(&$vars) {
     $vars['theme_hook_suggestions'][] = 'page__' . $nodetype;
   }
 
+  /**
+   * All Nodes
+   */
+   if (isset($vars['node'])) {
+
+     $node = $vars['node'];
+     $jf = new jfBaseClass();
+
+   }
+
+  /**
+   * Homepage
+   */
   if (isset($vars['node']) && $vars['is_front']) {
-    $node = $vars['node'];
-    $jf = new jfBaseClass();
+
+    // Fields
+    $fields = $jf->getFieldValues($node, array(
+      'field_intro_image',
+      'field_url',
+      'field_svg_paths',
+    ));
+
+    $intro_img = file_create_url($fields['field_intro_image']['uri']);
+    $vars['intro_url'] = $fields['field_url'];
+    $vars['intro_img'] = $intro_img;
+    $vars['svg_paths'] = $fields['field_svg_paths']['value'];
 
     // View
     $projects_view = $jf->getView('projects', 'block');
@@ -38,21 +61,12 @@ function jf_preprocess_page(&$vars) {
 
     $vars['projects'] = $projects;
 
-    // Fields
-    $fields = $jf->getFieldValues($node, array(
-      'field_intro_image',
-      'field_url',
-    ));
-
-    $intro_img = file_create_url($fields['field_intro_image']['uri']);
-    $vars['intro_url'] = $fields['field_url'];
-    $vars['intro_img'] = $intro_img;
-
   }
 
+  /**
+   * Project Page
+   */
   if (isset($vars['node']) && $vars['node']->type === 'project') {
-    $node = $vars['node'];
-    $jf = new jfBaseClass();
 
     $fields = $jf->getFieldValues($node, array(
       'field_subtitle',

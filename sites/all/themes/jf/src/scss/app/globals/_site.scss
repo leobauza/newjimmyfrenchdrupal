@@ -20,12 +20,16 @@
 .site__hero {
   position: relative;
   z-index: 0;
+  background: $black;
   a {
     display: block;
   }
   img {
+    @include transition(opacity 1s);
+    opacity: .25;
     display: block;
     width: 100%;
+    z-index: 50;
   }
   .nav-tabs {
     position: absolute;
@@ -34,17 +38,36 @@
     z-index: 100;
   }
   svg {
+    @include transition(opacity 2s);
+    opacity: 1;
     visibility: hidden;
     position: absolute;
     left: 0;
     top: 0;
     width: 100%;
+    z-index: 75;
+  }
+  path {
+    fill: none;
+    stroke: $white;
+    stroke-width: 3;
+    stroke-miterlimit: 10;
   }
   &.animate {
     svg {
       visibility: visible;
     }
   }
+
+  &.finished {
+    img {
+      opacity: 1;
+    }
+    svg {
+      opacity: 0;
+    }
+  }
+
 }
 
 // Large Screens
