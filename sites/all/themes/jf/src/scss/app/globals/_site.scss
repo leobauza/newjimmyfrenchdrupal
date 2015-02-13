@@ -1,5 +1,9 @@
 /* app/globals/site */
 
+/**
+ * Homepage
+ */
+
 // flex grid
 .grid {
   @include flexbox();
@@ -69,6 +73,67 @@
   }
 
 }
+
+/**
+ * Case Study Shared
+ */
+.content__header {
+  h2 {
+    padding: 58px 10px 60px;
+    margin: 0px;
+    text-align: center;
+    background: $white;
+    .subtitle {
+      display: block;
+      text-transform: uppercase;
+      font-size: .39em;
+      line-height: 2.1em;
+      font-weight: 600;
+    }
+  }
+  img {
+    display: block;
+    margin: 0 auto;
+  }
+}
+
+.intro__body {
+  padding: 55px 0px 22px;
+}
+
+.content__rows {
+  img {
+    display: block;
+    width: 100%;
+  }
+}
+
+/**
+ * Case Study Complex
+ */
+.content__header.-full {
+  img {
+    width: 100%;
+  }
+}
+
+.content__rows.-full {
+
+}
+
+/**
+ * Case Study Basic
+ */
+.content__header.-basic {
+  .intro__image {
+    padding: 110px 0px;
+  }
+}
+
+.content__rows.-basic {
+
+}
+
 
 // Large Screens
 @media (min-width: 79.5em) { // 1272px (div by 16)

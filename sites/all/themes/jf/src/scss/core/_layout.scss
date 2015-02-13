@@ -1,6 +1,7 @@
 /* core/layout */
 .container {
-  padding: 0px 20px;
+  max-width: 1060px;
+  margin: 0 auto;
 }
 .divider {
   padding: 20px;
@@ -36,9 +37,9 @@
  */
 //grid
 $global_columns: 10;
-$global_gutter: 3.39622;
+$global_gutter: 3.308129;
 
-@mixin rows($gutter: 3.183, $columns: 12) {
+@mixin rows($gutter: 3.305005, $columns: 12) {
   width:100%;
   //margin: 0px 0px 10px;
 
@@ -84,8 +85,9 @@ $global_gutter: 3.39622;
   $col_width: (99.9998 / $global_columns);
   $col_remainder: ($global_gutter/$global_columns) * 1;
   $padding: ($col_width * 1 - $global_gutter + $col_remainder) * 1%;
-  padding: 0px $padding;
-  width: 100% - ($padding*2);
+  //padding: 0px $padding;
+  //width: 100% - ($padding*2);
+  padding-bottom: ($col_width * 1 - $global_gutter + $col_remainder)/2 * 1%;
 
   &> [class*="span"] {
     &.l {
@@ -161,8 +163,8 @@ $global_gutter: 3.39622;
 /*
  * Responsive
  */
-//@media (max-width: 43.75em) { // 700px
-@media (max-width: 59.9375em) { // 959px
+@media (max-width: 43.75em) { // 700px
+//@media (max-width: 59.9375em) { // 959px
 
   /*margin right instead of margin left to do overflow hidden*/
   [class*="row"] > [class*="span"] {

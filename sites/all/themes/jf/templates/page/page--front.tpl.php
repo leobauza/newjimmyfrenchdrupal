@@ -8,9 +8,21 @@
 <?php require_once __DIR__ . "/../partials/header.tpl.inc"; ?>
 
 <section class="main-content">
-  <?php if (!empty($page['highlighted'])): ?>
-    <div class="highlighted hero-unit"><?php print render($page['highlighted']); ?></div>
-  <?php endif; ?>
+
+  <div class="drupal__required">
+    <?php if (!empty($page['highlighted'])): ?>
+      <div class="highlighted hero-unit"><?php print render($page['highlighted']); ?></div>
+    <?php endif; ?>
+    <!-- DISPLAYS MESSAGES AND STUFF -->
+    <?php if (!empty($page['help'])): ?>
+      <div class="well"><?php print render($page['help']); ?></div>
+    <?php endif; ?>
+
+    <?php if (!empty($action_links)): ?>
+      <ul class="action-links"><?php print render($action_links); ?></ul>
+    <?php endif; ?>
+    <?php // print render($page['content']); ?>
+  </div>
 
   <section class="site__hero">
     <a href="<?php print $intro_url['value']; ?>" class="hero__feature">
@@ -26,17 +38,7 @@
 
   </section>
 
-<?php print $messages; ?>
-
-  <!-- DISPLAYS MESSAGES AND STUFF -->
-  <?php if (!empty($page['help'])): ?>
-    <div class="well"><?php print render($page['help']); ?></div>
-  <?php endif; ?>
-
-  <?php if (!empty($action_links)): ?>
-    <ul class="action-links"><?php print render($action_links); ?></ul>
-  <?php endif; ?>
-  <?php // print render($page['content']); ?>
+  <?php print $messages; ?>
 
   <section class="grid">
 

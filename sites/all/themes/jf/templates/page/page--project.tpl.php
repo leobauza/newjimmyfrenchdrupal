@@ -4,6 +4,16 @@
  * Project Pages
  */
 
+$content_styles = '';
+if (isset($fields['field_background_colour']['value'])) {
+  $content_styles = "style='background-color: #" . $fields['field_background_colour']['value'] . "'";
+}
+
+$content_class = '-basic';
+if ($fields['field_case_study_template']['value'] === 'full') {
+  $content_class = '-full';
+}
+
 ?>
 
 <?php require_once __DIR__ . "/../partials/header.tpl.inc"; ?>
@@ -11,45 +21,56 @@
 <?php print $messages; ?>
 
 <section class="main-content">
-  <?php if (!empty($page['highlighted'])): ?>
-    <div class="highlighted hero-unit"><?php print render($page['highlighted']); ?></div>
-  <?php endif; ?>
 
-  <?php if (!empty($tabs)): ?>
-    <?php print render($tabs); ?>
-  <?php endif; ?>
-
-  <?php if (!empty($page['help'])): ?>
-    <div class="well"><?php print render($page['help']); ?></div>
-  <?php endif; ?>
-
-  <?php if (!empty($action_links)): ?>
-    <ul class="action-links"><?php print render($action_links); ?></ul>
-  <?php endif; ?>
-  <?php //print render($page['content']); ?>
-
-  <header class="content__header">
-    <?php print render($title_prefix); ?>
-      <h2><?php print $title; ?></h2>
-    <?php print render($title_suffix); ?>
-    <?php if ($fields['field_subtitle']): ?>
-      <p><?php print $fields['field_subtitle']['value']; ?></p>
+  <div class="drupal__required">
+    <?php if (!empty($page['highlighted'])): ?>
+      <div class="highlighted hero-unit"><?php print render($page['highlighted']); ?></div>
     <?php endif; ?>
-      <img src="<?php print $intro_img; ?>" alt="<?php print $title; ?>" />
 
-    <?php
-      if (isset($fields['body'])) {
-        print $fields['body']['value'];
-      }
-    ?>
+    <?php if (!empty($tabs)): ?>
+      <?php print render($tabs); ?>
+    <?php endif; ?>
+
+    <?php if (!empty($page['help'])): ?>
+      <div class="well"><?php print render($page['help']); ?></div>
+    <?php endif; ?>
+
+    <?php if (!empty($action_links)): ?>
+      <ul class="action-links"><?php print render($action_links); ?></ul>
+    <?php endif; ?>
+    <?php //print render($page['content']); ?>
+  </div>
+
+  <header <?php print $content_styles; ?> class="content__header <?php print $content_class; ?>">
+    <?php print render($title_prefix); ?>
+      <h2>
+        <?php print $title; ?>
+        <?php if ($fields['field_subtitle']): ?>
+          <span class="subtitle"><?php print $fields['field_subtitle']['value']; ?></span>
+        <?php endif; ?>
+      </h2>
+    <?php print render($title_suffix); ?>
+
+    <div class="intro__image">
+      <img src="<?php print $intro_img; ?>" alt="<?php print $title; ?>" />
+    </div>
+
+    <?php if (isset($fields['body'])): ?>
+      <div class="intro__body container">
+        <?php print $fields['body']['value']; ?>
+      </div>
+    <?php endif; ?>
+
   </header>
 
-  <section class="content__rows" style="background-color: <?php if (isset($fields['field_background_colour']['value'])) print "#" . $fields['field_background_colour']['value']; ?>">
-    <?php if ($fields['field_case_study_template']['value'] === 'full' ) : ?>
-      <?php require_once __DIR__ . "/../partials/rows.tpl.inc"; ?>
-    <?php else : ?>
-      <?php require_once __DIR__ . "/../partials/rows--basic.tpl.inc"; ?>
-    <?php endif; ?>
+  <section <?php print $content_styles; ?> class="content__rows <?php print $content_class; ?>">
+    <div class="container">
+      <?php if ($fields['field_case_study_template']['value'] === 'full' ) : ?>
+        <?php require_once __DIR__ . "/../partials/rows.tpl.inc"; ?>
+      <?php else : ?>
+        <?php require_once __DIR__ . "/../partials/rows--basic.tpl.inc"; ?>
+      <?php endif; ?>
+    </div>
   </section>
 
 

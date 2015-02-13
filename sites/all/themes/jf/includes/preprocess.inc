@@ -91,6 +91,7 @@ function jf_preprocess_page(&$vars) {
       'field_image_two',
       'field_row_text',
       'field_image_caption',
+      'field_row_split',
     ));
     // images
     $intro_img = file_create_url($fields['field_intro_image']['uri']);

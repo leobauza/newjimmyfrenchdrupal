@@ -10,6 +10,9 @@
     font-weight: 600;
     font-size: 1.2em;
   }
+  .node-type-project & {
+    background: $white url(../img/bg/bg_footer_case_study.png) 0% 0% repeat-x;
+  }
 }
 .footer__social {
   float: right;
