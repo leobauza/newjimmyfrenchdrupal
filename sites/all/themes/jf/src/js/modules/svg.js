@@ -73,11 +73,16 @@
     },
 
     onDelegated: function (e) {
-
+      // hi
     },
 
+    // test: function (e) {
+    //   console.log(this);
+    //   console.log("test");
+    // },
+
     events: {
-      //'click svg' : 'test'
+      // 'click p, div' : 'test'
     }
 
   });

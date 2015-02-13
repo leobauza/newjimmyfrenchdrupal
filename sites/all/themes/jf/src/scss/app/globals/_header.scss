@@ -1,13 +1,35 @@
 /* app/globals/header */
 .site__header {
   position: absolute;
-  padding: 38px 0px;
+  padding: 38px 0px 33px 0px;
   top: 0;
   left: 0;
   width: 100%;
   z-index: 100;
   .admin-menu & {
     top: 29px;
+  }
+  .node-type-project.admin-menu & {
+    top: 0px;
+  }
+  .node-type-project & {
+    position: relative;
+    background: $white url(../img/bg/bg_header_case_study.png) 0 100% repeat-x;
+    // @include boxShadow (inset 0 -10px 100px rgba(0,0,0,0.075));
+    #brand {
+      a {
+        color: $text_colour;
+      }
+    }
+    .info__toggle {
+      color: $text_colour;
+      &:hover {
+        border-bottom: 2px solid $text_colour;
+      }
+    }
+    .icon--grid .square {
+      background: $text_colour;
+    }
   }
 }
 
@@ -25,9 +47,8 @@
   position: fixed;
   left: 100px;
   top: 41px;
-  display: block;
-  @include sprite($icon_grid);
-  text-indent: -9999px;
+  // @include sprite($icon_grid);
+  // text-indent: -9999px;
   .admin-menu & {
     top: (41 + 29) + px;
   }

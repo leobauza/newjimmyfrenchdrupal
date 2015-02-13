@@ -13,7 +13,6 @@
   <?php endif; ?>
 
   <section class="site__hero">
-
     <a href="<?php print $intro_url['value']; ?>" class="hero__feature">
       <svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 1272 785" enable-background="new 0 0 1272 785" xml:space="preserve">
         <?php print $svg_paths; ?>

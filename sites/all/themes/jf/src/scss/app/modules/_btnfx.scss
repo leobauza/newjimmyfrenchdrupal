@@ -120,3 +120,51 @@ $transTime: .2s;
 .collapse-borderless {
   border: none;
 }
+
+// Grid Button
+.icon--grid {
+  @include square(26px, 26px);
+  display: block;
+  .square {
+    @include square(6px, 6px);
+    position: absolute;
+    display: block;
+    background: $white;
+    &.-a {
+      top: 0px;
+      left: 0px;
+    }
+    &.-b {
+      top: 0px;
+      left: 10px;
+    }
+    &.-c {
+      top: 0px;
+      left: 20px;
+    }
+    &.-d {
+      top: 10px;
+      left: 0px;
+    }
+    &.-e {
+      top: 10px;
+      left: 10px;
+    }
+    &.-f {
+      top: 10px;
+      left: 20px;
+    }
+    &.-g {
+      top: 20px;
+      left: 0px;
+    }
+    &.-h {
+      top: 20px;
+      left: 10px;
+    }
+    &.-i {
+      top: 20px;
+      left: 20px;
+    }
+  }
+}
