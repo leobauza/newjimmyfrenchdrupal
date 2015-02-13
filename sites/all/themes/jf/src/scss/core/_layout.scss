@@ -87,7 +87,8 @@ $global_gutter: 3.308129;
   $padding: ($col_width * 1 - $global_gutter + $col_remainder) * 1%;
   //padding: 0px $padding;
   //width: 100% - ($padding*2);
-  padding-bottom: ($col_width * 1 - $global_gutter + $col_remainder)/2 * 1%;
+  //padding-bottom: ($col_width * 1 - $global_gutter + $col_remainder)/2 * 1%;
+  padding-bottom: $global_gutter * 1%;
 
   &> [class*="span"] {
     &.l {
