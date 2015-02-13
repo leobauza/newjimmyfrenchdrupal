@@ -50,7 +50,7 @@ $warning: #f0ad4e;
 $error: #d9534f;
 
 // fonts
-$base_size: 63.7%;
+$base_size: 62.5%;//63.7%;
 @include font-face('Canaro', '../fonts/canaro-book-webfont');
 @include font-face('Canaro', '../fonts/canaro-semibold-webfont', 600, normal);
 @include font-face('Canaro', '../fonts/canaro-light-webfont', 300, normal);
