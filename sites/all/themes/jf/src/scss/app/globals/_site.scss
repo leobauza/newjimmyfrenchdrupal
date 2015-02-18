@@ -34,6 +34,10 @@
     display: block;
     width: 100%;
     z-index: 50;
+    &.cancel {
+      @include transition(none);
+      opacity: 1;
+    }
   }
   .nav-tabs {
     position: absolute;

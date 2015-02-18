@@ -14,12 +14,18 @@ function jf_preprocess_page(&$vars) {
   /**
    * All Nodes
    */
-   if (isset($vars['node'])) {
+  if (isset($vars['node'])) {
 
-     $node = $vars['node'];
-     $jf = new jfBaseClass();
+    $node = $vars['node'];
+    $jf = new jfBaseClass();
 
-   }
+    if (isset($node->field_theme_picker)) {
+      $theme_picked = field_view_field('node', $node, 'field_theme_picker');
+      $theme_picked = $theme_picked['#items'][0]['value'];
+    }
+
+  }
+
 
   /**
    * Homepage
@@ -62,6 +68,38 @@ function jf_preprocess_page(&$vars) {
     $vars['projects'] = $projects;
 
   }
+
+
+  /**
+   * Information Page
+   */
+  if (isset($theme_picked) && $theme_picked === 'information') {
+
+    $vars['theme_hook_suggestions'][] = 'page__information';
+
+    // Fields
+    $fields = $jf->getFieldValues($node, array(
+      'field_intro_image',
+      'field_subtitle',
+      'body',
+      'field_list',
+      'field_list_links',
+    ));
+
+    $intro_img = file_create_url($fields['field_intro_image']['uri']);
+    $vars['intro_img'] = $intro_img;
+    $vars['subtitle'] = $fields['field_subtitle']['value'];
+    $vars['body'] = $fields['body']['value'];
+    $vars['capabilities'] = $fields['field_list'];
+
+    // field collections
+    $vars['featured_on'] = $jf->loadCollectionItems($fields['field_list_links'], array(
+      'field_text',
+      'field_url',
+    ));
+
+  }
+
 
   /**
    * Project Page

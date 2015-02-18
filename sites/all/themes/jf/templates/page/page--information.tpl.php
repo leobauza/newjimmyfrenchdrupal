@@ -25,13 +25,7 @@
   </div>
 
   <section class="site__hero">
-    <a href="<?php print $intro_url['value']; ?>" class="hero__feature">
-      <svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 1272 785" enable-background="new 0 0 1272 785" xml:space="preserve">
-        <?php print $svg_paths; ?>
-      </svg>
-      <img src="<?php print $intro_img; ?>" alt="<?php print $title; ?>" />
-    </a>
-
+    <img class="cancel" src="<?php print $intro_img; ?>" alt="<?php print $title; ?>" />
     <?php if (!empty($tabs)): ?>
       <?php print render($tabs); ?>
     <?php endif; ?>
@@ -39,16 +33,9 @@
   </section>
 
   <?php print $messages; ?>
+  <h2>stuff</h2>
+  <p>...everything else...</p>
 
-  <section class="grid">
-
-    <?php foreach ($projects as $key => $project): ?>
-      <a href="/<?php print $project['url']; ?>" class="grid__item">
-        <img src="<?php print $project['thumbnail']; ?>" alt="<?php print $project['title']; ?>" />
-      </a>
-    <?php endforeach; ?>
-
-  </section>
 
 </section>
 
