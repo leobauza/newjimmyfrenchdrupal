@@ -79,7 +79,7 @@
  */
 .content__header {
   h2 {
-    padding: 58px 10px 60px;
+    padding: 58px 10px 58px;
     margin: 0px;
     text-align: center;
     background: $white;
@@ -127,6 +127,10 @@
 .content__header.-basic {
   .intro__image {
     padding: 110px 0px;
+  }
+  img {
+    margin: 0px;
+    @include boxShadow(0px 0px 40px 0px rgba(0,0,0,0.3));
   }
 }
 

@@ -10,8 +10,10 @@ if (isset($fields['field_background_colour']['value'])) {
 }
 
 $content_class = '-basic';
+$img_wrap_class = 'container';
 if ($fields['field_case_study_template']['value'] === 'full') {
   $content_class = '-full';
+  $img_wrap_class = '';
 }
 
 ?>
@@ -51,7 +53,7 @@ if ($fields['field_case_study_template']['value'] === 'full') {
       </h2>
     <?php print render($title_suffix); ?>
 
-    <div class="intro__image">
+    <div class="intro__image <?php print $img_wrap_class; ?>">
       <img src="<?php print $intro_img; ?>" alt="<?php print $title; ?>" />
     </div>
 

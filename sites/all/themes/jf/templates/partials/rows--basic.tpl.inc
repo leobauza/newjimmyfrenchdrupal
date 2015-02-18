@@ -33,7 +33,6 @@ $layout_classes = array();
   ?>
 
   <section class="row-fluid -project">
-    DIFFERENT!!
     <?php if ( isset($row['field_image_one']) && isset($row['field_image_two']) ): ?>
 
       <article class="<?php print $layout_classes[0]; ?>">
