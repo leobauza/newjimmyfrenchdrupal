@@ -16,7 +16,7 @@ if ($fields['field_case_study_template']['value'] === 'full') {
 
 ?>
 
-<?php require_once __DIR__ . "/../partials/header.tpl.inc"; ?>
+<?php require_once path_to_theme('jf') . "/templates/partials/header.tpl.inc"; ?>
 
 <?php print $messages; ?>
 
@@ -66,9 +66,9 @@ if ($fields['field_case_study_template']['value'] === 'full') {
   <section <?php print $content_styles; ?> class="content__rows <?php print $content_class; ?>">
     <div class="container">
       <?php if ($fields['field_case_study_template']['value'] === 'full' ) : ?>
-        <?php require_once __DIR__ . "/../partials/rows.tpl.inc"; ?>
+        <?php require_once path_to_theme('jf') . "/templates/partials/rows.tpl.inc"; ?>
       <?php else : ?>
-        <?php require_once __DIR__ . "/../partials/rows--basic.tpl.inc"; ?>
+        <?php require_once path_to_theme('jf') . "/templates/partials/rows--basic.tpl.inc"; ?>
       <?php endif; ?>
     </div>
   </section>
@@ -78,4 +78,4 @@ if ($fields['field_case_study_template']['value'] === 'full') {
 </section>
 
 
-<?php require_once __DIR__ . "/../partials/footer.tpl.inc"; ?>
+<?php require_once path_to_theme('jf') . "/templates/partials/footer.tpl.inc"; ?>

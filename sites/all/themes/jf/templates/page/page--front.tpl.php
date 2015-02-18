@@ -5,7 +5,7 @@
  */
 ?>
 
-<?php require_once __DIR__ . "/../partials/header.tpl.inc"; ?>
+<?php require_once path_to_theme('jf') . "/templates/partials/header.tpl.inc"; ?>
 
 <section class="main-content">
 
@@ -53,4 +53,4 @@
 </section>
 
 
-<?php require_once __DIR__ . "/../partials/footer.tpl.inc"; ?>
+<?php require_once path_to_theme('jf') . "/templates/partials/footer.tpl.inc"; ?>
