@@ -22,7 +22,7 @@ if ($fields['field_case_study_template']['value'] === 'full') {
 
 <?php print $messages; ?>
 
-<section class="main-content">
+<section class="main-content -internal">
 
   <div class="drupal__required">
     <?php if (!empty($page['highlighted'])): ?>

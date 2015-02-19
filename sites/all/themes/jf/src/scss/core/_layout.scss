@@ -108,7 +108,26 @@ $global_gutter: 3.308129;
  */
 
 .row-fluid--alt {
-  @include rows();
+  @extend %group;
+  @include rows($global_gutter, $global_columns);
+
+  $col_width: (99.9998 / $global_columns);
+  $col_remainder: ($global_gutter/$global_columns) * 1;
+  $padding: ($col_width * 1 - $global_gutter + $col_remainder) * 1%;
+
+  padding: 0px $padding;
+  width: 100% - ($padding*2);
+
+  &> [class*="span"] {
+    &.l {
+      margin-right: 0;
+      @include overflower;
+    }
+    &:last-child {
+      margin-right: 0;
+      @include overflower;
+    }
+  }
 }
 
 

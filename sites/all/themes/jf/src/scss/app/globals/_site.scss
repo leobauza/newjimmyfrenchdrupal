@@ -79,14 +79,23 @@
 }
 
 /**
+ * General
+ */
+.main-content {
+  &.-internal {
+    background: $white;
+  }
+}
+
+/**
  * Case Study Shared
  */
 .content__header {
   h2 {
     padding: 58px 10px 58px;
     margin: 0px;
-    text-align: center;
     background: $white;
+    text-align: center;
     .subtitle {
       display: block;
       text-transform: uppercase;

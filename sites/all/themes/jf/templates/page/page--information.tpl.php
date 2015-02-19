@@ -7,7 +7,7 @@
 
 <?php require_once path_to_theme('jf') . "/templates/partials/header.tpl.inc"; ?>
 
-<section class="main-content">
+<section class="main-content -internal">
 
   <div class="drupal__required">
     <?php if (!empty($page['highlighted'])): ?>
@@ -31,10 +31,49 @@
     <?php endif; ?>
 
   </section>
-
   <?php print $messages; ?>
-  <h2>stuff</h2>
-  <p>...everything else...</p>
+
+  <section class="row-fluid--alt">
+    <section class="span5">
+      <article class="info__section">
+        <h2><?php print $subtitle; ?></h2>
+        <?php print $body; ?>
+      </article>
+      <article class="info__section row-fluid">
+        <div class="span4">
+          <h4>Capabilities</h4>
+          <ul>
+            <?php foreach ($capabilities as $capability): ?>
+              <li><?php print $capability['value']; ?></li>
+            <?php endforeach; ?>
+          </ul>
+        </div>
+        <div class="span6">
+          <h4>Featured On</h4>
+          <ul>
+            <?php foreach ($featured_on as $feature): ?>
+              <li>
+                <a target="_blank" href="<?php print $feature['field_url']['value']; ?>"><?php print $feature['field_text']['value']; ?></a>
+              </li>
+            <?php endforeach; ?>
+          </ul>
+        </div>
+      </article>
+      <article class="info__section l">
+        <h4>Connect</h4>
+        <p>some stuff in this stuff</p>
+      </article>
+    </section>
+    <aside class="span5">
+      <article class="info__form">
+        <h2>Let's Work Together</h2>
+        <p>I’m always looking for new & interesting projects. If you’re looking for a designer, let’s chat!</p>
+
+        [webform...]
+
+      </article>
+    </aside>
+  </section>
 
 
 </section>
