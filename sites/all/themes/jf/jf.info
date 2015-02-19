@@ -6,6 +6,7 @@ regions[navigation]      = 'Navigation'
 regions[highlighted]     = 'Highlighted'
 regions[help]            = 'Help'
 regions[content]         = 'Content'
+regions[form]            = 'Form'
 regions[footer]          = 'Footer'
 
 ;css

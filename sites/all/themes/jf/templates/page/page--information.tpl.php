@@ -68,9 +68,9 @@
       <article class="info__form">
         <h2>Let's Work Together</h2>
         <p>I’m always looking for new & interesting projects. If you’re looking for a designer, let’s chat!</p>
-
-        [webform...]
-
+        <?php
+          print render($page['form']);
+        ?>
       </article>
     </aside>
   </section>
