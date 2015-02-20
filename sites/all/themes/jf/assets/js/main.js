@@ -6,13 +6,14 @@
 
 "use strict";
 
-var svg;
+var svg, forms;
 
 if (typeof require === 'function') {
   svg = require('./modules/svg');
+  forms = require('./modules/forms');
 }
 
-},{"./modules/svg":3}],2:[function(require,module,exports){
+},{"./modules/forms":3,"./modules/svg":4}],2:[function(require,module,exports){
 /**
  * The Flyweight Class
  */
@@ -231,9 +232,69 @@ if (typeof require === 'function') {
     Flyweight = require('../libs/flyweight');
   }
 
+  var Forms = Flyweight.Module.extend({
+
+    name: 'Forms',
+    // el: '.site__hero',
+    debug: true,
+
+    initialize: function () {
+
+      console.error('[forms.js][line 19]: this needs to check if there is a form, and get the url for the post request dynamically');
+
+      $('#webform-client-form-11').submit(function (e) {
+
+        e.preventDefault();
+
+        var form = $(this),
+            postData = form.serialize(),
+            nodeId = '11';
+
+        console.log(postData);
+
+        $.post("http://jimmyfrench.loc/webform_ajax/11", postData, function (data) {
+
+          console.log(data);
+
+        });
+
+
+      });
+
+    },
+
+    onDelegated: function (e) {
+      // hi
+    },
+
+    // test: function (e) {
+    //   console.log(this);
+    //   console.log("test");
+    // },
+
+    events: {
+      // 'click p, div' : 'test'
+    }
+
+  });
+
+  module.exports = new Forms();
+
+})(jQuery);
+},{"../libs/flyweight":2}],4:[function(require,module,exports){
+(function ($) {
+
+  "use strict";
+
+  var Flyweight;
+
+  if (typeof require === 'function' && typeof Flyweight !== 'function') {
+    Flyweight = require('../libs/flyweight');
+  }
+
   var Svg = Flyweight.Module.extend({
 
-    name: 'Sample',
+    name: 'Svg',
     el: '.site__hero',
     debug: true,
 

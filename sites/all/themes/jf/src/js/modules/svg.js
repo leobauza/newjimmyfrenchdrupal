@@ -10,7 +10,7 @@
 
   var Svg = Flyweight.Module.extend({
 
-    name: 'Sample',
+    name: 'Svg',
     el: '.site__hero',
     debug: true,
 

@@ -18,7 +18,7 @@ function jfm_theme($existing, $type, $theme, $path) {
 
 }
 /**
- *  Implements hook_block_info()
+ * Implements hook_block_info()
  */
 function jfm_block_info() {
   module_load_include('inc', 'jfm', 'inc/block.info');
@@ -36,3 +36,132 @@ function jfm_block_view($delta = '') {
   $block['content'] = getThemeSocialBar($delta);
   return $block;
 }
+
+
+/**
+ * Contact Form Ajaxify
+ */
+
+function jfm_menu() {
+  $items = array();
+  $items['webform_ajax/%'] = array(
+    'page callback' => '_custom_webform_ajax',
+    'page arguments' => array(1,2),
+    'access callback' => '_custom_webform_ajax_access',
+  );
+  return $items;
+}
+
+function _custom_webform_ajax($nid, $data) {
+
+  $local_POST = $_POST;
+  $form_build_id = $_POST['form_build_id'];
+
+  $form_id = 'webform_client_form_' . $nid;
+
+  $node = node_load($nid);
+
+  $submission = array();
+  $form_state = array(
+    'method' => 'post',
+    'submitted' => false,
+    'values' => array(),
+    'build_info' => array(
+      'args' => array(
+        $node,
+        array(),
+        FALSE
+      )
+    )
+  );
+
+  $form = form_get_cache($form_build_id, $form_state);
+  $form_array = drupal_rebuild_form($form_id, $form_state);
+
+  // Add the clicked button before processing the form
+  $form_state['clicked_button'] = $form_array['actions']['submit'];
+
+  // Process the form?
+  if (is_array($local_POST['submitted'])) {
+    foreach ($local_POST['submitted'] as $submit_index => $submit) {
+      $form_state['values']['submitted'][$submit_index] = $submit;
+    }
+  }
+
+  // Clearing empty values from $form_state
+  if (is_array($form_state['values']['submitted'])) {
+    foreach ($form_state['values']['submitted'] as $value_index => $value) {
+      if (!$value) {
+        unset($form_state['values']['submitted'][$value_index]);
+      }
+    }
+  }
+
+  $form_state['values']['details']['nid'] = $nid;
+  $form_state['no_redirect'] = TRUE;
+
+  // Executing the pressed button action
+  drupal_build_form($form_id, $form_state);
+
+  if (!$form_state['executed']) {
+    // If the form didn't submit successfully, get the errors
+    // which are set by drupal_set_message
+    $messages = drupal_get_messages('error');
+    $messages = implode('<br />', $messages['error']);
+  }
+  else {
+    // If form submitted successfully, create a nice message.
+    $messages = 'Your submission has been received. Thank you.';
+  }
+  // drupal_json_output seems to confuse some browsers, who want to save as a file
+  print drupal_json_encode(array(
+    'message' => $messages,
+    'status' => $form_state['executed'],
+  ));
+
+  // return drupal_json_output(array(
+  //   'message' => t('Your submission has been received. Thank you for contacting us.'),
+  //   'status' => 'sent',
+  // ));
+
+}
+
+function _custom_webform_ajax_access() {
+  // todo: Add user role / perm check
+  return true;
+}
+
+
+
+
+
+// // webform
+// function jfm_form_alter(&$form, &$form_state, $form_id) {
+//   if(strstr($form_id, 'webform_client_form_')) {
+//     $nid = $form['#node']->nid;
+//     $form['actions']['submit']['#attributes']['id'] = 'edit-webform-ajax-submit-'.$form['#node']->nid;
+//     $form['actions']['submit']['#ajax'] = array(
+//       'callback' => 'jfm_webform_js_submit',
+//       'wrapper' => 'webform-client-form-' . $nid,
+//       'method' => 'replace',
+//       'effect' => 'fade',
+//     );
+//     dpm($form);
+//   }
+// }
+//
+// function jfm_webform_js_submit($form, $form_state) {
+//   return "hi";
+//   // $sid = $form_state['values']['details']['sid'];
+//   // if ($sid) {
+//   //   $node = node_load($form_state['values']['details']['nid']);
+//   //   $confirmation = array(
+//   //     '#type' => 'markup',
+//   //     '#markup' => check_markup($node->webform['confirmation'], $node->webform['confirmation_format'], '', TRUE),
+//   //   );
+//   //   return $confirmation;
+//   // }
+//   // else {
+//   //   return $form;
+//   // }
+// }
