@@ -10,10 +10,22 @@ module.exports = function(grunt) {
           'sites/all/themes/jf/assets/css/styles.css' : 'sites/all/themes/jf/src/scss/styles.scss',
         },
         options: {
-          style: 'compressed' //compressed or compact or expanded
+          sourceMap: true,
+          outputStyle: 'compressed' //nested or compressed
         }
       }
     },
+
+    // sass: {
+    //   dev: {
+    //     options: {
+    //       style: 'compressed' //compressed or compact or expanded
+    //     },
+    //     files: {
+    //       'sites/all/themes/jf/assets/css/styles.css' : 'sites/all/themes/jf/src/scss/styles.scss',
+    //     }
+    //   }
+    // },
 
     sprite: {
       all: {
@@ -66,14 +78,15 @@ module.exports = function(grunt) {
         tasks: ['sass:dev']
       },
       js: {
-        files: ['sites/all/themes/jf/src/**'],
+        files: ['sites/all/themes/jf/src/js/**'],
         tasks: ['browserify:js']
       }
     }
 
   });
 
-  grunt.loadNpmTasks('grunt-contrib-sass');
+  // grunt.loadNpmTasks('grunt-contrib-sass');
+  grunt.loadNpmTasks('grunt-sass');
   grunt.loadNpmTasks('grunt-contrib-watch');
   grunt.loadNpmTasks('grunt-spritesmith');
   grunt.loadNpmTasks('grunt-browserify');
