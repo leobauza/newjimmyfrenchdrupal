@@ -5,9 +5,12 @@
 
 "use strict";
 
-var svg, forms;
+var Svg, Forms;
 
 if (typeof require === 'function') {
-  svg = require('./modules/svg');
-  forms = require('./modules/forms');
+  Svg = require('./modules/svg');
+  Forms = require('./modules/forms');
 }
+
+var svg = new Svg(),
+    forms = new Forms();

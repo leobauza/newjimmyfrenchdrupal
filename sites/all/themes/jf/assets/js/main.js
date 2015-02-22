@@ -6,12 +6,15 @@
 
 "use strict";
 
-var svg, forms;
+var Svg, Forms;
 
 if (typeof require === 'function') {
-  svg = require('./modules/svg');
-  forms = require('./modules/forms');
+  Svg = require('./modules/svg');
+  Forms = require('./modules/forms');
 }
+
+var svg = new Svg(),
+    forms = new Forms();
 
 },{"./modules/forms":3,"./modules/svg":4}],2:[function(require,module,exports){
 /**
@@ -278,7 +281,7 @@ if (typeof require === 'function') {
 
   });
 
-  module.exports = new Forms();
+  module.exports = Forms;
 
 })(jQuery);
 },{"../libs/flyweight":2}],4:[function(require,module,exports){
@@ -371,7 +374,7 @@ if (typeof require === 'function') {
 
   });
 
-  module.exports = new Svg();
+  module.exports = Svg;
 
 })(jQuery);
 },{"../libs/flyweight":2}]},{},[1]);

@@ -87,6 +87,6 @@
 
   });
 
-  module.exports = new Svg();
+  module.exports = Svg;
 
 })(jQuery);

@@ -54,6 +54,6 @@
 
   });
 
-  module.exports = new Forms();
+  module.exports = Forms;
 
 })(jQuery);
