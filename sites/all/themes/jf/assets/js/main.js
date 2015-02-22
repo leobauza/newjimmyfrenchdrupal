@@ -24,6 +24,8 @@ var svg = new Svg(),
  * Protect window.console method calls, e.g. console is not defined on IE
  * unless dev tools are open, and IE doesn't define console.debug
  */
+"use strict";
+
 (function() {
   if (!window.console) {
     window.console = {};
@@ -36,7 +38,7 @@ var svg = new Svg(),
   ];
   // define undefined methods as noops to prevent errors
   var func = function() {};
-  for (var i = 0; i < m.length; i++) {
+  for (var i = 0; i < m.length; i += 1) {
     if (!window.console[m[i]]) {
       window.console[m[i]] = func;
     }
@@ -79,16 +81,16 @@ var svg = new Svg(),
 
   //WRITE A LOG THAT CAN BE TURNED ON AND OFF
   var msg = Flyweight.msg = function (msg, type) {
-    if (!type) type = 'log';
+    if (!type) { type = 'log'; }
     // if msgs turned on
     if (this.debug) {
       console[type](msg);
     }
   };
 
-  var ns = Flyweight.ns = function (ns_string) {
+  var ns = Flyweight.ns = function (nsString) {
     var
-      parts = ns_string.split('.'),
+      parts = nsString.split('.'),
       parent = this,
       i
     ;
@@ -115,12 +117,13 @@ var svg = new Svg(),
   // });
 
   /**
-   * [Static Constructor] Flyweight.module.extend is a way to create modules
+   * Module
+   * [Static Constructor] Flyweight.Module.extend is a way to create modules
    * with shared properties.
    */
   var Module = Flyweight.Module = function(element, options) {
 
-    if(!(this instanceof Module)) return new Module();
+    if(!(this instanceof Module)) { return new Module(); }
 
     if (typeof this.name !== 'string') {
       Flyweight.msg('Module must have a name property', 'error');
@@ -172,8 +175,8 @@ var svg = new Svg(),
       var that = this;
 
       //sort through events
-      $.each(events, function(event_target, method) {
-        var parts = event_target.split(' '),
+      $.each(events, function(eventTarget, method) {
+        var parts = eventTarget.split(' '),
             _event = parts.shift() + '.delegatedEvents.' + that.name,
             _selector = parts.join(' ');
             // _selector = (typeof els[_target] === "string")? els[_target] : els[_target].selector;
@@ -189,6 +192,275 @@ var svg = new Svg(),
     }
 
   });
+
+  /**
+   * Router
+   * Adapted from RouterRouter
+   * by Jason Garber (http://sixtwothree.org)
+   * Source code available at: https://github.com/jgarber623/RouterRouter
+   */
+  var Router = Flyweight.Router = function (options) {
+
+    if(!(this instanceof Router)) { return new Router(); }
+    this.options = typeof options !== "undefined" ? options : this;
+
+    if (this.options.routes) {
+      this.routes = this.options.routes;
+    }
+
+    this.location = window.location;
+    this._bindRoutes();
+
+  };
+
+  var isType = function(obj, name) {
+    return Object.prototype.toString.call(obj) === "[object " + name + "]";
+  };
+
+  var escapeRegExp = /[\-{}\[\]+?.,\\\^$|#\s]/g,
+      namedParam = /(\(\?)?:\w+/g,
+      optionalParam = /\((.*?)\)/g,
+      splatParam = /\*\w+/g,
+      routeStripper = /^[#\/]|\s+$/g,
+      rootStripper = /^\/+|\/+$/g,
+      pathStripper = /#.*$/,
+      trailingSlash = /\/$/;
+
+  $.extend(Router.prototype, {
+    _bindRoutes: function() {
+      if (this.routes) {
+        var route,
+            routes = []; //Object.keys(this.routes);
+
+        $.each(this.routes, function (k, v) {
+          routes.push(k);
+        });
+
+        while (typeof (route = routes.pop()) !== "undefined") {
+          this.route(route, this.routes[route]);
+        }
+      }
+    },
+
+    _extractParameters: function(route, fragment) {
+      var params = route.exec(fragment).slice(1);
+      return $.map(params, function(param) {
+        return param ? decodeURIComponent(param) : null;
+      });
+    },
+
+    _getFragment: function(fragment) {
+      return fragment.replace(routeStripper, "").replace(trailingSlash, "");
+    },
+
+    _routeToRegExp: function(route) {
+      route = route.replace(escapeRegExp, "\\$&").replace(optionalParam, "(?:$1)?").replace(namedParam, function(match, optional) {
+        return optional ? match : "([^/?]+)";
+      }).replace(splatParam, "([^?]*?)");
+      return new RegExp("^" + route + "(?:\\?([\\s\\S]*))?$");
+    },
+
+    route: function(route, name, callback) {
+      if (!isType(route, "RegExp")) {
+        route = this._routeToRegExp(route);
+      }
+      if (isType(name, "Function")) {
+        callback = name;
+        name = "";
+      }
+      if (!callback) {
+        callback = this.options[name];
+      }
+      var fragment = this._getFragment(this.location.pathname);
+      if (route.test(fragment)) {
+        var args = this._extractParameters(route, fragment);
+        if (isType(callback, "Function")) {
+          callback.apply(this, args);
+        }
+      }
+      return this;
+    }
+
+  });
+
+
+  /**
+   * History
+   * Adapted from RouterRouter
+   * by Jason Garber (http://sixtwothree.org)
+   * Source code available at: https://github.com/jgarber623/RouterRouter
+   */
+  var History = Flyweight.History = function() {
+
+    // hmmm?
+    if (typeof window !== 'undefined') {
+      this.location = window.location;
+      this.history = window.history;
+    }
+
+  };
+
+  History.started = false;
+
+  $.extend(History.prototype, {
+
+    navigate: function (fragment, options) {
+
+      if (!History.started) { return false; }
+      if (!options || options === true) { options = {trigger: !!options}; }
+
+      fragment = this.getFragment(fragment || '');
+
+      var root = this.root;
+
+      if (fragment === '' || fragment.charAt(0) === '?') {
+        root = root.slice(0, -1) || '/';
+      }
+
+      var url = root + fragment;
+
+      fragment = decodeURI(fragment.replace(pathStripper, ''));
+
+      if (this.fragment === fragment) { return; }
+
+      this.fragment = fragment;
+
+      if (this._usePushState) {
+        this.history[options.replace ? 'replaceState' : 'pushState']({}, document.title, url);
+      }
+
+      if (options.trigger) { return this.loadUrl(fragment); }
+
+    },
+
+    checkUrl: function (e) {
+
+      var current = this.getFragment();
+
+      if (current === this.fragment) {
+        return false;
+      }
+
+      this.loadUrl();
+
+    },
+
+    // atRoot: function() {
+    //   var path = this.location.pathname.replace(/[^\/]$/, '$&/');
+    //   return path === this.root && !this.getSearch();
+    // },
+
+    getFragment: function(fragment) {
+      if (fragment === null || fragment === undefined) {
+        fragment = this.getPath();
+      }
+      return fragment.replace(routeStripper, '');
+    },
+
+    getHash: function(window) {
+      var match = (window || this).location.href.match(/#(.*)$/);
+      return match ? match[1] : '';
+    },
+
+    getSearch: function() {
+      var match = this.location.href.replace(/#.*/, '').match(/\?.+/);
+      return match ? match[0] : '';
+    },
+
+    getPath: function() {
+      var path = decodeURI(this.location.pathname + this.getSearch());
+      var root = this.root.slice(0, -1);
+      if (!path.indexOf(root)) { path = path.slice(root.length); }
+      return path.charAt(0) === '/' ? path.slice(1) : path;
+    },
+
+    start: function(options) {
+      if (History.started) { throw new Error('Flyweight.history has already been started'); }
+      History.started = true;
+
+      var _this = this;
+
+      // initial configuration
+      this.options          = $.extend({root: '/'}, this.options, options);
+      this.root             = this.options.root;
+      this._wantsPushState  = true; //!!this.options.pushState;
+      this._hasPushState    = !!(this.history && this.history.pushState);
+      this._usePushState    = this._wantsPushState && this._hasPushState;
+      this.fragment         = this.getFragment();
+      this.router           = this.options.router;
+
+      // Normalize root to always include a leading and trailing slash.
+      this.root = ('/' + this.root + '/').replace(rootStripper, '/');
+
+      // Add a cross-platform `addEventListener` shim for older browsers.
+      // Don't really need this...
+      var addEventListener = window.addEventListener || function (eventName, listener) {
+        return attachEvent('on' + eventName, listener);
+      };
+
+      // We only care about browsers with popstate
+      // other browsers work the old fashioned page refresh way
+      if (this._usePushState) {
+        addEventListener('popstate', function (e) {
+          _this.checkUrl.apply(_this, [e]);
+        }, false);
+      } else {
+        return false;
+      }
+
+    },
+
+    loadUrl: function (fragment) {
+
+      var _this = this;
+      fragment = this.fragment = this.getFragment(fragment);
+
+      $.each(this.router.routes, function (route, callback) {
+
+        var _route;
+        if (!isType(route, "RegExp")) {
+          _route = _this.router._routeToRegExp(route);
+        }
+        if (_route.test(_this.fragment)) {
+          _this.router.route(route, callback);
+        }
+
+      });
+
+    }
+
+  });
+
+  // Create the default Flyweight.history.
+  Flyweight.history = new History();
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
   /**
    * Extend ripped off from backbone.js
@@ -218,7 +490,7 @@ var svg = new Svg(),
 
   };
 
-  Module.extend = extend;
+  Module.extend = Router.extend = extend;
 
   return Flyweight;
 
