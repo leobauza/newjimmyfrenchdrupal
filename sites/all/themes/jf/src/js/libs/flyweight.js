@@ -415,34 +415,6 @@
   // Create the default Flyweight.history.
   Flyweight.history = new History();
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
   /**
    * Extend ripped off from backbone.js
    */
