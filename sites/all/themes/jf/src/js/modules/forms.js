@@ -11,45 +11,38 @@
   var Forms = Flyweight.Module.extend({
 
     name: 'Forms',
-    // el: '.site__hero',
+    el: '.info__form',
     debug: true,
 
     initialize: function () {
 
-      console.error('[forms.js][line 19]: this needs to check if there is a form, and get the url for the post request dynamically');
+      var data = $(this.el).data();
+      this.formName = data.form;
 
-      $('#webform-client-form-11').submit(function (e) {
+    },
 
-        e.preventDefault();
+    submit: function (e) {
 
-        var form = $(this),
-            postData = form.serialize(),
-            nodeId = '11';
+      e.preventDefault();
 
-        console.log(postData);
+      var _this = e.data.context,
+          form = $(this),
+          postData = form.serialize(),
+          nid = Drupal.settings.forms[_this.formName];
 
-        $.post("http://jimmyfrench.loc/webform_ajax/11", postData, function (data) {
+      $.post("/webform_ajax/" + nid, postData, function (data) {
 
-          console.log(data);
-
-        });
-
+        console.log(data);
 
       });
 
     },
 
     onDelegated: function (e) {
-      // hi
     },
 
-    // test: function (e) {
-    //   console.log(this);
-    //   console.log("test");
-    // },
-
     events: {
-      // 'click p, div' : 'test'
+      'submit form' : 'submit'
     }
 
   });

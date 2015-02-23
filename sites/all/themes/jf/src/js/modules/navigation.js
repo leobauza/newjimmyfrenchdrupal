@@ -87,11 +87,6 @@
       // hi
     },
 
-    // test: function (e) {
-    //   console.log(this);
-    //   console.log("test");
-    // },
-
     events: {
       'click a' : 'processClick'
     }

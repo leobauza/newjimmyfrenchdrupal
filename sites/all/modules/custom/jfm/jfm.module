@@ -17,6 +17,7 @@ function jfm_theme($existing, $type, $theme, $path) {
   return $theme;
 
 }
+
 /**
  * Implements hook_block_info()
  */
@@ -27,6 +28,7 @@ function jfm_block_info() {
 
   return $blocks;
 }
+
 /**
  *  Implements hook_block_view()
  */
@@ -132,36 +134,17 @@ function _custom_webform_ajax_access() {
 }
 
 
-
-
-
 // // webform
-// function jfm_form_alter(&$form, &$form_state, $form_id) {
-//   if(strstr($form_id, 'webform_client_form_')) {
-//     $nid = $form['#node']->nid;
-//     $form['actions']['submit']['#attributes']['id'] = 'edit-webform-ajax-submit-'.$form['#node']->nid;
-//     $form['actions']['submit']['#ajax'] = array(
-//       'callback' => 'jfm_webform_js_submit',
-//       'wrapper' => 'webform-client-form-' . $nid,
-//       'method' => 'replace',
-//       'effect' => 'fade',
-//     );
-//     dpm($form);
-//   }
-// }
-//
-// function jfm_webform_js_submit($form, $form_state) {
-//   return "hi";
-//   // $sid = $form_state['values']['details']['sid'];
-//   // if ($sid) {
-//   //   $node = node_load($form_state['values']['details']['nid']);
-//   //   $confirmation = array(
-//   //     '#type' => 'markup',
-//   //     '#markup' => check_markup($node->webform['confirmation'], $node->webform['confirmation_format'], '', TRUE),
-//   //   );
-//   //   return $confirmation;
-//   // }
-//   // else {
-//   //   return $form;
-//   // }
-// }
+function jfm_form_alter(&$form, &$form_state, $form_id) {
+
+  if(strstr($form_id, 'webform_client_form_')) {
+
+    drupal_add_js(array(
+      'forms' => array(
+        $form['#node']->title => $form['#node']->nid
+      )
+    ), 'setting');
+
+  }
+
+}

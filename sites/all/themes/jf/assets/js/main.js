@@ -18,7 +18,7 @@ if (typeof require === 'function') {
 var svg = new Svg(),
     forms = new Forms();
 
-Router = Flyweight.Router.extend({
+  Router = Flyweight.Router.extend({
     routes: {
       '*any': 'any',
       'about': 'about'
@@ -42,18 +42,8 @@ Router = Flyweight.Router.extend({
   });
 
   if (Flyweight.history._usePushState) {
-    var nav = new Navigation();
+    // var nav = new Navigation();
   }
-
-  // jQuery('.info__toggle').click(function (e) {
-  //   e.preventDefault();
-  //   var href = jQuery(this).attr('href');
-  //   Flyweight.history.navigate(href, { trigger: true });
-  // });
-
-  // $('h1').click(function (e) {
-  //   Flyweight.history.navigate('foo/bar/', {trigger: true});
-  // });
 
 },{"./libs/flyweight.js":2,"./modules/forms":3,"./modules/navigation":4,"./modules/svg":5}],2:[function(require,module,exports){
 /**
@@ -521,45 +511,38 @@ Router = Flyweight.Router.extend({
   var Forms = Flyweight.Module.extend({
 
     name: 'Forms',
-    // el: '.site__hero',
+    el: '.info__form',
     debug: true,
 
     initialize: function () {
 
-      console.error('[forms.js][line 19]: this needs to check if there is a form, and get the url for the post request dynamically');
+      var data = $(this.el).data();
+      this.formName = data.form;
 
-      $('#webform-client-form-11').submit(function (e) {
+    },
 
-        e.preventDefault();
+    submit: function (e) {
 
-        var form = $(this),
-            postData = form.serialize(),
-            nodeId = '11';
+      e.preventDefault();
 
-        console.log(postData);
+      var _this = e.data.context,
+          form = $(this),
+          postData = form.serialize(),
+          nid = Drupal.settings.forms[_this.formName];
 
-        $.post("http://jimmyfrench.loc/webform_ajax/11", postData, function (data) {
+      $.post("/webform_ajax/" + nid, postData, function (data) {
 
-          console.log(data);
-
-        });
-
+        console.log(data);
 
       });
 
     },
 
     onDelegated: function (e) {
-      // hi
     },
 
-    // test: function (e) {
-    //   console.log(this);
-    //   console.log("test");
-    // },
-
     events: {
-      // 'click p, div' : 'test'
+      'submit form' : 'submit'
     }
 
   });
@@ -657,11 +640,6 @@ Router = Flyweight.Router.extend({
       // hi
     },
 
-    // test: function (e) {
-    //   console.log(this);
-    //   console.log("test");
-    // },
-
     events: {
       'click a' : 'processClick'
     }
@@ -746,18 +724,7 @@ Router = Flyweight.Router.extend({
 
     },
 
-    onDelegated: function (e) {
-      // hi
-    },
-
-    // test: function (e) {
-    //   console.log(this);
-    //   console.log("test");
-    // },
-
-    events: {
-      // 'click p, div' : 'test'
-    }
+    events: {}
 
   });
 

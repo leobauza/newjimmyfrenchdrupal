@@ -17,7 +17,7 @@ if (typeof require === 'function') {
 var svg = new Svg(),
     forms = new Forms();
 
-Router = Flyweight.Router.extend({
+  Router = Flyweight.Router.extend({
     routes: {
       '*any': 'any',
       'about': 'about'
@@ -41,15 +41,5 @@ Router = Flyweight.Router.extend({
   });
 
   if (Flyweight.history._usePushState) {
-    var nav = new Navigation();
+    // var nav = new Navigation();
   }
-
-  // jQuery('.info__toggle').click(function (e) {
-  //   e.preventDefault();
-  //   var href = jQuery(this).attr('href');
-  //   Flyweight.history.navigate(href, { trigger: true });
-  // });
-
-  // $('h1').click(function (e) {
-  //   Flyweight.history.navigate('foo/bar/', {trigger: true});
-  // });

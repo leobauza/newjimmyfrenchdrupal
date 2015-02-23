@@ -65,7 +65,7 @@
       </article>
     </section>
     <aside class="span5">
-      <article class="info__form">
+      <article class="info__form" data-form="Contact Form">
         <h2>Let's Work Together</h2>
         <p>I’m always looking for new & interesting projects. If you’re looking for a designer, let’s chat!</p>
         <?php
