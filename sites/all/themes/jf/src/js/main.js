@@ -43,3 +43,4 @@ var svg = new Svg(),
   if (Flyweight.history._usePushState) {
     // var nav = new Navigation();
   }
+
