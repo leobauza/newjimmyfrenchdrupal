@@ -25,17 +25,18 @@
     }
     a {
       display: block;
-      @include square(20px, 20px);
+      // @include square(20px, 20px);
       text-indent: -9999px;
     }
     .twitter {
-      @include sprite($icon_twitter_footer);
+      // @include sprite($icon_twitter_footer);
+      // @include sprite(twitter);
     }
     .dribbble {
-      @include sprite($icon_dribbble_footer);
+      // @include sprite(dribbble);
     }
     .instagram {
-      @include sprite($icon_instagram_footer);
+      // @include sprite(instagram);
     }
   }
 }

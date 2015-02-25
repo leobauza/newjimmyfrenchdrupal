@@ -1,0 +1,35 @@
+%svg-common {
+	background: url(change/sprite.svg) no-repeat;
+  background: #000;
+}
+
+.svg-dribbble {
+	@extend %svg-common;
+	background-position: 100% 0;
+}
+
+.svg-dribbble-dims {
+	width: 42px;
+	height: 42px;
+}
+
+.svg-instagram {
+	@extend %svg-common;
+	background-position: 100% 8.75%;
+}
+
+.svg-instagram-dims {
+	width: 42px;
+	height: 42px;
+}
+
+.svg-twitter {
+	@extend %svg-common;
+	background-position: 0 0;
+}
+
+.svg-twitter-dims {
+	width: 522px;
+	height: 522px;
+}
+
