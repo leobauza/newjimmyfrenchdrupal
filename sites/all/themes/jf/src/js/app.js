@@ -8,10 +8,10 @@
 var Flyweight, Svg, Forms, Router, Navigation;
 
 if (typeof require === 'function') {
-  Flyweight = require('./libs/flyweight.js');
-  Svg = require('./modules/svg');
-  Forms = require('./modules/forms');
-  Navigation = require('./modules/navigation');
+  Flyweight = require('libs/flyweight');
+  Svg = require('modules/svg');
+  Forms = require('modules/forms');
+  Navigation = require('modules/navigation');
 }
 
 var svg = new Svg(),

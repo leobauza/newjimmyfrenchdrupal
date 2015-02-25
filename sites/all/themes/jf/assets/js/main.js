@@ -1,4 +1,52 @@
-(function e(t,n,r){function s(o,u){if(!n[o]){if(!t[o]){var a=typeof require=="function"&&require;if(!u&&a)return a(o,!0);if(i)return i(o,!0);var f=new Error("Cannot find module '"+o+"'");throw f.code="MODULE_NOT_FOUND",f}var l=n[o]={exports:{}};t[o][0].call(l.exports,function(e){var n=t[o][1][e];return s(n?n:e)},l,l.exports,e,t,n,r)}return n[o].exports}var i=typeof require=="function"&&require;for(var o=0;o<r.length;o++)s(r[o]);return s})({"/Users/lbauza/Sites/Personal/jimmyfrench/httpdocs/sites/all/themes/jf/src/js/libs/flyweight.js":[function(require,module,exports){
+(function e(t,n,r){function s(o,u){if(!n[o]){if(!t[o]){var a=typeof require=="function"&&require;if(!u&&a)return a(o,!0);if(i)return i(o,!0);var f=new Error("Cannot find module '"+o+"'");throw f.code="MODULE_NOT_FOUND",f}var l=n[o]={exports:{}};t[o][0].call(l.exports,function(e){var n=t[o][1][e];return s(n?n:e)},l,l.exports,e,t,n,r)}return n[o].exports}var i=typeof require=="function"&&require;for(var o=0;o<r.length;o++)s(r[o]);return s})({"/Users/lbauza/Sites/Personal/jimmyfrench/httpdocs/sites/all/themes/jf/src/js/app.js":[function(require,module,exports){
+/**
+ * !! DO NOT EDIT MAIN.JS !!
+ * jf/src/app.js outputs to assets/js/main.js
+ */
+
+"use strict";
+
+var Flyweight, Svg, Forms, Router, Navigation;
+
+if (typeof require === 'function') {
+  Flyweight = require('libs/flyweight');
+  Svg = require('modules/svg');
+  Forms = require('modules/forms');
+  Navigation = require('modules/navigation');
+}
+
+var svg = new Svg(),
+    forms = new Forms();
+
+  Router = Flyweight.Router.extend({
+    routes: {
+      '*any': 'any',
+      'about': 'about'
+    },
+
+    any: function () {
+      //get the page if you are not ON the page
+      console.log("run standard page change code?");
+    },
+
+    about: function () {
+      console.log("specific code for about page");
+    }
+
+  });
+
+  var router = new Router();
+
+  Flyweight.history.start({
+    router: router
+  });
+
+  if (Flyweight.history._usePushState) {
+    // var nav = new Navigation();
+  }
+
+
+},{"libs/flyweight":"/Users/lbauza/Sites/Personal/jimmyfrench/httpdocs/sites/all/themes/jf/src/js/libs/flyweight.js","modules/forms":"/Users/lbauza/Sites/Personal/jimmyfrench/httpdocs/sites/all/themes/jf/src/js/modules/forms.js","modules/navigation":"/Users/lbauza/Sites/Personal/jimmyfrench/httpdocs/sites/all/themes/jf/src/js/modules/navigation.js","modules/svg":"/Users/lbauza/Sites/Personal/jimmyfrench/httpdocs/sites/all/themes/jf/src/js/modules/svg.js"}],"/Users/lbauza/Sites/Personal/jimmyfrench/httpdocs/sites/all/themes/jf/src/js/libs/flyweight.js":[function(require,module,exports){
 /**
  * The Flyweight Class
  */
@@ -450,55 +498,7 @@
 
 });
 
-},{}],"/Users/lbauza/Sites/Personal/jimmyfrench/httpdocs/sites/all/themes/jf/src/js/main.js":[function(require,module,exports){
-/**
- * !! DO NOT EDIT MAIN.JS !!
- * jf/src/app.js outputs to assets/js/main.js
- */
-
-"use strict";
-
-var Flyweight, Svg, Forms, Router, Navigation;
-
-if (typeof require === 'function') {
-  Flyweight = require('./libs/flyweight.js');
-  Svg = require('./modules/svg');
-  Forms = require('./modules/forms');
-  Navigation = require('./modules/navigation');
-}
-
-var svg = new Svg(),
-    forms = new Forms();
-
-  Router = Flyweight.Router.extend({
-    routes: {
-      '*any': 'any',
-      'about': 'about'
-    },
-
-    any: function () {
-      //get the page if you are not ON the page
-      console.log("run standard page change code?");
-    },
-
-    about: function () {
-      console.log("specific code for about page");
-    }
-
-  });
-
-  var router = new Router();
-
-  Flyweight.history.start({
-    router: router
-  });
-
-  if (Flyweight.history._usePushState) {
-    // var nav = new Navigation();
-  }
-
-
-},{"./libs/flyweight.js":"/Users/lbauza/Sites/Personal/jimmyfrench/httpdocs/sites/all/themes/jf/src/js/libs/flyweight.js","./modules/forms":"/Users/lbauza/Sites/Personal/jimmyfrench/httpdocs/sites/all/themes/jf/src/js/modules/forms.js","./modules/navigation":"/Users/lbauza/Sites/Personal/jimmyfrench/httpdocs/sites/all/themes/jf/src/js/modules/navigation.js","./modules/svg":"/Users/lbauza/Sites/Personal/jimmyfrench/httpdocs/sites/all/themes/jf/src/js/modules/svg.js"}],"/Users/lbauza/Sites/Personal/jimmyfrench/httpdocs/sites/all/themes/jf/src/js/modules/forms.js":[function(require,module,exports){
+},{}],"/Users/lbauza/Sites/Personal/jimmyfrench/httpdocs/sites/all/themes/jf/src/js/modules/forms.js":[function(require,module,exports){
 (function ($) {
 
   "use strict";
@@ -732,4 +732,4 @@ var svg = new Svg(),
   module.exports = Svg;
 
 })(jQuery);
-},{"../libs/flyweight":"/Users/lbauza/Sites/Personal/jimmyfrench/httpdocs/sites/all/themes/jf/src/js/libs/flyweight.js"}]},{},["/Users/lbauza/Sites/Personal/jimmyfrench/httpdocs/sites/all/themes/jf/src/js/main.js"]);
+},{"../libs/flyweight":"/Users/lbauza/Sites/Personal/jimmyfrench/httpdocs/sites/all/themes/jf/src/js/libs/flyweight.js"}]},{},["/Users/lbauza/Sites/Personal/jimmyfrench/httpdocs/sites/all/themes/jf/src/js/app.js"]);
