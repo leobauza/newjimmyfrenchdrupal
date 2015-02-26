@@ -34,7 +34,7 @@ gulp.task('sprite', function () {
     }
   };
 
-  return gulp.src('./sites/all/themes/jf/assets/img/icons/*.svg')
+  return gulp.src('./sites/all/themes/jf/src/icons/*.svg')
     .pipe(svgSprite(config))
     .pipe(gulp.dest('./sites/all/themes/jf/'));
 
