@@ -3,7 +3,7 @@ var gulp = require('gulp'),
 
 gulp.task('sprite', function () {
 
-  config = {
+  var config = {
     shape: {
       spacing: {
         padding: 5
@@ -13,23 +13,35 @@ gulp.task('sprite', function () {
       css: {
         dest: '.',
         bust: false,
+        prefix: '',
         render: {
           scss: {
-            template: './gulp/tasks/sprite/sprite.scss',
-            dest: '_sprite.scss'
+            template: './gulp/tasks/sprite/sprite-template.scss',
+            dest: 'src/scss/core/_spritesvg.scss'
           }
         },
-        sprite: 'change/sprite.svg',
+        sprite: 'assets/img/sprite.svg',
+      }
+    },
+    variables: {
+      spriteFile: 'sprite.svg',
+      calcOffset: function () {
+        return function (values, render) {
+          var vals = render(values).split('|');
+          return vals[0] - vals[1];
+        };
       }
     }
   };
 
   return gulp.src('./sites/all/themes/jf/assets/img/icons/*.svg')
     .pipe(svgSprite(config))
-    .pipe(gulp.dest('./sites/all/themes/jf/assets/TEST/'));
-
+    .pipe(gulp.dest('./sites/all/themes/jf/'));
 
 });
+
+// need a PNG sprite fallback
+// need SCSS template to account for that...
 
 // gulp.task('pngSprite', ['svgSprite'], function() {
 //   return gulp.src('./sites/all/themes/jf/assets/img/sprite.svg')

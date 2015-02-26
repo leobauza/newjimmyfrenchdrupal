@@ -29,14 +29,14 @@
       text-indent: -9999px;
     }
     .twitter {
-      // @include sprite($icon_twitter_footer);
+      @include sprite($twitter);
       // @include sprite(twitter);
     }
     .dribbble {
-      // @include sprite(dribbble);
+      @include sprite($dribbble);
     }
     .instagram {
-      // @include sprite(instagram);
+      @include sprite($instagram);
     }
   }
 }
