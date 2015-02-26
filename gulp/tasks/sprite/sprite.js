@@ -17,7 +17,7 @@ gulp.task('sprite', function () {
         render: {
           scss: {
             template: './gulp/tasks/sprite/sprite-template.scss',
-            dest: 'src/scss/core/_spritesvg.scss'
+            dest: 'src/scss/core/_sprite.scss'
           }
         },
         sprite: 'assets/img/sprite.svg',

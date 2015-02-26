@@ -13,7 +13,7 @@
 		"../../../../../../core/_list.scss",
 		"../../../../../../core/_form.scss",
 		"../../../../../../core/_table.scss",
-		"../../../../../../core/_spritesvg.scss",
+		"../../../../../../core/_sprite.scss",
 		"../../../../../../app/components/_btn.scss",
 		"../../../../../../app/components/_callout.scss",
 		"../../../../../../app/components/_listgroup.scss",
