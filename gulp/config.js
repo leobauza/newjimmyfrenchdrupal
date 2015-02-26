@@ -1,5 +1,6 @@
 var src = './sites/all/themes/jf/src',
-    dest = './sites/all/themes/jf/assets';
+    dest = './sites/all/themes/jf/assets',
+    theme = './sites/all/themes/jf';
 
 module.exports = {
   browserify: {
@@ -14,5 +15,17 @@ module.exports = {
     //   dest: './sites/all/themes/jf/assets/js'
     // }
     ]
+  },
+  sass: {
+    entry: src + '/scss/styles.scss',
+    dest: dest + '/css',
+    style: 'compressed' // 'expanded'
+  },
+  sprite: {
+    entry: src + '/icons/*.svg',
+    dest: theme,
+    name: 'sprite.svg', // file name
+    sprite: './assets/img/', // dest rel to theme
+    scss:'./src/scss/core/_sprite.scss' // dest rel to theme
   }
 };

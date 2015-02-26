@@ -1,15 +1,18 @@
 var gulp = require('gulp'),
     sass = require('gulp-sass'),
     handleErrors = require('../util/handleErrors'),
-    sourcemaps = require('gulp-sourcemaps');
+    sourcemaps = require('gulp-sourcemaps'),
+    config = require('../config').sass;
 
 gulp.task('sass', function () {
 
-  return gulp.src('./sites/all/themes/jf/src/scss/styles.scss')
+  return gulp.src(config.entry)
     .pipe(sourcemaps.init())
-    .pipe(sass())
+    .pipe(sass({
+      outputStyle: config.style
+    }))
     .on('error', handleErrors)
     .pipe(sourcemaps.write())
-    .pipe(gulp.dest('./sites/all/themes/jf/assets/css'));
+    .pipe(gulp.dest(config.dest));
 
 });

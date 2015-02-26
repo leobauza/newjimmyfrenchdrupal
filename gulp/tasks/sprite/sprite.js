@@ -1,9 +1,10 @@
 var gulp = require('gulp'),
-    svgSprite = require('gulp-svg-sprite');
+    svgSprite = require('gulp-svg-sprite'),
+    config = require('../../config').sprite;
 
 gulp.task('sprite', function () {
 
-  var config = {
+  var sprite = {
     shape: {
       spacing: {
         padding: 5
@@ -17,14 +18,14 @@ gulp.task('sprite', function () {
         render: {
           scss: {
             template: './gulp/tasks/sprite/sprite-template.scss',
-            dest: 'src/scss/core/_sprite.scss'
+            dest: config.scss
           }
         },
-        sprite: 'assets/img/sprite.svg',
+        sprite: config.sprite + config.name,
       }
     },
     variables: {
-      spriteFile: 'sprite.svg',
+      spriteFile: config.name,
       calcOffset: function () {
         return function (values, render) {
           var vals = render(values).split('|');
@@ -34,9 +35,9 @@ gulp.task('sprite', function () {
     }
   };
 
-  return gulp.src('./sites/all/themes/jf/src/icons/*.svg')
-    .pipe(svgSprite(config))
-    .pipe(gulp.dest('./sites/all/themes/jf/'));
+  return gulp.src(config.entry)
+    .pipe(svgSprite(sprite))
+    .pipe(gulp.dest(config.dest));
 
 });
 

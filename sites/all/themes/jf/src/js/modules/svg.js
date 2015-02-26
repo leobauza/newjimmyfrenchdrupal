@@ -15,7 +15,6 @@
     debug: true,
 
     initialize: function () {
-
       var $hero = $(this.el),
           $paths = $(this.el + ' path');
 
