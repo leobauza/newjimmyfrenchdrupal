@@ -21,6 +21,8 @@
     "gulp-svg2png": "^0.3.0",
     "gulp-svg-sprites": "^2.0.1",
     "vinyl": "^0.4.6",
-    "gulp-svg-sprite": "^1.0.18"
+    "gulp-svg-sprite": "^1.0.18",
+    "gulp-sass": "^1.3.3",
+    "gulp-sourcemaps": "^1.5.0"
   }
 }
