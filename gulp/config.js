@@ -26,6 +26,7 @@ module.exports = {
     dest: theme,
     name: 'sprite.svg', // file name
     sprite: './assets/img/', // dest rel to theme
-    scss:'./src/scss/core/_sprite.scss' // dest rel to theme
+    scss:'./src/scss/core/_sprite.scss', // dest rel to theme
+    img: theme + '/assets/img' //img location for svg2png
   }
 };

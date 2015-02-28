@@ -1,8 +1,9 @@
 var gulp = require('gulp'),
     svgSprite = require('gulp-svg-sprite'),
+    svg2png = require('gulp-svg2png'),
     config = require('../../config').sprite;
 
-gulp.task('sprite', function () {
+gulp.task('svgSprite', function () {
 
   var sprite = {
     shape: {
@@ -41,13 +42,10 @@ gulp.task('sprite', function () {
 
 });
 
-// need a PNG sprite fallback
-// need SCSS template to account for that...
+gulp.task('pngSprite', ['svgSprite'], function() {
+  return gulp.src(config.img + '/' + config.name)
+    .pipe(svg2png())
+    .pipe(gulp.dest(config.img));
+});
 
-// gulp.task('pngSprite', ['svgSprite'], function() {
-//   return gulp.src('./sites/all/themes/jf/assets/img/sprite.svg')
-//     .pipe(svg2png())
-//     .pipe(gulp.dest('./sites/all/themes/jf/assets/img'));
-// });
-//
-// gulp.task('sprite', ['pngSprite']);
+gulp.task('sprite', ['pngSprite']);
