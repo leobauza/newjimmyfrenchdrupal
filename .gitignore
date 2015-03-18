@@ -8,3 +8,4 @@ sites/*/private
 .sass-cache
 node_modules
 .jshintrc
+*.log

@@ -5,7 +5,8 @@
  */
 ?>
 <!DOCTYPE html>
-<html lang="<?php print $language->language; ?>">
+<!--[if lt IE 9]><html class="lt-ie9" lang="<?php print $language->language; ?>"><![endif]-->
+<!--[if (gt IE 9)|!(IE)]><!--><html lang="<?php print $language->language; ?>"><!--<![endif]-->
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
