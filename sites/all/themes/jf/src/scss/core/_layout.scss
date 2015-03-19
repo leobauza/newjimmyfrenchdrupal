@@ -76,6 +76,7 @@ $global_gutter: 3.308129;
 
 /*
  * fluid row using overflow hidden
+ * ["case study basic", "case study full"]
  */
 
 .row-fluid {
@@ -105,6 +106,7 @@ $global_gutter: 3.308129;
 
 /*
  * fluid row using percentages
+ * ["information"]
  */
 
 .row-fluid--alt {
@@ -115,7 +117,7 @@ $global_gutter: 3.308129;
   $col_remainder: ($global_gutter/$global_columns) * 1;
   $padding: ($col_width * 1 - $global_gutter + $col_remainder) * 1%;
 
-  padding: 0px $padding;
+  padding: 60px $padding 0px;
   width: 100% - ($padding*2);
 
   &> [class*="span"] {

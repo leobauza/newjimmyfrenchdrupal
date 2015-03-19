@@ -151,6 +151,34 @@
 
 }
 
+/**
+ * Information
+ */
+
+.row-fluid--information {
+  @extend .row-fluid--alt;
+  .span5 > .inner {
+    padding: 0;
+    border-right: 2px solid $global_border;
+  }
+}
+
+.info__section {
+  border-bottom: 2px solid $global_border;
+  margin: 0px 29px 33px 0px;
+  &.row-fluid {
+    padding: 0;
+    width: auto;
+  }
+  &.l {
+    margin-bottom: 0;
+    border: none;
+  }
+}
+
+.info__form {
+
+}
 
 // Large Screens
 @media (min-width: 79.5em) { // 1272px (div by 16)

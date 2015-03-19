@@ -33,36 +33,38 @@
   </section>
   <?php print $messages; ?>
 
-  <section class="row-fluid--alt">
+  <section class="row-fluid--information">
     <section class="span5">
-      <article class="info__section">
-        <h2><?php print $subtitle; ?></h2>
-        <?php print $body; ?>
-      </article>
-      <article class="info__section row-fluid">
-        <div class="span4">
-          <h4>Capabilities</h4>
-          <ul>
-            <?php foreach ($capabilities as $capability): ?>
-              <li><?php print $capability['value']; ?></li>
-            <?php endforeach; ?>
-          </ul>
-        </div>
-        <div class="span6">
-          <h4>Featured On</h4>
-          <ul>
-            <?php foreach ($featured_on as $feature): ?>
-              <li>
-                <a target="_blank" href="<?php print $feature['field_url']['value']; ?>"><?php print $feature['field_text']['value']; ?></a>
-              </li>
-            <?php endforeach; ?>
-          </ul>
-        </div>
-      </article>
-      <article class="info__section l">
-        <h4>Connect</h4>
-        <p>some stuff in this stuff</p>
-      </article>
+      <div class="inner">
+        <article class="info__section">
+          <h2><?php print $subtitle; ?></h2>
+          <?php print $body; ?>
+        </article>
+        <article class="info__section row-fluid">
+          <div class="span4">
+            <h4>Capabilities</h4>
+            <ul>
+              <?php foreach ($capabilities as $capability): ?>
+                <li><?php print $capability['value']; ?></li>
+              <?php endforeach; ?>
+            </ul>
+          </div>
+          <div class="span6">
+            <h4>Featured On</h4>
+            <ul>
+              <?php foreach ($featured_on as $feature): ?>
+                <li>
+                  <a target="_blank" href="<?php print $feature['field_url']['value']; ?>"><?php print $feature['field_text']['value']; ?></a>
+                </li>
+              <?php endforeach; ?>
+            </ul>
+          </div>
+        </article>
+        <article class="info__section l">
+          <h4>Connect</h4>
+          <p>some stuff in this stuff</p>
+        </article>
+      </div>
     </section>
     <aside class="span5">
       <article class="info__form" data-form="Contact Form">
