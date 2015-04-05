@@ -18,18 +18,25 @@
 
       var _this = this;
 
+      this.baseUrl = window.location.protocol + "//" + window.location.host + '/';
+
       this.where = Flyweight.history.getFragment();
 
       this.markIgnored([
         '.nav-tabs a'
       ]);
 
-      window.addEventListener('popstate', function (e) {
+      // window.addEventListener('popstate', function (e) {
+      //   _this.loadPage.apply(_this, [e]);
+      // }, false);
+
+      $(window).on('popstate', function (e) {
+        e.preventDefault();
         _this.loadPage.apply(_this, [e]);
-      }, false);
+      });
 
     },
-
+    // click only
     processClick: function (e) {
 
       if ($(this).hasClass('-ignored')) {
@@ -45,34 +52,40 @@
         return;
       }
 
-      $.get(href, function (data) {
-        // do stuff...
-        // console.log("this works");
+      // console.log("i am going to:", where);
+      // console.log("i am at:", _this.where);
 
-        // then navigate
+      $.get(_this.baseUrl + href, function (data) {
+
+        var $data = $(data);
+        var $main = $data.filter('.main-content');
+
+        // replace main content
+        $('.main-content').html($main.html());
+
         _this.where = where;
         Flyweight.history.navigate(href, { trigger: true });
-      });
+      }, 'html');
 
     },
-
+    // browser buttons
     loadPage: function (e) {
       // ajax call
       var where = Flyweight.history.getFragment(),
           href = where,
           _this = this;
 
-      // console.log("i am going to:", where);
-      // console.log("i am at:", this.where);
+      $.get(_this.baseUrl + href, function (data) {
 
-      $.get(href, function (data) {
+        var $data = $(data);
+        var $main = $data.filter('.main-content');
 
-        // do stuff...
-        // console.log(data);
+        // replace main content
+        $('.main-content').html($main.html());
 
-        // then navigate
         _this.where = where;
-      });
+        Flyweight.history.navigate(href, { trigger: true });
+      }, 'html');
 
     },
 

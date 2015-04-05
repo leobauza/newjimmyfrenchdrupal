@@ -53,6 +53,7 @@ gulp.task('browserify', function () {
 
       return gulp.src([bundleConfig.entry])
         .pipe(bundle)
+        .on('error', handleErrors)
         .pipe(rename(bundleConfig.outputName))
         .pipe(gulp.dest(bundleConfig.dest))
         .on('end', function () {

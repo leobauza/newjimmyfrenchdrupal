@@ -14,22 +14,40 @@ if (typeof require === 'function') {
   Navigation = require('modules/navigation');
 }
 
-var svg = new Svg(),
-    forms = new Forms();
+/**
+ * Elements
+ */
+var $mainContent = jQuery('.main-content'),
+    $body = jQuery('body');
 
   Router = Flyweight.Router.extend({
     routes: {
+      '': 'home',
       '*any': 'any',
-      'about': 'about'
+      'about': 'about',
+      'project/:name' : 'project'
     },
 
     any: function () {
       //get the page if you are not ON the page
-      console.log("run standard page change code?");
+    },
+
+    home: function () {
+      $body.removeClass('node-type-project');
+      $mainContent.removeClass('-internal');
+      var svg = new Svg();
+      console.log(svg);
     },
 
     about: function () {
-      console.log("specific code for about page");
+      $body.removeClass('node-type-project');
+      $mainContent.removeClass('-internal');
+      var forms = new Forms();
+    },
+
+    project: function () {
+      $body.addClass('node-type-project');
+      $mainContent.addClass('-internal');
     }
 
   });
@@ -41,6 +59,6 @@ var svg = new Svg(),
   });
 
   if (Flyweight.history._usePushState) {
-    // var nav = new Navigation();
+    var nav = new Navigation();
   }
 
