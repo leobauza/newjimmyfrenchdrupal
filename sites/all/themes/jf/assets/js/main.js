@@ -3,66 +3,72 @@
  * !! DO NOT EDIT MAIN.JS !!
  * jf/src/app.js outputs to assets/js/main.js
  */
+(function ($) {
+  "use strict";
 
-"use strict";
+  var Flyweight, Svg, Forms, Router, Navigation;
 
-var Flyweight, Svg, Forms, Router, Navigation;
-
-if (typeof require === 'function') {
-  Flyweight = require('libs/flyweight');
-  Svg = require('modules/svg');
-  Forms = require('modules/forms');
-  Navigation = require('modules/navigation');
-}
-
-/**
- * Elements
- */
-var $mainContent = jQuery('.main-content'),
-    $body = jQuery('body');
-
-  Router = Flyweight.Router.extend({
-    routes: {
-      '': 'home',
-      '*any': 'any',
-      'about': 'about',
-      'project/:name' : 'project'
-    },
-
-    any: function () {
-      //get the page if you are not ON the page
-    },
-
-    home: function () {
-      $body.removeClass('node-type-project');
-      $mainContent.removeClass('-internal');
-      var svg = new Svg();
-      console.log(svg);
-    },
-
-    about: function () {
-      $body.removeClass('node-type-project');
-      $mainContent.removeClass('-internal');
-      var forms = new Forms();
-    },
-
-    project: function () {
-      $body.addClass('node-type-project');
-      $mainContent.addClass('-internal');
-    }
-
-  });
-
-  var router = new Router();
-
-  Flyweight.history.start({
-    router: router
-  });
-
-  if (Flyweight.history._usePushState) {
-    var nav = new Navigation();
+  if (typeof require === 'function') {
+    Flyweight = require('libs/flyweight');
+    Svg = require('modules/svg');
+    Forms = require('modules/forms');
+    Navigation = require('modules/navigation');
   }
 
+  /**
+   * Elements
+   */
+  var $mainContent = $('.main-content'),
+      $body = $('body');
+
+    Router = Flyweight.Router.extend({
+      routes: {
+        '': 'home',
+        '*any': 'any',
+        'about': 'about',
+        'project/:name' : 'project'
+      },
+
+      any: function () {
+        //get the page if you are not ON the page
+      },
+
+      home: function () {
+        // $body.removeClass('node-type-project');
+        // $mainContent.removeClass('-internal');
+        $(document)
+        .off('backEvent clickEvent')
+        .on('backEvent clickEvent', function (e, params) {
+          console.log(params);
+          var svg = new Svg();
+        });
+
+      },
+
+      about: function () {
+        // $body.removeClass('node-type-project');
+        // $mainContent.removeClass('-internal');
+        // var forms = new Forms();
+      },
+
+      project: function () {
+        // $body.addClass('node-type-project');
+        // $mainContent.addClass('-internal');
+      }
+
+    });
+
+    var router = new Router();
+
+    Flyweight.history.start({
+      router: router
+    });
+
+    if (Flyweight.history._usePushState) {
+      var nav = new Navigation();
+    }
+
+})(jQuery);
 
 },{"libs/flyweight":"/Users/lbauza/Sites/Personal/jimmyfrench/httpdocs/sites/all/themes/jf/src/js/libs/flyweight.js","modules/forms":"/Users/lbauza/Sites/Personal/jimmyfrench/httpdocs/sites/all/themes/jf/src/js/modules/forms.js","modules/navigation":"/Users/lbauza/Sites/Personal/jimmyfrench/httpdocs/sites/all/themes/jf/src/js/modules/navigation.js","modules/svg":"/Users/lbauza/Sites/Personal/jimmyfrench/httpdocs/sites/all/themes/jf/src/js/modules/svg.js"}],"/Users/lbauza/Sites/Personal/jimmyfrench/httpdocs/sites/all/themes/jf/src/js/libs/flyweight.js":[function(require,module,exports){
 /**
@@ -637,6 +643,11 @@ var $mainContent = jQuery('.main-content'),
 
         _this.where = where;
         Flyweight.history.navigate(href, { trigger: true });
+
+        $(document).trigger('clickEvent', {
+          html: $main.html()
+        });
+
       }, 'html');
 
     },
@@ -651,12 +662,15 @@ var $mainContent = jQuery('.main-content'),
 
         var $data = $(data);
         var $main = $data.filter('.main-content');
-
         // replace main content
         $('.main-content').html($main.html());
 
+        $(document).trigger('backEvent', {
+          html: $main.html()
+        });
+
         _this.where = where;
-        Flyweight.history.navigate(href, { trigger: true });
+        // Flyweight.history.navigate(href, { trigger: true });
       }, 'html');
 
     },

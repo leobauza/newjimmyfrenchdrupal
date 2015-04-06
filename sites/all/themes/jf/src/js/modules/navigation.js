@@ -65,6 +65,11 @@
 
         _this.where = where;
         Flyweight.history.navigate(href, { trigger: true });
+
+        $(document).trigger('clickEvent', {
+          html: $main.html()
+        });
+
       }, 'html');
 
     },
@@ -79,12 +84,15 @@
 
         var $data = $(data);
         var $main = $data.filter('.main-content');
-
         // replace main content
         $('.main-content').html($main.html());
 
+        $(document).trigger('backEvent', {
+          html: $main.html()
+        });
+
         _this.where = where;
-        Flyweight.history.navigate(href, { trigger: true });
+        // Flyweight.history.navigate(href, { trigger: true });
       }, 'html');
 
     },
