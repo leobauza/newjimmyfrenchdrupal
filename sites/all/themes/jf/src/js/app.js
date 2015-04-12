@@ -5,14 +5,17 @@
 (function ($) {
   "use strict";
 
-  var Flyweight, Svg, Forms, Router, Navigation;
-
-  if (typeof require === 'function') {
-    Flyweight = require('libs/flyweight');
-    Svg = require('modules/svg');
-    Forms = require('modules/forms');
-    Navigation = require('modules/navigation');
-  }
+  var Flyweight = require('libs/flyweight'),
+      Svg = require('modules/svg'),
+      Forms = require('modules/forms'),
+      Navigation = require('modules/navigation'),
+      imagesLoaded = require('imagesloaded'),
+      Status = {
+        any: 0,
+        home: 0,
+        about: 0,
+        project: 0
+      };
 
   /**
    * Elements
@@ -20,7 +23,7 @@
   var $mainContent = $('.main-content'),
       $body = $('body');
 
-    Router = Flyweight.Router.extend({
+  var Router = Flyweight.Router.extend({
       routes: {
         '': 'home',
         '*any': 'any',
@@ -33,26 +36,64 @@
       },
 
       home: function () {
-        // $body.removeClass('node-type-project');
-        // $mainContent.removeClass('-internal');
+
+        if (Status.home === 0) {
+          new Svg();
+          $body.removeClass('node-type-project');
+          $mainContent.removeClass('-internal');
+          Status.home = 1;
+        }
+
         $(document)
         .off('backEvent clickEvent')
         .on('backEvent clickEvent', function (e, params) {
-          console.log(params);
-          var svg = new Svg();
+          $mainContent.html(params.html);
+          $body.removeClass('node-type-project');
+          $mainContent.removeClass('-internal');
+          new Svg();
         });
 
       },
 
       about: function () {
+
+        if (Status.about === 0) {
+          new Forms();
+          $body.removeClass('node-type-project');
+          $mainContent.removeClass('-internal');
+          Status.about = 1;
+        }
+
+        $(document)
+        .off('backEvent clickEvent')
+        .on('backEvent clickEvent', function (e, params) {
+          $mainContent.html(params.html);
+          $body.removeClass('node-type-project');
+          $mainContent.removeClass('-internal');
+          var forms = new Forms();
+        });
+
         // $body.removeClass('node-type-project');
         // $mainContent.removeClass('-internal');
         // var forms = new Forms();
       },
 
       project: function () {
-        // $body.addClass('node-type-project');
-        // $mainContent.addClass('-internal');
+
+        if (Status.project === 0) {
+          $body.addClass('node-type-project');
+          $mainContent.addClass('-internal');
+          Status.project = 1;
+        }
+
+        $(document)
+        .off('backEvent clickEvent')
+        .on('backEvent clickEvent', function (e, params) {
+          $mainContent.html(params.html);
+          $body.addClass('node-type-project');
+          $mainContent.addClass('-internal');
+        });
+
       }
 
     });
@@ -66,5 +107,6 @@
     if (Flyweight.history._usePushState) {
       var nav = new Navigation();
     }
+
 
 })(jQuery);
