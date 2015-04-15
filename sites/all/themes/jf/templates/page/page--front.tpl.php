@@ -53,4 +53,15 @@
 </section>
 
 
+<section class="overlay">
+
+  <?php foreach ($projects as $key => $project): ?>
+    <a href="/<?php print $project['url']; ?>" class="overlay__item">
+      <img src="<?php print $project['thumbnail']; ?>" alt="<?php print $project['title']; ?>" />
+    </a>
+  <?php endforeach; ?>
+
+</section>
+
+
 <?php require_once path_to_theme('jf') . "/templates/partials/footer.tpl.inc"; ?>

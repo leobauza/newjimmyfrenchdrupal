@@ -15,7 +15,6 @@
     debug: true,
 
     initialize: function () {
-
       var data = $(this.el).data();
       this.formName = data.form;
 

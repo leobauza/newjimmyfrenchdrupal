@@ -33,14 +33,13 @@
 
       any: function () {
         //get the page if you are not ON the page
+        console.log("stuff");
       },
 
       home: function () {
 
         if (Status.home === 0) {
           new Svg();
-          $body.removeClass('node-type-project');
-          $mainContent.removeClass('-internal');
           Status.home = 1;
         }
 
@@ -50,6 +49,7 @@
           $mainContent.html(params.html);
           $body.removeClass('node-type-project');
           $mainContent.removeClass('-internal');
+          // only need a new one ONCE this should reactivate it
           new Svg();
         });
 
@@ -59,8 +59,6 @@
 
         if (Status.about === 0) {
           new Forms();
-          $body.removeClass('node-type-project');
-          $mainContent.removeClass('-internal');
           Status.about = 1;
         }
 
@@ -69,20 +67,15 @@
         .on('backEvent clickEvent', function (e, params) {
           $mainContent.html(params.html);
           $body.removeClass('node-type-project');
-          $mainContent.removeClass('-internal');
+          $mainContent.addClass('-internal');
           var forms = new Forms();
         });
 
-        // $body.removeClass('node-type-project');
-        // $mainContent.removeClass('-internal');
-        // var forms = new Forms();
       },
 
       project: function () {
 
         if (Status.project === 0) {
-          $body.addClass('node-type-project');
-          $mainContent.addClass('-internal');
           Status.project = 1;
         }
 
@@ -107,6 +100,5 @@
     if (Flyweight.history._usePushState) {
       var nav = new Navigation();
     }
-
 
 })(jQuery);

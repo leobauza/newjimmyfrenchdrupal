@@ -929,14 +929,13 @@ if ( typeof define === 'function' && define.amd ) {
 
       any: function () {
         //get the page if you are not ON the page
+        console.log("stuff");
       },
 
       home: function () {
 
         if (Status.home === 0) {
           new Svg();
-          $body.removeClass('node-type-project');
-          $mainContent.removeClass('-internal');
           Status.home = 1;
         }
 
@@ -946,6 +945,7 @@ if ( typeof define === 'function' && define.amd ) {
           $mainContent.html(params.html);
           $body.removeClass('node-type-project');
           $mainContent.removeClass('-internal');
+          // only need a new one ONCE this should reactivate it
           new Svg();
         });
 
@@ -955,8 +955,6 @@ if ( typeof define === 'function' && define.amd ) {
 
         if (Status.about === 0) {
           new Forms();
-          $body.removeClass('node-type-project');
-          $mainContent.removeClass('-internal');
           Status.about = 1;
         }
 
@@ -965,20 +963,15 @@ if ( typeof define === 'function' && define.amd ) {
         .on('backEvent clickEvent', function (e, params) {
           $mainContent.html(params.html);
           $body.removeClass('node-type-project');
-          $mainContent.removeClass('-internal');
+          $mainContent.addClass('-internal');
           var forms = new Forms();
         });
 
-        // $body.removeClass('node-type-project');
-        // $mainContent.removeClass('-internal');
-        // var forms = new Forms();
       },
 
       project: function () {
 
         if (Status.project === 0) {
-          $body.addClass('node-type-project');
-          $mainContent.addClass('-internal');
           Status.project = 1;
         }
 
@@ -1003,7 +996,6 @@ if ( typeof define === 'function' && define.amd ) {
     if (Flyweight.history._usePushState) {
       var nav = new Navigation();
     }
-
 
 })(jQuery);
 
@@ -1477,7 +1469,6 @@ if ( typeof define === 'function' && define.amd ) {
     debug: true,
 
     initialize: function () {
-
       var data = $(this.el).data();
       this.formName = data.form;
 
@@ -1512,6 +1503,7 @@ if ( typeof define === 'function' && define.amd ) {
   module.exports = Forms;
 
 })(jQuery);
+
 },{"../libs/flyweight":"/Users/lbauza/Sites/Drupal/jimmyfrench/httpdocs/sites/all/themes/jf/src/js/libs/flyweight.js"}],"/Users/lbauza/Sites/Drupal/jimmyfrench/httpdocs/sites/all/themes/jf/src/js/modules/navigation.js":[function(require,module,exports){
 (function ($) {
 
@@ -1538,7 +1530,8 @@ if ( typeof define === 'function' && define.amd ) {
       this.where = Flyweight.history.getFragment();
 
       this.markIgnored([
-        '.nav-tabs a'
+        '.nav-tabs a',
+        '.icon--grid'
       ]);
 
       // window.addEventListener('popstate', function (e) {
@@ -1596,7 +1589,6 @@ if ( typeof define === 'function' && define.amd ) {
           _this = this;
 
       $.get(_this.baseUrl + href, function (data) {
-
         var $data = $(data);
         var $main = $data.filter('.main-content');
         // replace main content
@@ -1619,12 +1611,50 @@ if ( typeof define === 'function' && define.amd ) {
       });
     },
 
+    navOverlay: function (e) {
+
+      // console.log(e.data.context);
+      var $overlay = $('.overlay'),
+          $items = $('.overlay .overlay__item'),
+          width = $items.width(),
+          height = $items.height(),
+          posX = 0,
+          posY = 0,
+          timeout = 0,
+          bodyHeight = $('body').height();
+
+      $overlay.height(bodyHeight);
+
+      $.each($items, function (k, v) {
+        setTimeout(function () {
+          $(v).css({
+            top: posY,
+            left: posX
+          });
+          if (posX < width*2) {
+            posX += width;
+          } else {
+            posX = 0;
+            posY += height;
+          }
+        }, timeout);
+
+        timeout += 100;
+
+
+      });
+
+      console.log($items.width());
+
+    },
+
     onDelegated: function (e) {
       // hi
     },
 
     events: {
-      'click a' : 'processClick'
+      'click a' : 'processClick',
+      'click .nav__toggle' : 'navOverlay'
     }
 
   });
@@ -1714,4 +1744,5 @@ if ( typeof define === 'function' && define.amd ) {
   module.exports = Svg;
 
 })(jQuery);
+
 },{"../libs/flyweight":"/Users/lbauza/Sites/Drupal/jimmyfrench/httpdocs/sites/all/themes/jf/src/js/libs/flyweight.js"}]},{},["/Users/lbauza/Sites/Drupal/jimmyfrench/httpdocs/sites/all/themes/jf/src/js/app.js"]);
