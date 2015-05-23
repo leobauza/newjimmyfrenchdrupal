@@ -23,8 +23,7 @@
       this.where = Flyweight.history.getFragment();
 
       this.markIgnored([
-        '.nav-tabs a',
-        '.icon--grid'
+        '.nav-tabs a'
       ]);
 
       // window.addEventListener('popstate', function (e) {
@@ -62,8 +61,7 @@
         var $main = $data.filter('.main-content');
 
         // replace main content
-        //$('.main-content').html($main.html());
-
+        $('.main-content').html($main.html());
         _this.where = where;
         Flyweight.history.navigate(href, { trigger: true });
 
@@ -82,10 +80,11 @@
           _this = this;
 
       $.get(_this.baseUrl + href, function (data) {
+
         var $data = $(data);
         var $main = $data.filter('.main-content');
         // replace main content
-        // $('.main-content').html($main.html());
+        $('.main-content').html($main.html());
 
         $(document).trigger('backEvent', {
           html: $main.html()
@@ -104,50 +103,12 @@
       });
     },
 
-    navOverlay: function (e) {
-
-      // console.log(e.data.context);
-      var $overlay = $('.overlay'),
-          $items = $('.overlay .overlay__item'),
-          width = $items.width(),
-          height = $items.height(),
-          posX = 0,
-          posY = 0,
-          timeout = 0,
-          bodyHeight = $('body').height();
-
-      $overlay.height(bodyHeight);
-
-      $.each($items, function (k, v) {
-        setTimeout(function () {
-          $(v).css({
-            top: posY,
-            left: posX
-          });
-          if (posX < width*2) {
-            posX += width;
-          } else {
-            posX = 0;
-            posY += height;
-          }
-        }, timeout);
-
-        timeout += 100;
-
-
-      });
-
-      console.log($items.width());
-
-    },
-
     onDelegated: function (e) {
       // hi
     },
 
     events: {
-      'click a' : 'processClick',
-      'click .nav__toggle' : 'navOverlay'
+      'click a' : 'processClick'
     }
 
   });

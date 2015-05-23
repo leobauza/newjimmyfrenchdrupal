@@ -9,13 +9,8 @@
       Svg = require('modules/svg'),
       Forms = require('modules/forms'),
       Navigation = require('modules/navigation'),
-      imagesLoaded = require('imagesloaded'),
-      Status = {
-        any: 0,
-        home: 0,
-        about: 0,
-        project: 0
-      };
+      Land = 0,
+      Router;
 
   /**
    * Elements
@@ -23,7 +18,7 @@
   var $mainContent = $('.main-content'),
       $body = $('body');
 
-  var Router = Flyweight.Router.extend({
+    Router = Flyweight.Router.extend({
       routes: {
         '': 'home',
         '*any': 'any',
@@ -31,62 +26,48 @@
         'project/:name' : 'project'
       },
 
-      any: function () {
-        //get the page if you are not ON the page
-        console.log("stuff");
-      },
-
       home: function () {
 
-        if (Status.home === 0) {
-          new Svg();
-          Status.home = 1;
+        if (Land === 0) {
+          console.log(Land);
+          var svg = new Svg();
+          Land = 1; // capture when we land in a non-ajaxy way
+        } else {
+          $body.removeClass('node-type-project');
+          $mainContent.removeClass('-internal');
         }
-
         $(document)
         .off('backEvent clickEvent')
         .on('backEvent clickEvent', function (e, params) {
-          $mainContent.html(params.html);
-          $body.removeClass('node-type-project');
-          $mainContent.removeClass('-internal');
-          // only need a new one ONCE this should reactivate it
-          new Svg();
+          console.log(params);
+          var svg = new Svg();
         });
 
       },
 
       about: function () {
 
-        if (Status.about === 0) {
-          new Forms();
-          Status.about = 1;
+        if (Land === 0 ) {
+          Land = 1; // capture when we land in a non-ajaxy way
         }
-
-        $(document)
-        .off('backEvent clickEvent')
-        .on('backEvent clickEvent', function (e, params) {
-          $mainContent.html(params.html);
-          $body.removeClass('node-type-project');
-          $mainContent.addClass('-internal');
-          var forms = new Forms();
-        });
+        $body.removeClass('node-type-project');
+        $mainContent.removeClass('-internal');
+        var forms = new Forms();
 
       },
 
       project: function () {
 
-        if (Status.project === 0) {
-          Status.project = 1;
+        if (Land === 0 ) {
+          Land = 1; // capture when we land in a non-ajaxy way
         }
+        $body.addClass('node-type-project');
+        $mainContent.addClass('-internal');
 
-        $(document)
-        .off('backEvent clickEvent')
-        .on('backEvent clickEvent', function (e, params) {
-          $mainContent.html(params.html);
-          $body.addClass('node-type-project');
-          $mainContent.addClass('-internal');
-        });
+      },
 
+      any: function (a) {
+        //get the page if you are not ON the page
       }
 
     });
