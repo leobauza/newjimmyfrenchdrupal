@@ -15,6 +15,7 @@
     debug: true,
 
     initialize: function () {
+
       var data = $(this.el).data();
       this.formName = data.form;
 
@@ -27,7 +28,7 @@
       var _this = e.data.context,
           form = $(this),
           postData = form.serialize(),
-          nid = Drupal.settings.forms[_this.formName];
+          nid = form.data().id;
 
       $.post("/webform_ajax/" + nid, postData, function (data) {
 

@@ -136,8 +136,9 @@ function _custom_webform_ajax_access() {
 
 // // webform
 function jfm_form_alter(&$form, &$form_state, $form_id) {
-  if(strstr($form_id, 'webform_client_form_')) {
 
+  if(strstr($form_id, 'webform_client_form_')) {
+    $form['#attributes']['data-id'] = $form['#node']->nid;
     drupal_add_js(array(
       'forms' => array(
         $form['#node']->title => $form['#node']->nid
