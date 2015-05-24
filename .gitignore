@@ -5,7 +5,6 @@ sites/*/settings*.php
 sites/*/files
 sites/*/private
 
-.sass-cache
+.sass-cache/
 node_modules
 .jshintrc
-*.log
