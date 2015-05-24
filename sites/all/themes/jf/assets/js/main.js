@@ -22,7 +22,6 @@
   var $mainContent = $('.main-content'),
       $body = $('body');
 
-
   /**
    * Listen to page changes for HTML
    */
@@ -33,6 +32,7 @@
       route: params.route
     });
     $('body').removeClass('loading'); // class added navigation.pageChange()
+    Drupal.attachBehaviors('.main-content'); // make contextual links work again (and other modules js)
 
   });
 
@@ -42,7 +42,6 @@
   $(document).on('pageSetup', function (e, params) {
 
     $mainContent.html(html);
-    Drupal.attachBehaviors(); // make contextual links work again (and other modules js)
 
     switch (params.route) {
       case 'about':
