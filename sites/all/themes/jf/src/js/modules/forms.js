@@ -11,12 +11,12 @@
   var Forms = Flyweight.Module.extend({
 
     name: 'Forms',
-    el: '.info__form',
-    debug: true,
+    //el: '.info__form', //not great for ajax
+    debug: false,
 
     initialize: function () {
 
-      var data = $(this.el).data();
+      var data = $('.info__form').data();
       this.formName = data.form;
 
     },
@@ -39,10 +39,11 @@
     },
 
     onDelegated: function (e) {
+      this.msg("events have been delegated!", 'warn');
     },
 
     events: {
-      'submit form' : 'submit'
+      'submit .info__form form' : 'submit',
     }
 
   });

@@ -1,5 +1,15 @@
 /* app/globals/site */
 
+body.loading {
+  background: $offwhite;
+  .site__header {
+    background: $brand;
+  }
+  .main-content {
+    visibility: hidden;
+  }
+}
+
 /**
  * Homepage
  */

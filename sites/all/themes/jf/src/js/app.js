@@ -9,7 +9,10 @@
       Svg = require('modules/svg'),
       Forms = require('modules/forms'),
       Navigation = require('modules/navigation'),
-      Land = 0,
+      Land = 0, // landing marker
+      svg = {}, // homepage svg
+      form = {},
+      html = '', // ajaxed html
       Router;
 
   /**
@@ -18,68 +21,111 @@
   var $mainContent = $('.main-content'),
       $body = $('body');
 
-    Router = Flyweight.Router.extend({
-      routes: {
-        '': 'home',
-        '*any': 'any',
-        'about': 'about',
-        'project/:name' : 'project'
-      },
 
-      home: function () {
+  /**
+   * Listen to page changes for HTML
+   */
+  $(document).on('pageChange', function (e, params) {
 
-        if (Land === 0) {
-          console.log(Land);
-          var svg = new Svg();
-          Land = 1; // capture when we land in a non-ajaxy way
+    html = params.html;
+    $(document).trigger('pageSetup', {
+      route: params.route
+    });
+    $('body').removeClass('loading'); // class added navigation.pageChange()
+
+  });
+
+  /**
+   * Listen for q to set up the page
+   */
+  $(document).on('pageSetup', function (e, params) {
+
+    $mainContent.html(html);
+    Drupal.attachBehaviors(); // make contextual links work again (and other modules js)
+
+    switch (params.route) {
+      case 'about':
+        if (typeof form === 'object' && 'initialize' in form) {
+          form.delegateEvents(); // form initiated just need to delegate the submit button again
+          // form.initialize();
         } else {
-          $body.removeClass('node-type-project');
-          $mainContent.removeClass('-internal');
+          form = new Forms();
         }
-        $(document)
-        .off('backEvent clickEvent')
-        .on('backEvent clickEvent', function (e, params) {
-          console.log(params);
-          var svg = new Svg();
-        });
+        break;
 
-      },
+      case 'project':
+        // nothing yet
+        break;
 
-      about: function () {
-
-        if (Land === 0 ) {
-          Land = 1; // capture when we land in a non-ajaxy way
+      default:
+        if (typeof svg === 'object' && 'initialize' in svg) {
+          svg.initialize();
+        } else {
+          svg = new Svg();
         }
+        break;
+    }
+
+  });
+
+
+  Router = Flyweight.Router.extend({
+    routes: {
+      '': 'home',
+      '*any': 'any',
+      'about': 'about',
+      'project/:name' : 'project'
+    },
+
+    home: function () {
+
+      if (Land === 0) {
+        svg = new Svg();
+        Land = 1; // capture when we land in a non-ajaxy way
+      } else {
         $body.removeClass('node-type-project');
         $mainContent.removeClass('-internal');
-        var forms = new Forms();
-
-      },
-
-      project: function () {
-
-        if (Land === 0 ) {
-          Land = 1; // capture when we land in a non-ajaxy way
-        }
-        $body.addClass('node-type-project');
-        $mainContent.addClass('-internal');
-
-      },
-
-      any: function (a) {
-        //get the page if you are not ON the page
       }
 
-    });
+    },
 
-    var router = new Router();
+    about: function () {
 
-    Flyweight.history.start({
-      router: router
-    });
+      if (Land === 0 ) {
+        form = new Forms();
+        Land = 1; // capture when we land in a non-ajaxy way
+      } else {
+        $body.removeClass('node-type-project');
+        $mainContent.removeClass('-internal');
+      }
 
-    if (Flyweight.history._usePushState) {
-      var nav = new Navigation();
+    },
+
+    project: function () {
+
+      if (Land === 0 ) {
+        Land = 1; // capture when we land in a non-ajaxy way
+      } else {
+        $body.addClass('node-type-project');
+        $mainContent.addClass('-internal');
+      }
+
+    },
+
+    any: function (a) {
+
     }
+
+  });
+
+  var router = new Router();
+
+  Flyweight.history.start({
+    router: router
+  });
+
+  if (Flyweight.history._usePushState) {
+    var nav = new Navigation();
+  }
 
 })(jQuery);

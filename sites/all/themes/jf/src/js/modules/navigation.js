@@ -22,9 +22,7 @@
 
       this.where = Flyweight.history.getFragment();
 
-      this.markIgnored([
-        '.nav-tabs a'
-      ]);
+      this.markIgnored(['.nav-tabs a', '#admin-menu a']);
 
       // window.addEventListener('popstate', function (e) {
       //   _this.loadPage.apply(_this, [e]);
@@ -32,10 +30,35 @@
 
       $(window).on('popstate', function (e) {
         e.preventDefault();
-        _this.loadPage.apply(_this, [e]);
+        _this.browserEvent.apply(_this, [e]);
       });
 
     },
+
+    pageChange: function (href, where) {
+
+      var _this = this,
+          route = where.split('/')[0];
+
+      $('body').addClass('loading');
+      $.get(this.baseUrl + href, function (data) {
+
+        var $data = $(data);
+        var $main = $data.filter('.main-content');
+
+        // control replacing the main content from the router
+        $(document).trigger('pageChange', {
+          html: $main.html(),
+          route: route
+        });
+
+        _this.where = where;
+        Flyweight.history.navigate(href, { trigger: true });
+
+      }, 'html');
+
+    },
+
     // click only
     processClick: function (e) {
 
@@ -52,55 +75,30 @@
         return;
       }
 
-      // console.log("i am going to:", where);
-      // console.log("i am at:", _this.where);
-
-      $.get(_this.baseUrl + href, function (data) {
-
-        var $data = $(data);
-        var $main = $data.filter('.main-content');
-
-        // replace main content
-        $('.main-content').html($main.html());
-        _this.where = where;
-        Flyweight.history.navigate(href, { trigger: true });
-
-        $(document).trigger('clickEvent', {
-          html: $main.html()
-        });
-
-      }, 'html');
+      _this.pageChange(href, where);
 
     },
+
     // browser buttons
-    loadPage: function (e) {
+    browserEvent: function (e) {
+
       // ajax call
       var where = Flyweight.history.getFragment(),
           href = where,
           _this = this;
 
-      $.get(_this.baseUrl + href, function (data) {
-
-        var $data = $(data);
-        var $main = $data.filter('.main-content');
-        // replace main content
-        $('.main-content').html($main.html());
-
-        $(document).trigger('backEvent', {
-          html: $main.html()
-        });
-
-        _this.where = where;
-        // Flyweight.history.navigate(href, { trigger: true });
-      }, 'html');
+      this.pageChange(href, where);
 
     },
 
     markIgnored: function (selectors) {
       // find all links that should'd be ajaxyfied
-      $.each(selectors, function (i, selector) {
-        $(selector).addClass('-ignored');
-      });
+      setTimeout(function () {
+        $.each(selectors, function (i, selector) {
+          $(selector).addClass('-ignored');
+        });
+      }, 1000); // find a better way to wait for the admin menu to load...
+
     },
 
     onDelegated: function (e) {

@@ -10,7 +10,10 @@
       Svg = require('modules/svg'),
       Forms = require('modules/forms'),
       Navigation = require('modules/navigation'),
-      Land = 0,
+      Land = 0, // landing marker
+      svg = {}, // homepage svg
+      form = {},
+      html = '', // ajaxed html
       Router;
 
   /**
@@ -19,69 +22,112 @@
   var $mainContent = $('.main-content'),
       $body = $('body');
 
-    Router = Flyweight.Router.extend({
-      routes: {
-        '': 'home',
-        '*any': 'any',
-        'about': 'about',
-        'project/:name' : 'project'
-      },
 
-      home: function () {
+  /**
+   * Listen to page changes for HTML
+   */
+  $(document).on('pageChange', function (e, params) {
 
-        if (Land === 0) {
-          console.log(Land);
-          var svg = new Svg();
-          Land = 1; // capture when we land in a non-ajaxy way
+    html = params.html;
+    $(document).trigger('pageSetup', {
+      route: params.route
+    });
+    $('body').removeClass('loading'); // class added navigation.pageChange()
+
+  });
+
+  /**
+   * Listen for q to set up the page
+   */
+  $(document).on('pageSetup', function (e, params) {
+
+    $mainContent.html(html);
+    Drupal.attachBehaviors(); // make contextual links work again (and other modules js)
+
+    switch (params.route) {
+      case 'about':
+        if (typeof form === 'object' && 'initialize' in form) {
+          form.delegateEvents(); // form initiated just need to delegate the submit button again
+          // form.initialize();
         } else {
-          $body.removeClass('node-type-project');
-          $mainContent.removeClass('-internal');
+          form = new Forms();
         }
-        $(document)
-        .off('backEvent clickEvent')
-        .on('backEvent clickEvent', function (e, params) {
-          console.log(params);
-          var svg = new Svg();
-        });
+        break;
 
-      },
+      case 'project':
+        // nothing yet
+        break;
 
-      about: function () {
-
-        if (Land === 0 ) {
-          Land = 1; // capture when we land in a non-ajaxy way
+      default:
+        if (typeof svg === 'object' && 'initialize' in svg) {
+          svg.initialize();
+        } else {
+          svg = new Svg();
         }
+        break;
+    }
+
+  });
+
+
+  Router = Flyweight.Router.extend({
+    routes: {
+      '': 'home',
+      '*any': 'any',
+      'about': 'about',
+      'project/:name' : 'project'
+    },
+
+    home: function () {
+
+      if (Land === 0) {
+        svg = new Svg();
+        Land = 1; // capture when we land in a non-ajaxy way
+      } else {
         $body.removeClass('node-type-project');
         $mainContent.removeClass('-internal');
-        var forms = new Forms();
-
-      },
-
-      project: function () {
-
-        if (Land === 0 ) {
-          Land = 1; // capture when we land in a non-ajaxy way
-        }
-        $body.addClass('node-type-project');
-        $mainContent.addClass('-internal');
-
-      },
-
-      any: function (a) {
-        //get the page if you are not ON the page
       }
 
-    });
+    },
 
-    var router = new Router();
+    about: function () {
 
-    Flyweight.history.start({
-      router: router
-    });
+      if (Land === 0 ) {
+        form = new Forms();
+        Land = 1; // capture when we land in a non-ajaxy way
+      } else {
+        $body.removeClass('node-type-project');
+        $mainContent.removeClass('-internal');
+      }
 
-    if (Flyweight.history._usePushState) {
-      var nav = new Navigation();
+    },
+
+    project: function () {
+
+      if (Land === 0 ) {
+        Land = 1; // capture when we land in a non-ajaxy way
+      } else {
+        $body.addClass('node-type-project');
+        $mainContent.addClass('-internal');
+      }
+
+    },
+
+    any: function (a) {
+
     }
+
+  });
+
+  var router = new Router();
+
+  Flyweight.history.start({
+    router: router
+  });
+
+  if (Flyweight.history._usePushState) {
+    var nav = new Navigation();
+  }
 
 })(jQuery);
 
@@ -551,12 +597,12 @@
   var Forms = Flyweight.Module.extend({
 
     name: 'Forms',
-    el: '.info__form',
-    debug: true,
+    //el: '.info__form', //not great for ajax
+    debug: false,
 
     initialize: function () {
 
-      var data = $(this.el).data();
+      var data = $('.info__form').data();
       this.formName = data.form;
 
     },
@@ -579,10 +625,11 @@
     },
 
     onDelegated: function (e) {
+      this.msg("events have been delegated!", 'warn');
     },
 
     events: {
-      'submit form' : 'submit'
+      'submit .info__form form' : 'submit',
     }
 
   });
@@ -616,9 +663,7 @@
 
       this.where = Flyweight.history.getFragment();
 
-      this.markIgnored([
-        '.nav-tabs a'
-      ]);
+      this.markIgnored(['.nav-tabs a', '#admin-menu a']);
 
       // window.addEventListener('popstate', function (e) {
       //   _this.loadPage.apply(_this, [e]);
@@ -626,10 +671,35 @@
 
       $(window).on('popstate', function (e) {
         e.preventDefault();
-        _this.loadPage.apply(_this, [e]);
+        _this.browserEvent.apply(_this, [e]);
       });
 
     },
+
+    pageChange: function (href, where) {
+
+      var _this = this,
+          route = where.split('/')[0];
+
+      $('body').addClass('loading');
+      $.get(this.baseUrl + href, function (data) {
+
+        var $data = $(data);
+        var $main = $data.filter('.main-content');
+
+        // control replacing the main content from the router
+        $(document).trigger('pageChange', {
+          html: $main.html(),
+          route: route
+        });
+
+        _this.where = where;
+        Flyweight.history.navigate(href, { trigger: true });
+
+      }, 'html');
+
+    },
+
     // click only
     processClick: function (e) {
 
@@ -646,55 +716,30 @@
         return;
       }
 
-      // console.log("i am going to:", where);
-      // console.log("i am at:", _this.where);
-
-      $.get(_this.baseUrl + href, function (data) {
-
-        var $data = $(data);
-        var $main = $data.filter('.main-content');
-
-        // replace main content
-        $('.main-content').html($main.html());
-        _this.where = where;
-        Flyweight.history.navigate(href, { trigger: true });
-
-        $(document).trigger('clickEvent', {
-          html: $main.html()
-        });
-
-      }, 'html');
+      _this.pageChange(href, where);
 
     },
+
     // browser buttons
-    loadPage: function (e) {
+    browserEvent: function (e) {
+
       // ajax call
       var where = Flyweight.history.getFragment(),
           href = where,
           _this = this;
 
-      $.get(_this.baseUrl + href, function (data) {
-
-        var $data = $(data);
-        var $main = $data.filter('.main-content');
-        // replace main content
-        $('.main-content').html($main.html());
-
-        $(document).trigger('backEvent', {
-          html: $main.html()
-        });
-
-        _this.where = where;
-        // Flyweight.history.navigate(href, { trigger: true });
-      }, 'html');
+      this.pageChange(href, where);
 
     },
 
     markIgnored: function (selectors) {
       // find all links that should'd be ajaxyfied
-      $.each(selectors, function (i, selector) {
-        $(selector).addClass('-ignored');
-      });
+      setTimeout(function () {
+        $.each(selectors, function (i, selector) {
+          $(selector).addClass('-ignored');
+        });
+      }, 1000); // find a better way to wait for the admin menu to load...
+
     },
 
     onDelegated: function (e) {
