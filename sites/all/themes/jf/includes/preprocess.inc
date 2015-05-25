@@ -24,25 +24,6 @@ function jf_preprocess_page(&$vars) {
       $theme_picked = $theme_picked['#items'][0]['value'];
     }
 
-  }
-
-
-  /**
-   * Homepage
-   */
-  if (isset($vars['node']) && $vars['is_front']) {
-
-    // Fields
-    $fields = $jf->getFieldValues($node, array(
-      'field_intro_image',
-      'field_url',
-      'field_svg_paths',
-    ));
-
-    $intro_img = file_create_url($fields['field_intro_image']['uri']);
-    $vars['intro_url'] = $fields['field_url'];
-    $vars['intro_img'] = $intro_img;
-    $vars['svg_paths'] = $fields['field_svg_paths']['value'];
 
     // View
     $projects_view = $jf->getView('projects', 'block');
@@ -66,6 +47,26 @@ function jf_preprocess_page(&$vars) {
     }
 
     $vars['projects'] = $projects;
+
+  }
+
+
+  /**
+   * Homepage
+   */
+  if (isset($vars['node']) && $vars['is_front']) {
+
+    // Fields
+    $fields = $jf->getFieldValues($node, array(
+      'field_intro_image',
+      'field_url',
+      'field_svg_paths',
+    ));
+
+    $intro_img = file_create_url($fields['field_intro_image']['uri']);
+    $vars['intro_url'] = $fields['field_url'];
+    $vars['intro_img'] = $intro_img;
+    $vars['svg_paths'] = $fields['field_svg_paths']['value'];
 
   }
 

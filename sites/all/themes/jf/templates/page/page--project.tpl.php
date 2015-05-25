@@ -75,9 +75,6 @@ if ($fields['field_case_study_template']['value'] === 'full') {
     </div>
   </section>
 
-
-
 </section>
-
 
 <?php require_once path_to_theme('jf') . "/templates/partials/footer.tpl.inc"; ?>

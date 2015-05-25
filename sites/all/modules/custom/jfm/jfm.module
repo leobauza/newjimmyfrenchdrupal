@@ -133,8 +133,7 @@ function _custom_webform_ajax_access() {
   return true;
 }
 
-
-// // webform
+// webform
 function jfm_form_alter(&$form, &$form_state, $form_id) {
 
   if(strstr($form_id, 'webform_client_form_')) {

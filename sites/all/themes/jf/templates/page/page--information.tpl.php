@@ -69,7 +69,7 @@
     <aside class="span5">
       <article class="info__form" data-form="Contact Form">
         <h2>Let's Work Together</h2>
-        <p>I’m always looking for new & interesting projects. If you’re looking for a designer, let’s chat!</p>
+        <p>I’m always looking for new &amp; interesting projects. If you’re looking for a designer, let’s chat!</p>
         <?php
           print render($page['form']);
         ?>
@@ -77,8 +77,6 @@
     </aside>
   </section>
 
-
 </section>
-
 
 <?php require_once path_to_theme('jf') . "/templates/partials/footer.tpl.inc"; ?>

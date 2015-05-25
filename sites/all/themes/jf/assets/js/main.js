@@ -32,6 +32,13 @@
       route: params.route
     });
     $('body').removeClass('loading'); // class added navigation.pageChange()
+    /**
+     * So this stupid thing...
+     * The contextual links won't work because if you land on a page without
+     * contextual links then the behaviour isn't available for you to attach
+     * ie. landing on the homepage which has no contextual links anywhere means
+     * the module never loaded its crap in the first place. Great...
+     */
     Drupal.attachBehaviors('.main-content'); // make contextual links work again (and other modules js)
 
   });
