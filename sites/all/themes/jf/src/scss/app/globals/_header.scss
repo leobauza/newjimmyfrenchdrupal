@@ -5,7 +5,7 @@
   top: 0;
   left: 0;
   width: 100%;
-  z-index: 100;
+  z-index: 500;
   .admin-menu & {
     top: 20px;// 29px;
   }
@@ -49,10 +49,36 @@
   position: fixed;
   left: 100px;
   top: 41px;
+  z-index: 500;
   // @include sprite($icon_grid);
   // text-indent: -9999px;
   .admin-menu & {
-    top: (41 + 29) + px;
+    top: (41 + 20) + px;//(41 + 29) + px;
+  }
+  &.open {
+    @include transition(all .5s);
+    @include rotate(-45deg);
+    .square {
+    //   &.-a {
+    //     top: 10px;
+    //     left: -10px;
+    //   }
+    //   &.-c {
+    //     top: -10px;
+    //     left: 10px;
+    //   }
+    //   &.-i {
+    //     top: 10px;
+    //     left: 30px;
+    //   }
+    //   &.-g {
+    //     top: 30px;
+    //     left: 10px;
+    //   }
+      &.-a, &.-c, &.-i, &.-g {
+        visibility: hidden;
+      }
+    }
   }
 }
 

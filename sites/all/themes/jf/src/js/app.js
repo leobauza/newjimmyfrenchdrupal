@@ -6,6 +6,7 @@
   "use strict";
 
   var Flyweight = require('libs/flyweight'),
+      Menu = require('modules/menu'),
       Svg = require('modules/svg'),
       Forms = require('modules/forms'),
       Navigation = require('modules/navigation'),
@@ -13,6 +14,7 @@
       svg = {}, // homepage svg
       form = {},
       html = '', // ajaxed html
+      menu,
       Router;
 
   /**
@@ -78,9 +80,17 @@
   Router = Flyweight.Router.extend({
     routes: {
       '': 'home',
-      '*any': 'any',
       'about': 'about',
-      'project/:name' : 'project'
+      'project/:name' : 'project',
+      '*any': 'any'
+    },
+
+    any: function () {
+
+      if (Land === 0) {
+        menu = new Menu();
+      }
+
     },
 
     home: function () {
@@ -115,10 +125,6 @@
         $body.addClass('node-type-project');
         $mainContent.addClass('-internal');
       }
-
-    },
-
-    any: function (a) {
 
     }
 

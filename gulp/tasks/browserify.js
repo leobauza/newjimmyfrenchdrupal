@@ -23,7 +23,7 @@ gulp.task('browserify', function () {
       b = browserify(filename, {
         cache: {},
         packageCache: {},
-        fullPaths: true,
+        fullPaths: false,
         paths: [
           './node_modules',
           './sites/all/themes/jf/src/js',

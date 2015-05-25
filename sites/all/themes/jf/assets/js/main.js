@@ -1,4 +1,4 @@
-(function e(t,n,r){function s(o,u){if(!n[o]){if(!t[o]){var a=typeof require=="function"&&require;if(!u&&a)return a(o,!0);if(i)return i(o,!0);var f=new Error("Cannot find module '"+o+"'");throw f.code="MODULE_NOT_FOUND",f}var l=n[o]={exports:{}};t[o][0].call(l.exports,function(e){var n=t[o][1][e];return s(n?n:e)},l,l.exports,e,t,n,r)}return n[o].exports}var i=typeof require=="function"&&require;for(var o=0;o<r.length;o++)s(r[o]);return s})({"/Users/lbauza/Sites/Personal/jimmyfrench/httpdocs/sites/all/themes/jf/src/js/app.js":[function(require,module,exports){
+(function e(t,n,r){function s(o,u){if(!n[o]){if(!t[o]){var a=typeof require=="function"&&require;if(!u&&a)return a(o,!0);if(i)return i(o,!0);var f=new Error("Cannot find module '"+o+"'");throw f.code="MODULE_NOT_FOUND",f}var l=n[o]={exports:{}};t[o][0].call(l.exports,function(e){var n=t[o][1][e];return s(n?n:e)},l,l.exports,e,t,n,r)}return n[o].exports}var i=typeof require=="function"&&require;for(var o=0;o<r.length;o++)s(r[o]);return s})({1:[function(require,module,exports){
 /**
  * !! DO NOT EDIT MAIN.JS !!
  * jf/src/app.js outputs to assets/js/main.js
@@ -7,6 +7,7 @@
   "use strict";
 
   var Flyweight = require('libs/flyweight'),
+      Menu = require('modules/menu'),
       Svg = require('modules/svg'),
       Forms = require('modules/forms'),
       Navigation = require('modules/navigation'),
@@ -14,6 +15,7 @@
       svg = {}, // homepage svg
       form = {},
       html = '', // ajaxed html
+      menu,
       Router;
 
   /**
@@ -79,9 +81,17 @@
   Router = Flyweight.Router.extend({
     routes: {
       '': 'home',
-      '*any': 'any',
       'about': 'about',
-      'project/:name' : 'project'
+      'project/:name' : 'project',
+      '*any': 'any'
+    },
+
+    any: function () {
+
+      if (Land === 0) {
+        menu = new Menu();
+      }
+
     },
 
     home: function () {
@@ -117,10 +127,6 @@
         $mainContent.addClass('-internal');
       }
 
-    },
-
-    any: function (a) {
-
     }
 
   });
@@ -137,7 +143,7 @@
 
 })(jQuery);
 
-},{"libs/flyweight":"/Users/lbauza/Sites/Personal/jimmyfrench/httpdocs/sites/all/themes/jf/src/js/libs/flyweight.js","modules/forms":"/Users/lbauza/Sites/Personal/jimmyfrench/httpdocs/sites/all/themes/jf/src/js/modules/forms.js","modules/navigation":"/Users/lbauza/Sites/Personal/jimmyfrench/httpdocs/sites/all/themes/jf/src/js/modules/navigation.js","modules/svg":"/Users/lbauza/Sites/Personal/jimmyfrench/httpdocs/sites/all/themes/jf/src/js/modules/svg.js"}],"/Users/lbauza/Sites/Personal/jimmyfrench/httpdocs/sites/all/themes/jf/src/js/libs/flyweight.js":[function(require,module,exports){
+},{"libs/flyweight":2,"modules/forms":3,"modules/menu":4,"modules/navigation":5,"modules/svg":6}],2:[function(require,module,exports){
 /**
  * The Flyweight Class
  */
@@ -254,7 +260,7 @@
     Flyweight.msg('Creating a module named: ' + this.name, 'warn');
     var el = element || this.el || document,
         _this = this,
-        moduleOptions = this.moduleOptions || {};
+        moduleOptions = this.options || {};
 
     if (!$(el).length) {
       Flyweight.msg('this el is no present, so module won\'t be initialized', 'warn');
@@ -589,7 +595,7 @@
 
 });
 
-},{}],"/Users/lbauza/Sites/Personal/jimmyfrench/httpdocs/sites/all/themes/jf/src/js/modules/forms.js":[function(require,module,exports){
+},{}],3:[function(require,module,exports){
 (function ($) {
 
   "use strict";
@@ -644,7 +650,157 @@
 
 })(jQuery);
 
-},{"../libs/flyweight":"/Users/lbauza/Sites/Personal/jimmyfrench/httpdocs/sites/all/themes/jf/src/js/libs/flyweight.js"}],"/Users/lbauza/Sites/Personal/jimmyfrench/httpdocs/sites/all/themes/jf/src/js/modules/navigation.js":[function(require,module,exports){
+},{"../libs/flyweight":2}],4:[function(require,module,exports){
+(function ($) {
+
+  "use strict";
+
+  var Flyweight;
+
+  if (typeof require === 'function' && typeof Flyweight !== 'function') {
+    Flyweight = require('../libs/flyweight');
+  }
+
+  var Menu = Flyweight.Module.extend({
+
+    name: 'Menu',
+    // el: '.site__hero',
+    debug: true,
+    options: {
+      menu: 0, // menu state 0 === closed
+      delay: 100 // delay between items sliding in
+    },
+
+    initialize: function () {
+
+      var self = this;
+
+    },
+
+    moveItems: function (item, key, row) {
+
+      var self = this,
+          horizontal = key,
+          vertical = self.itemsHeight * row;
+
+      // horizontal move is either 0, 1, or 2 times 33.33333%
+      if (key % 3 === 0 && key > 2) {
+        horizontal = 0;
+      } else if ((key - 1) % 3 === 0  && key > 2) {
+        horizontal = 1;
+      } else if ((key - 2) % 3 === 0  && key > 2) {
+        horizontal = 2;
+      }
+
+      $(item).css({
+        top: vertical + 'px',
+        left: (33.3333 * horizontal) + '%'
+      });
+
+    },
+
+    openMenu: function (target, $items) {
+
+      var self = this,
+          time = 0,
+          row = 0;
+
+      /**
+       * Move this to a util for multi-step animations
+       */
+      $('.overlay').addClass('pre');
+      setTimeout(function () {
+        $('.overlay').addClass('open');
+      }, 100);
+
+      $(target).addClass('open');
+
+      $.each($items, function (key, item) {
+
+        setTimeout(function () {
+          if (key % 3 === 0 && key !== 0) { row += 1; }
+          self.moveItems(item, key, row);
+          // after the last one set the menu to open
+          if (key + 1 === $items.length) {
+            self.menu = 1;
+          }
+
+        }, time);
+
+        time += self.delay; // delay each item moving in
+
+      });
+
+
+    },
+
+    closeMenu: function (target, $items) {
+
+      var self = this,
+          time = 0,
+          $reverseItems = $items.get().reverse(); // in reverse!
+
+      $.each($reverseItems, function (key, item) {
+
+        setTimeout(function () {
+          $(item).css({
+            top: '100%',
+            left: '100%'
+          });
+
+          // reset after last item is out
+          if (key + 1 === $items.length) {
+            $('.overlay').removeClass('open');
+            $(target).removeClass('open');
+            self.menu = 0;
+          }
+
+        }, time);
+
+        time += self.delay;
+
+      });
+
+
+    },
+
+    toggleMenu: function (e) {
+
+      e.preventDefault();
+
+      var $items = $('.overlay__item'),
+          self = e.data.context,
+          time = 0,
+          row = 0;
+
+      self.itemsHeight = $items.height();
+
+      if (self.menu === 0) {
+        self.openMenu(this, $items);
+      } else if (self.menu === 1){
+        self.closeMenu(this, $items);
+      } else {
+        console.log("transition period");
+      }
+
+      self.menu = 2; //transition period cancels all clicks
+
+    },
+
+    onDelegated: function (e) {
+      // hi
+    },
+
+    events: {
+      'click .nav__toggle' : 'toggleMenu'
+    }
+
+  });
+
+  module.exports = Menu;
+
+})(jQuery);
+},{"../libs/flyweight":2}],5:[function(require,module,exports){
 (function ($) {
 
   "use strict";
@@ -669,7 +825,7 @@
 
       this.where = Flyweight.history.getFragment();
 
-      this.markIgnored(['.nav-tabs a', '#admin-menu a']);
+      this.markIgnored(['.nav-tabs a', '#admin-menu a', '.nav__toggle']);
 
       // window.addEventListener('popstate', function (e) {
       //   _this.loadPage.apply(_this, [e]);
@@ -761,7 +917,7 @@
   module.exports = Navigation;
 
 })(jQuery);
-},{"../libs/flyweight":"/Users/lbauza/Sites/Personal/jimmyfrench/httpdocs/sites/all/themes/jf/src/js/libs/flyweight.js"}],"/Users/lbauza/Sites/Personal/jimmyfrench/httpdocs/sites/all/themes/jf/src/js/modules/svg.js":[function(require,module,exports){
+},{"../libs/flyweight":2}],6:[function(require,module,exports){
 (function ($) {
 
   "use strict";
@@ -843,4 +999,4 @@
 
 })(jQuery);
 
-},{"../libs/flyweight":"/Users/lbauza/Sites/Personal/jimmyfrench/httpdocs/sites/all/themes/jf/src/js/libs/flyweight.js"}]},{},["/Users/lbauza/Sites/Personal/jimmyfrench/httpdocs/sites/all/themes/jf/src/js/app.js"]);
+},{"../libs/flyweight":2}]},{},[1]);

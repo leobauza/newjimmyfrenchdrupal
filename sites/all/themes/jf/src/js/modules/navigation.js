@@ -22,7 +22,7 @@
 
       this.where = Flyweight.history.getFragment();
 
-      this.markIgnored(['.nav-tabs a', '#admin-menu a']);
+      this.markIgnored(['.nav-tabs a', '#admin-menu a', '.nav__toggle']);
 
       // window.addEventListener('popstate', function (e) {
       //   _this.loadPage.apply(_this, [e]);

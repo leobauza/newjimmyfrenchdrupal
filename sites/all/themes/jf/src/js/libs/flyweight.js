@@ -114,7 +114,7 @@
     Flyweight.msg('Creating a module named: ' + this.name, 'warn');
     var el = element || this.el || document,
         _this = this,
-        moduleOptions = this.moduleOptions || {};
+        moduleOptions = this.options || {};
 
     if (!$(el).length) {
       Flyweight.msg('this el is no present, so module won\'t be initialized', 'warn');

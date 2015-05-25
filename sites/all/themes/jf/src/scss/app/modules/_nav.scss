@@ -1,11 +1,17 @@
 /* app/modules/nav */
 .overlay {
   position: absolute;
-  top: 0;
+  top: 107px;
   left: 0;
   width: 100%;
   z-index: 100;
   overflow: hidden;
+  &.open {
+    overflow: visible;
+  }
+  .admin-menu & {
+    top: (20 + 107) + px; // 29px;
+  }
 }
 
 .overlay__item {
@@ -15,7 +21,28 @@
   position: absolute;
   left: 100%;
   top: 100%;
+  z-index: 150;
   img {
+    display: block;
+  }
+}
+
+.overlay__background {
+  @include transition(all .5s);
+  display: none;
+  position: fixed;
+  height: 100%;
+  width: 100%;
+  top: 0;
+  left: 0;
+  z-index: 100;
+  background: transparent;
+  .pre & {
+    display: block;
+  }
+  .open & {
+    background: $black;
+    background: fade-out($black, .1);
     display: block;
   }
 }

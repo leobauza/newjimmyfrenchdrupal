@@ -21,5 +21,5 @@
       <img src="<?php print $project['thumbnail']; ?>" alt="<?php print $project['title']; ?>" />
     </a>
   <?php endforeach; ?>
-
+  <div class="overlay__background"></div>
 </section>
