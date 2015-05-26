@@ -227,7 +227,28 @@ body.loading {
 }
 
 .info__form {
-
+  .form-item {
+    position: relative;
+    margin-bottom: 28px;
+  }
+  .form-actions {
+    padding-top: 32px;
+  }
+  label {
+    position: absolute;
+    left: 0;
+    bottom: 9px;
+    margin: 0px;
+    line-height: 1em;
+  }
+  .webform-component-textarea {
+    label {
+      bottom: 12px;
+    }
+  }
+  textarea {
+    resize: none;
+  }
 }
 
 // Large Screens

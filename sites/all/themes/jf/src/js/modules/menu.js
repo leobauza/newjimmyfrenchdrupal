@@ -97,7 +97,7 @@
 
           // reset after last item is out
           if (key + 1 === $items.length) {
-            $('.overlay').removeClass('open');
+            $('.overlay').removeClass('open pre');
             $(target).removeClass('open');
             self.menu = 0;
           }

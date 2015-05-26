@@ -38,12 +38,33 @@
 
     },
 
+    placeHolderFocus: function (e) {
+
+      var $parent = $(this).closest('.form-item');
+
+      $parent.find('label').hide();
+
+    },
+
+    placeHolderBlur: function (e) {
+
+      var $parent = $(this).closest('.form-item'),
+          val = $(this).val();
+
+      if (val === '') {
+        $parent.find('label').show();
+      }
+
+    },
+
     onDelegated: function (e) {
       this.msg("events have been delegated!", 'warn');
     },
 
     events: {
       'submit .info__form form' : 'submit',
+      'focus .info__form input[type="text"], .info__form textarea' : 'placeHolderFocus',
+      'blur .info__form input[type="text"], .info__form textarea' : 'placeHolderBlur'
     }
 
   });
