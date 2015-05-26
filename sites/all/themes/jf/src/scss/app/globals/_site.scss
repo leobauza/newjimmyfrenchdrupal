@@ -176,6 +176,24 @@ body.loading {
 .info__section {
   border-bottom: 2px solid $global_border;
   margin: 0px 29px 33px 0px;
+  h4 {
+    text-transform: uppercase;
+  }
+  ul {
+    @include resetList();
+    font-size: 100%;
+  }
+  li {
+    font-size: 1.8em;
+    padding: 0px;
+    margin: 0px;
+  }
+  a {
+    display: block;
+    &:hover {
+      text-decoration: none;
+    }
+  }
   &.row-fluid {
     padding: 0;
     width: auto;
