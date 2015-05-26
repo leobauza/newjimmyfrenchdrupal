@@ -185,13 +185,35 @@ body.loading {
   }
   li {
     font-size: 1.8em;
-    padding: 0px;
     margin: 0px;
   }
   a {
     display: block;
     &:hover {
       text-decoration: none;
+    }
+  }
+  .info__social {
+    @extend %group;
+    padding: 13px 0px 0px 0px;
+    li {
+      float: left;
+      margin: 0 48px 0 0;
+    }
+    a {
+      text-indent: -9999px;
+    }
+    .twitter {
+      @include sprite($twitter_mod);
+    }
+    .dribbble {
+      @include sprite($dribbble_mod);
+    }
+    .instagram {
+      @include sprite($instagram_mod);
+    }
+    .linkedin {
+      @include sprite($instagram_mod);
     }
   }
   &.row-fluid {

@@ -62,7 +62,12 @@
         </article>
         <article class="info__section l">
           <h4>Connect</h4>
-          <p>some stuff in this stuff</p>
+          <ul class="info__social">
+            <li><a target="_blank" class="twitter" href="<?php print theme_get_setting('twitter'); ?>">Twitter</a></li>
+            <li><a target="_blank" class="dribbble" href="<?php print theme_get_setting('dribbble'); ?>">Dribbble</a></li>
+            <li><a target="_blank" class="instagram" href="<?php print theme_get_setting('instagram'); ?>">Instagram</a></li>
+            <li><a target="_blank" class="linkedin" href="<?php print theme_get_setting('linkedin'); ?>">LinkedIn</a></li>
+          </ul>
         </article>
       </div>
     </section>
