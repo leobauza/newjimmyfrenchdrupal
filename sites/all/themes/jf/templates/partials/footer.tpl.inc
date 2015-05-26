@@ -15,11 +15,12 @@
 </footer>
 
 <section class="overlay">
-
-  <?php foreach ($projects as $key => $project): ?>
-    <a href="/<?php print $project['url']; ?>" class="overlay__item">
-      <img src="<?php print $project['thumbnail']; ?>" alt="<?php print $project['title']; ?>" />
-    </a>
-  <?php endforeach; ?>
-  <div class="overlay__background"></div>
+  <?php if (isset($projects)): ?>
+    <?php foreach ($projects as $key => $project): ?>
+      <a href="/<?php print $project['url']; ?>" class="overlay__item">
+        <img src="<?php print $project['thumbnail']; ?>" alt="<?php print $project['title']; ?>" />
+      </a>
+    <?php endforeach; ?>
+    <div class="overlay__background"></div>
+  <?php endif; ?>
 </section>
