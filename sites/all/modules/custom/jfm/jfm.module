@@ -108,15 +108,18 @@ function _custom_webform_ajax($nid, $data) {
   if (!$form_state['executed']) {
     // If the form didn't submit successfully, get the errors
     // which are set by drupal_set_message
+    $title = "Sorry, there was an error";
     $messages = drupal_get_messages('error');
     $messages = implode('<br />', $messages['error']);
   }
   else {
     // If form submitted successfully, create a nice message.
-    $messages = 'Your submission has been received. Thank you.';
+    $title = 'Thank You!';
+    $messages = 'I will get back to you shortly.';
   }
   // drupal_json_output seems to confuse some browsers, who want to save as a file
   print drupal_json_encode(array(
+    'title' => $title,
     'message' => $messages,
     'status' => $form_state['executed'],
   ));

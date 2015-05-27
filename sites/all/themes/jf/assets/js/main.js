@@ -630,7 +630,11 @@
 
       $.post("/webform_ajax/" + nid, postData, function (data) {
 
-        console.log(data);
+        var $data = $.parseJSON(data);
+        $('.info__form').html(
+          "<h2>" + $data.title + "</h2>" +
+          "<p>" + $data.message + "</p>"
+        );
 
       });
 
