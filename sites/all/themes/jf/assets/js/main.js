@@ -22,7 +22,8 @@
    * Elements
    */
   var $mainContent = $('.main-content'),
-      $body = $('body');
+      $body = $('body'),
+      $footer = $('.site__footer .container');
 
   /**
    * Listen to page changes for HTML
@@ -104,6 +105,8 @@
         $mainContent.removeClass('-internal');
       }
 
+      $footer.removeClass().addClass('container -home');
+
     },
 
     about: function () {
@@ -116,6 +119,8 @@
         $mainContent.removeClass('-internal');
       }
 
+      $footer.removeClass().addClass('container -information');
+
     },
 
     project: function () {
@@ -126,6 +131,8 @@
         $body.addClass('node-type-project');
         $mainContent.addClass('-internal');
       }
+
+      $footer.removeClass().addClass('container');
 
     }
 

@@ -1,7 +1,12 @@
 /* core/layout */
 .container {
+  @extend %group;
   max-width: 1060px;
   margin: 0 auto;
+  padding: 0 10px;
+  &.-home {
+    max-width: none;
+  }
 }
 .divider {
   padding: 20px;
@@ -131,7 +136,11 @@ $global_gutter: 3.308129;
     }
   }
 }
-
+.container.-information {
+  @extend .row-fluid--alt;
+  padding-top: 0px;
+  max-width: none;
+}
 
 /*
  * fluid row no gutter
