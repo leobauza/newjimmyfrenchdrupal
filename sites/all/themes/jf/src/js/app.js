@@ -90,6 +90,8 @@
 
       if (Land === 0) {
         menu = new Menu();
+      } else {
+        if (menu.menu === 1) { menu.closeMenu(); }
       }
 
     },

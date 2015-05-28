@@ -22,6 +22,28 @@
 
       var self = this;
 
+      self.toggle = '.nav__toggle';
+      self.items = $('.overlay__item');
+
+    },
+
+    multiStepAnimation: function (conf) {
+
+      var count = 0;
+
+      (function loop () {
+
+        $(conf.selector)[conf.method](conf.steps[count]);
+        count += 1;
+
+        if (count < conf.steps.length) {
+          setTimeout(function () {
+            loop();
+          }, conf.timeout);
+        }
+
+      })();
+
     },
 
     moveItems: function (item, key, row) {
@@ -46,21 +68,28 @@
 
     },
 
-    openMenu: function (target, $items) {
+    openMenu: function () {
 
       var self = this,
           time = 0,
-          row = 0;
+          row = 0,
+          target = self.toggle,
+          $items = self.items;
 
-      /**
-       * Move this to a util for multi-step animations
-       */
-      $('.overlay').addClass('pre');
-      setTimeout(function () {
-        $('.overlay').addClass('open');
-      }, 100);
+      self.multiStepAnimation({
+        selector: '.overlay',
+        steps: ['pre', 'open'],
+        timeout: 100,
+        method: 'addClass'
+      });
 
-      $(target).addClass('open');
+      self.multiStepAnimation({
+        selector: target,
+        steps: ['pre', 'open'],
+        timeout: 250,
+        method: 'addClass'
+      });
+
 
       $.each($items, function (key, item) {
 
@@ -81,15 +110,18 @@
 
     },
 
-    closeMenu: function (target, $items) {
+    closeMenu: function () {
 
       var self = this,
           time = 0,
+          target = self.toggle,
+          $items = self.items,
           $reverseItems = $items.get().reverse(); // in reverse!
 
       $.each($reverseItems, function (key, item) {
 
         setTimeout(function () {
+
           $(item).css({
             top: '100%',
             left: '100%'
@@ -97,9 +129,22 @@
 
           // reset after last item is out
           if (key + 1 === $items.length) {
-            $('.overlay').removeClass('open pre');
-            $(target).removeClass('open');
+
+            self.multiStepAnimation({
+              selector: '.overlay',
+              steps: ['open', 'pre'],
+              timeout: 500,
+              method: 'removeClass'
+            });
+            self.multiStepAnimation({
+              selector: target,
+              steps: ['open', 'pre'],
+              timeout: 250,
+              method: 'removeClass'
+            });
+
             self.menu = 0;
+
           }
 
         }, time);
@@ -123,11 +168,9 @@
       self.itemsHeight = $items.height();
 
       if (self.menu === 0) {
-        self.openMenu(this, $items);
+        self.openMenu();
       } else if (self.menu === 1){
-        self.closeMenu(this, $items);
-      } else {
-        console.log("transition period");
+        self.closeMenu();
       }
 
       self.menu = 2; //transition period cancels all clicks

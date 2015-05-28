@@ -6,7 +6,7 @@
   width: 100%;
   z-index: 100;
   overflow: hidden;
-  &.open {
+  &.open, &.pre {
     overflow: visible;
   }
   .admin-menu & {
