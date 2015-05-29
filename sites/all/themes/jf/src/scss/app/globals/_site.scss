@@ -2,11 +2,15 @@
 
 body.loading {
   background: $offwhite;
+  overflow: hidden;
   .site__header {
-    background: $brand;
+    // opacity: 0;
   }
   .main-content {
-    visibility: hidden;
+    //visibility: hidden;
+  }
+  .site__footer {
+    display: none;
   }
 }
 
@@ -91,9 +95,45 @@ body.loading {
 /**
  * General
  */
+$T: .5s;
 .main-content {
+  @include square(100%, 100%);
   &.-internal {
+    padding-top: 107px;
     background: $white;
+  }
+  &.next, &.slide-in, &.prepare, &.slide-out {
+    position: absolute;
+    top: 0%;
+  }
+  &.next {
+    // @include transition(left 3s);
+    @include transition(all $T ease-out);
+    @include translate(100%, 0%);
+    // left: 100%;
+    z-index: 100;
+  }
+  &.slide-in {
+    // left: 0%;
+    @include translate(0%, 0%);
+  }
+  &.prepare {
+    @include transition(all ($T) ease-out);
+    // right: 0%;
+    @include translate(0%, 0%);
+    opacity: 1;
+    z-index: 0;
+  }
+  &.slide-out {
+    @include translate(-100%, 0%);
+    opacity: 0;
+    // right: 100%;
+  }
+}
+
+.admin-menu .main-content {
+  &.next, &.slide-in, &.slide-out, &.prepare {
+    top: 20px;
   }
 }
 
@@ -168,6 +208,7 @@ body.loading {
 
 .row-fluid--information {
   @extend .row-fluid--alt;
+  background: $white;
   .span5 > .inner {
     padding: 0;
     border-right: 2px solid $global_border;

@@ -9,19 +9,18 @@
       Menu = require('modules/menu'),
       Svg = require('modules/svg'),
       Forms = require('modules/forms'),
-      Navigation = require('modules/navigation'),
-      Land = 0, // landing marker
-      svg = {}, // homepage svg
-      form = {},
-      html = '', // ajaxed html
+      Navigation = require('modules/navigation');
+
+  var Land = 0, // landing marker
+      svg, // homepage svg
+      form,
       menu,
       Router;
 
   /**
    * Elements
    */
-  var $mainContent = $('.main-content'),
-      $body = $('body'),
+  var $body = $('body'),
       $footer = $('.site__footer .container');
 
   /**
@@ -29,10 +28,39 @@
    */
   $(document).on('pageChange', function (e, params) {
 
-    html = params.html;
-    $(document).trigger('pageSetup', {
-      route: params.route
-    });
+    // html = params.html;
+
+    // $(document).trigger('pageSetup', {
+    //   route: params.route
+    // });
+
+    // $mainContent.html(params.html);
+
+    switch (params.route) {
+      case 'about':
+        console.log($('.main-content.next'));
+        // $('.main-content').removeClass('-internal');
+        if (typeof form === 'object' && 'initialize' in form) {
+          form.delegateEvents(); // form initiated just need to delegate the submit button again
+        } else {
+          form = new Forms();
+        }
+        break;
+
+      case 'project':
+        // $('.main-content.next').addClass('-internal');
+        break;
+
+      default:
+        // $('.main-content.next').removeClass('-internal');
+        if (typeof svg === 'object' && 'initialize' in svg) {
+          svg.initialize();
+        } else {
+          svg = new Svg();
+        }
+        break;
+    }
+
     $('body').removeClass('loading'); // class added navigation.pageChange()
     /**
      * So this stupid thing...
@@ -50,30 +78,6 @@
    */
   $(document).on('pageSetup', function (e, params) {
 
-    $mainContent.html(html);
-
-    switch (params.route) {
-      case 'about':
-        if (typeof form === 'object' && 'initialize' in form) {
-          form.delegateEvents(); // form initiated just need to delegate the submit button again
-          // form.initialize();
-        } else {
-          form = new Forms();
-        }
-        break;
-
-      case 'project':
-        // nothing yet
-        break;
-
-      default:
-        if (typeof svg === 'object' && 'initialize' in svg) {
-          svg.initialize();
-        } else {
-          svg = new Svg();
-        }
-        break;
-    }
 
   });
 
@@ -103,7 +107,7 @@
         Land = 1; // capture when we land in a non-ajaxy way
       } else {
         $body.removeClass('node-type-project');
-        $mainContent.removeClass('-internal');
+        // $('.main-content').removeClass('-internal');
       }
 
       $footer.removeClass().addClass('container -home');
@@ -117,7 +121,7 @@
         Land = 1; // capture when we land in a non-ajaxy way
       } else {
         $body.removeClass('node-type-project');
-        $mainContent.removeClass('-internal');
+        // $('.main-content').removeClass('-internal');
       }
 
       $footer.removeClass().addClass('container -information');
@@ -130,7 +134,7 @@
         Land = 1; // capture when we land in a non-ajaxy way
       } else {
         $body.addClass('node-type-project');
-        $mainContent.addClass('-internal');
+        // $('.main-content').addClass('-internal');
       }
 
       $footer.removeClass().addClass('container');

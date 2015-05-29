@@ -10,10 +10,10 @@
     top: 20px;// 29px;
   }
   .node-type-project.admin-menu &, .page-user.admin-menu & {
-    top: 0px;
+    // top: 0px;
   }
   .node-type-project &, .page-user & {
-    position: relative;
+    // position: relative;
     background: $white url(../img/bg/bg_header_case_study.png) 0 100% repeat-x;
     // @include boxShadow (inset 0 -10px 100px rgba(0,0,0,0.075));
     #brand {

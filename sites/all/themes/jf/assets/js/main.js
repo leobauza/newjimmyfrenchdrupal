@@ -10,19 +10,18 @@
       Menu = require('modules/menu'),
       Svg = require('modules/svg'),
       Forms = require('modules/forms'),
-      Navigation = require('modules/navigation'),
-      Land = 0, // landing marker
-      svg = {}, // homepage svg
-      form = {},
-      html = '', // ajaxed html
+      Navigation = require('modules/navigation');
+
+  var Land = 0, // landing marker
+      svg, // homepage svg
+      form,
       menu,
       Router;
 
   /**
    * Elements
    */
-  var $mainContent = $('.main-content'),
-      $body = $('body'),
+  var $body = $('body'),
       $footer = $('.site__footer .container');
 
   /**
@@ -30,10 +29,39 @@
    */
   $(document).on('pageChange', function (e, params) {
 
-    html = params.html;
-    $(document).trigger('pageSetup', {
-      route: params.route
-    });
+    // html = params.html;
+
+    // $(document).trigger('pageSetup', {
+    //   route: params.route
+    // });
+
+    // $mainContent.html(params.html);
+
+    switch (params.route) {
+      case 'about':
+        console.log($('.main-content.next'));
+        // $('.main-content').removeClass('-internal');
+        if (typeof form === 'object' && 'initialize' in form) {
+          form.delegateEvents(); // form initiated just need to delegate the submit button again
+        } else {
+          form = new Forms();
+        }
+        break;
+
+      case 'project':
+        // $('.main-content.next').addClass('-internal');
+        break;
+
+      default:
+        // $('.main-content.next').removeClass('-internal');
+        if (typeof svg === 'object' && 'initialize' in svg) {
+          svg.initialize();
+        } else {
+          svg = new Svg();
+        }
+        break;
+    }
+
     $('body').removeClass('loading'); // class added navigation.pageChange()
     /**
      * So this stupid thing...
@@ -51,30 +79,6 @@
    */
   $(document).on('pageSetup', function (e, params) {
 
-    $mainContent.html(html);
-
-    switch (params.route) {
-      case 'about':
-        if (typeof form === 'object' && 'initialize' in form) {
-          form.delegateEvents(); // form initiated just need to delegate the submit button again
-          // form.initialize();
-        } else {
-          form = new Forms();
-        }
-        break;
-
-      case 'project':
-        // nothing yet
-        break;
-
-      default:
-        if (typeof svg === 'object' && 'initialize' in svg) {
-          svg.initialize();
-        } else {
-          svg = new Svg();
-        }
-        break;
-    }
 
   });
 
@@ -104,7 +108,7 @@
         Land = 1; // capture when we land in a non-ajaxy way
       } else {
         $body.removeClass('node-type-project');
-        $mainContent.removeClass('-internal');
+        // $('.main-content').removeClass('-internal');
       }
 
       $footer.removeClass().addClass('container -home');
@@ -118,7 +122,7 @@
         Land = 1; // capture when we land in a non-ajaxy way
       } else {
         $body.removeClass('node-type-project');
-        $mainContent.removeClass('-internal');
+        // $('.main-content').removeClass('-internal');
       }
 
       $footer.removeClass().addClass('container -information');
@@ -131,7 +135,7 @@
         Land = 1; // capture when we land in a non-ajaxy way
       } else {
         $body.addClass('node-type-project');
-        $mainContent.addClass('-internal');
+        // $('.main-content').addClass('-internal');
       }
 
       $footer.removeClass().addClass('container');
@@ -882,11 +886,7 @@
 
   "use strict";
 
-  var Flyweight;
-
-  if (typeof require === 'function' && typeof Flyweight !== 'function') {
-    Flyweight = require('../libs/flyweight');
-  }
+  var Flyweight = require('../libs/flyweight');
 
   var Navigation = Flyweight.Module.extend({
 
@@ -896,7 +896,7 @@
 
     initialize: function () {
 
-      var _this = this;
+      var self = this;
 
       this.baseUrl = window.location.protocol + "//" + window.location.host + '/';
 
@@ -905,34 +905,61 @@
       this.markIgnored(['.nav-tabs a', '#admin-menu a', '.nav__toggle']);
 
       // window.addEventListener('popstate', function (e) {
-      //   _this.loadPage.apply(_this, [e]);
+      //   self.loadPage.apply(self, [e]);
       // }, false);
 
       $(window).on('popstate', function (e) {
         e.preventDefault();
-        _this.browserEvent.apply(_this, [e]);
+        self.browserEvent.apply(self, [e]);
       });
 
     },
 
     pageChange: function (href, where) {
 
-      var _this = this,
+      var self = this,
           route = where.split('/')[0];
 
       $('body').addClass('loading');
+
+      // Request New Page
       $.get(this.baseUrl + href, function (data) {
 
-        var $data = $(data);
-        var $main = $data.filter('.main-content');
+        var $data = $(data),
+            $incomingMain = $data.filter('.main-content'),
+            $original = $('.main-content'),
+            $clone = $('.main-content').clone().addClass('next').html($incomingMain.html()),
+            T = 750;
 
-        // control replacing the main content from the router
-        $(document).trigger('pageChange', {
-          html: $main.html(),
-          route: route
-        });
+        // Add the clone after and add class to slide current out
+        $original.after($clone).addClass('prepare'); //slide out for T seconds
 
-        _this.where = where;
+        // change class for internal pages
+        if (route === 'project') {
+          $clone.addClass('-internal');
+        } else {
+          $clone.removeClass('-internal');
+        }
+
+        // Delay slide-in for CSS animation to work
+        setTimeout(function () {
+          $clone.addClass('slide-in'); // slide in for T seconds
+          $original.addClass('slide-out');
+        }, 100);
+
+        // Delay pageChange event until after CSS animation finishes (_site.scss)
+        setTimeout(function () {
+          $original.remove();
+          $clone.removeClass('next slide-in');
+          // Tell the router when the page actually changes (not just the url in popstate)
+          $(document).trigger('pageChange', {
+            // html: $main.html(),
+            route: route
+          });
+        }, T);
+
+        // set location on Navigation object
+        self.where = where;
         Flyweight.history.navigate(href, { trigger: true });
 
       }, 'html');
@@ -942,30 +969,26 @@
     // click only
     processClick: function (e) {
 
-      if ($(this).hasClass('-ignored')) {
-        return;
-      }
+      if ($(this).hasClass('-ignored')) { return; }
 
       e.preventDefault();
-      var _this = e.data.context,
+      var self = e.data.context,
           href = $(this).attr('href'),
           where = Flyweight.history.getFragment(href);
 
-      if (_this.where === where) {
-        return;
-      }
+      if (self.where === where) { return; }
 
-      _this.pageChange(href, where);
+      self.pageChange(href, where);
 
     },
 
     // browser buttons
     browserEvent: function (e) {
-
+      console.log("browser event on SAFARI PAGE LOAD");
       // ajax call
       var where = Flyweight.history.getFragment(),
           href = where,
-          _this = this;
+          self = this;
 
       this.pageChange(href, where);
 

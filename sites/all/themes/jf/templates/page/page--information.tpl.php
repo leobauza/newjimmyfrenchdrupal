@@ -7,7 +7,7 @@
 
 <?php require_once path_to_theme('jf') . "/templates/partials/header.tpl.inc"; ?>
 
-<section class="main-content -internal">
+<section class="main-content">
 
   <div class="drupal__required">
     <?php if (!empty($page['highlighted'])): ?>
