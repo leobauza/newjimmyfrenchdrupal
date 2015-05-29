@@ -58,7 +58,7 @@
 
     draw: function ($paths, $hero, count) {
       $.each($paths, function (k, v) {
-
+        // console.log(k); // 1293 paths!!!
         // Go!
         v.style.transition = v.style.WebkitTransition = 'stroke-dashoffset 2s ease-in-out';
         v.style.strokeDashoffset = '0';

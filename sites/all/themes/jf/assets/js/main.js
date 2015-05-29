@@ -55,9 +55,9 @@
       default:
         // $('.main-content.next').removeClass('-internal');
         if (typeof svg === 'object' && 'initialize' in svg) {
-          svg.initialize();
+          // svg.initialize();
         } else {
-          svg = new Svg();
+          // svg = new Svg();
         }
         break;
     }
@@ -104,7 +104,7 @@
     home: function () {
 
       if (Land === 0) {
-        svg = new Svg();
+        // svg = new Svg();
         Land = 1; // capture when we land in a non-ajaxy way
       } else {
         $body.removeClass('node-type-project');
@@ -1078,7 +1078,7 @@
 
     draw: function ($paths, $hero, count) {
       $.each($paths, function (k, v) {
-
+        // console.log(k); // 1293 paths!!!
         // Go!
         v.style.transition = v.style.WebkitTransition = 'stroke-dashoffset 2s ease-in-out';
         v.style.strokeDashoffset = '0';
