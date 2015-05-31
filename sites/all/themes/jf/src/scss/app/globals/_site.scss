@@ -259,7 +259,7 @@ $T: .5s;
       @include sprite($instagram_mod);
     }
     .linkedin {
-      @include sprite($instagram_mod);
+      @include sprite($linkedin_mod);
     }
   }
   &.row-fluid {
@@ -310,6 +310,15 @@ $T: .5s;
 // Portrait
 @media (max-width: 59.9375em) { // 959px (div by 16)
 
+  .grid__item {
+    @include flex(1 0 50%);
+    max-width: 50%;
+  }
 
+  .main-content {
+    &.-internal {
+      padding-top: 63px;
+    }
+  }
 
 }

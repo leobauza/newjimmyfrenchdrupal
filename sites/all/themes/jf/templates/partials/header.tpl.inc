@@ -18,5 +18,5 @@
       <a href="<?php print $front_page; ?>" title="<?php print t('Home'); ?>">Billy French</a>
     </h1>
   <?php endif; ?>
-  <a href="/about" class="info__toggle">information</a>
+  <a href="/about" class="info__toggle"><span>information</span><i class="mobile">i</i></a>
 </header>

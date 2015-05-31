@@ -894,7 +894,7 @@
         locs: []
       };
 
-      this.markIgnored(['.nav-tabs a', '#admin-menu a', '.nav__toggle']);
+      this.markIgnored(['.nav-tabs a', '#admin-menu a', '.nav__toggle', '.footer__social a', '.info__social a', '.info__section a']);
 
       // window.addEventListener('popstate', function (e) {
       //   self.loadPage.apply(self, [e]);

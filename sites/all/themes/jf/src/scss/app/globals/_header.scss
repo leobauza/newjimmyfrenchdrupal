@@ -73,3 +73,49 @@
     border-bottom: 2px solid $white;
   }
 }
+.mobile {
+  display: none;
+}
+// Portrait
+@media (max-width: 59.9375em) { // 959px (div by 16)
+
+  .info__toggle {
+    right: 50px;
+  }
+  .nav__toggle {
+    left: 50px;
+  }
+
+}
+
+@media (max-width: 43.75em) { // 700px (div by 16)
+
+  .site__header {
+    padding: 20px 0px 15px;
+  }
+  #brand {
+    width: 65%;
+    font-size: 2em;
+    padding: 2px 0px;
+  }
+  .info__toggle {
+    right: 20px;
+    top: 25px;
+    span {
+      display: none;
+    }
+    i {
+      font-style: normal;
+      display: block;
+      text-transform: none;
+    }
+    &:hover {
+      border:none;
+    }
+  }
+  .nav__toggle {
+    left: 20px;
+    top: 21px;
+  }
+
+}
