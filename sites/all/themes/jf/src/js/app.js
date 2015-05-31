@@ -28,18 +28,8 @@
    */
   $(document).on('pageChange', function (e, params) {
 
-    // html = params.html;
-
-    // $(document).trigger('pageSetup', {
-    //   route: params.route
-    // });
-
-    // $mainContent.html(params.html);
-
     switch (params.route) {
       case 'about':
-        console.log($('.main-content.next'));
-        // $('.main-content').removeClass('-internal');
         if (typeof form === 'object' && 'initialize' in form) {
           form.delegateEvents(); // form initiated just need to delegate the submit button again
         } else {
@@ -48,11 +38,9 @@
         break;
 
       case 'project':
-        // $('.main-content.next').addClass('-internal');
         break;
 
       default:
-        // $('.main-content.next').removeClass('-internal');
         if (typeof svg === 'object' && 'initialize' in svg) {
           // svg.initialize();
         } else {

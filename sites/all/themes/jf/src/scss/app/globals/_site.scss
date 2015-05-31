@@ -107,19 +107,20 @@ $T: .5s;
     top: 0%;
   }
   &.next {
-    // @include transition(left 3s);
-    @include transition(all $T ease-out);
+    @include transition(all $T ease-in-out);
     @include translate(100%, 0%);
-    // left: 100%;
+    z-index: 100;
+  }
+  &.inverse-next {
+    @include transition(all $T ease-in-out);
+    @include translate(-100%, 0%);
     z-index: 100;
   }
   &.slide-in {
-    // left: 0%;
     @include translate(0%, 0%);
   }
   &.prepare {
-    @include transition(all ($T) ease-out);
-    // right: 0%;
+    @include transition(all ($T) ease-in-out);
     @include translate(0%, 0%);
     opacity: 1;
     z-index: 0;
@@ -127,7 +128,10 @@ $T: .5s;
   &.slide-out {
     @include translate(-100%, 0%);
     opacity: 0;
-    // right: 100%;
+  }
+  &.inverse-slide-out {
+    @include translate(100%, 0%);
+    opacity: 0;
   }
 }
 

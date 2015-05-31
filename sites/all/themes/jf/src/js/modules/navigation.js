@@ -17,6 +17,7 @@
       this.baseUrl = window.location.protocol + "//" + window.location.host + '/';
 
       this.where = Flyweight.history.getFragment();
+      this.cache = false;
 
       this.markIgnored(['.nav-tabs a', '#admin-menu a', '.nav__toggle']);
 
@@ -26,6 +27,7 @@
 
       $(window).on('popstate', function (e) {
         e.preventDefault();
+        console.log(e);
         self.browserEvent.apply(self, [e]);
       });
 
@@ -44,13 +46,13 @@
         var $data = $(data),
             $incomingMain = $data.filter('.main-content'),
             $original = $('.main-content'),
-            $clone = $('.main-content').clone().addClass('next').html($incomingMain.html()),
+            $clone = $('.main-content').clone().addClass('inverse-next').html($incomingMain.html()),
             T = 750;
 
         // Add the clone after and add class to slide current out
-        $original.after($clone).addClass('prepare'); //slide out for T seconds
+        $original.after($clone).addClass('prepare');
 
-        // change class for internal pages
+        // change class for internal pages on incoming page
         if (route === 'project') {
           $clone.addClass('-internal');
         } else {
@@ -58,15 +60,15 @@
         }
 
         // Delay slide-in for CSS animation to work
-        setTimeout(function () {
-          $clone.addClass('slide-in'); // slide in for T seconds
-          $original.addClass('slide-out');
+        var slideClassesTimeout = setTimeout(function () {
+          $clone.addClass('slide-in');
+          $original.addClass('inverse-slide-out');
         }, 100);
 
         // Delay pageChange event until after CSS animation finishes (_site.scss)
-        setTimeout(function () {
+        var pageChangeTimeout = setTimeout(function () {
           $original.remove();
-          $clone.removeClass('next slide-in');
+          $clone.removeClass('inverse-next slide-in');
           // Tell the router when the page actually changes (not just the url in popstate)
           $(document).trigger('pageChange', {
             // html: $main.html(),
@@ -74,6 +76,8 @@
           });
         }, T);
 
+        // set cache to determine direction
+        self.cache = self.where;
         // set location on Navigation object
         self.where = where;
         Flyweight.history.navigate(href, { trigger: true });
