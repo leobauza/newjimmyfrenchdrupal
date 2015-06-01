@@ -61,15 +61,6 @@
 
   });
 
-  /**
-   * Listen for q to set up the page
-   */
-  $(document).on('pageSetup', function (e, params) {
-
-
-  });
-
-
   Router = Flyweight.Router.extend({
     routes: {
       '': 'home',

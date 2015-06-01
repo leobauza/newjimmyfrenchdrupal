@@ -62,15 +62,6 @@
 
   });
 
-  /**
-   * Listen for q to set up the page
-   */
-  $(document).on('pageSetup', function (e, params) {
-
-
-  });
-
-
   Router = Flyweight.Router.extend({
     routes: {
       '': 'home',
@@ -729,20 +720,24 @@
 
       var self = this,
           horizontal = key,
-          vertical = self.itemsHeight * row;
+          vertical = self.itemsHeight * row,
+          winWidth = $(window).width(),
+          itemsAcross = (winWidth <= 959)? 2 : 3,
+          multiplier = (winWidth <= 959)? 50 : 33.3333,
+          rowKey = (winWidth <= 959)? 1 : 2;
 
-      // horizontal move is either 0, 1, or 2 times 33.33333%
-      if (key % 3 === 0 && key > 2) {
+      // horizontal move is either 0, 1, or 2 times 33.33333% or 50%
+      if (key % itemsAcross === 0 && key > rowKey) {
         horizontal = 0;
-      } else if ((key - 1) % 3 === 0  && key > 2) {
+      } else if ((key - 1) % itemsAcross === 0  && key > rowKey) {
         horizontal = 1;
-      } else if ((key - 2) % 3 === 0  && key > 2) {
+      } else if ((key - 2) % itemsAcross === 0  && key > rowKey) {
         horizontal = 2;
       }
 
       $(item).css({
         top: vertical + 'px',
-        left: (33.3333 * horizontal) + '%'
+        left: (multiplier * horizontal) + '%'
       });
 
     },
@@ -753,7 +748,9 @@
           time = 0,
           row = 0,
           target = self.toggle,
-          $items = self.items;
+          $items = self.items,
+          winWidth = $(window).width(),
+          itemsAcross = (winWidth <= 959)? 2 : 3;
 
       self.multiStepAnimation({
         selector: '.overlay',
@@ -773,7 +770,7 @@
       $.each($items, function (key, item) {
 
         setTimeout(function () {
-          if (key % 3 === 0 && key !== 0) { row += 1; }
+          if (key % itemsAcross === 0 && key !== 0) { row += 1; }
           self.moveItems(item, key, row);
           // after the last one set the menu to open
           if (key + 1 === $items.length) {
