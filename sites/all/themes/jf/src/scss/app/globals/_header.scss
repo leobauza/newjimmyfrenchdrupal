@@ -73,6 +73,41 @@
     border-bottom: 2px solid $white;
   }
 }
+
+.loadbar {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 5px;
+  display: block;
+  visibility: hidden;
+  i, b {
+    position: absolute;
+    top: 0;
+    left: 0;
+    display: block;
+    background: $error;
+    width: 0px;
+    height: 5px;
+  }
+  .loading & {
+    visibility: visible;
+    i {
+      @include transition(width 5s ease-in-out);
+      width: 100%;
+    }
+    b {
+      @include transition(width .5s ease-in-out);
+    }
+  }
+  .loading--done & {
+    b {
+      width: 100%;
+    }
+  }
+}
+
 .mobile {
   display: none;
 }

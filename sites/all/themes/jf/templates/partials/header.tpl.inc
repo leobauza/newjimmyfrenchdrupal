@@ -1,5 +1,5 @@
 <header class="site__header">
-  <!-- <a href="#" class="nav__toggle">Open</a> -->
+  <span class="loadbar"><i></i><b></b></span>
   <?php if (isset($projects)): ?>
     <a href="#" class="icon--grid nav__toggle">
       <span class="square -a"></span>

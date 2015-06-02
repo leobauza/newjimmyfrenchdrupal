@@ -316,9 +316,15 @@ $T: .5s;
   }
 
   .main-content {
+    overflow: hidden;
     &.-internal {
       padding-top: 63px;
     }
+  }
+
+  .site__hero, .intro__image {
+    width: 150%;
+    margin-left: -25%;
   }
 
 }

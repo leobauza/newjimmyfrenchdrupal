@@ -50,7 +50,10 @@
         break;
     }
 
-    $('body').removeClass('loading'); // class added navigation.pageChange()
+    $body.addClass('loading--done');
+    var loadingDoneTimeout = setTimeout(function () {
+      $body.removeClass('loading loading--done'); // class added navigation.pageChange()
+    }, 750);
     /**
      * So this stupid thing...
      * The contextual links won't work because if you land on a page without

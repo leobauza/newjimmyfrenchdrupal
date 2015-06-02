@@ -202,6 +202,10 @@ $global_gutter: 3.308129;
     float: none;
     width: auto;
     margin-right: 0;
+    margin-bottom: $global_gutter * 1%;
+    &:last-child {
+      margin-bottom: 0px;
+    }
   }
 
   /*Use this to set exact percentages and have the last box be ok*/

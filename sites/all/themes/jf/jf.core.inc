@@ -7,6 +7,13 @@
 class jfBaseClass
 {
 
+  /**
+   * Helper method to drupal's field_view_field for multiple values
+   * @param  object $node           the drupal node
+   * @param  array  $fieldNames     a list of field names
+   * @param  string $entity_type    what kind of entity (usually 'node')
+   * @return array  $out            an array of usable fields??
+   */
   public static function getFieldValues($node, $fieldNames = array(), $entity_type = 'node')
   {
 
