@@ -21,6 +21,7 @@ body.loading {
 // flex grid
 .grid {
   @include flexbox();
+  -webkit-flex-wrap: wrap;
   flex-wrap: wrap;
   background: $offwhite;
   // justify-content: center;
