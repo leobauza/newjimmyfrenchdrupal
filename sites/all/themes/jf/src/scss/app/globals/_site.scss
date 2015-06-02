@@ -194,7 +194,7 @@ $T: .5s;
  */
 .content__header.-basic {
   .intro__image {
-    padding: 110px 0px;
+    padding: 110px 10px;
   }
   img {
     margin: 0px;
@@ -307,6 +307,11 @@ $T: .5s;
 
 }
 
+
+@media (max-width: 59.9375em) { // 1080px (div by 16)
+
+}
+
 // Portrait
 @media (max-width: 59.9375em) { // 959px (div by 16)
 
@@ -325,6 +330,24 @@ $T: .5s;
   .site__hero, .intro__image {
     width: 150%;
     margin-left: -25%;
+  }
+
+  .content__header.-basic .intro__image {
+    width: auto;
+    margin: 0;
+    padding: 30px 10px;
+  }
+
+  .row-fluid--information {
+    width: auto;
+    padding: 10px;
+    background: $white;
+    .span5 > .inner {
+      border: none;
+    }
+  }
+  .info__section {
+    padding: 0px 0px 20px 0px
   }
 
 }
