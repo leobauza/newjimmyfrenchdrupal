@@ -194,7 +194,7 @@ $global_gutter: 3.308129;
 /*
  * Responsive
  */
-@media (max-width: 43.75em) { // 700px
+@media (max-width: $firstBreakpoint) { // 700px
 //@media (max-width: 59.9375em) { // 959px
 
   /*margin right instead of margin left to do overflow hidden*/

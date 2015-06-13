@@ -299,7 +299,7 @@ $T: .5s;
 }
 
 // Large Screens
-@media (min-width: 79.5em) { // 1272px (div by 16)
+@media (min-width: $firstExpandpoint) { // 1272px (div by 16)
 
   .grid__item {
     @include flex(1 0 25%);
@@ -308,13 +308,8 @@ $T: .5s;
 
 }
 
-
-@media (max-width: 59.9375em) { // 1080px (div by 16)
-
-}
-
 // Portrait
-@media (max-width: 59.9375em) { // 959px (div by 16)
+@media (max-width: $firstBreakpoint) { //700 formerly: 59.9375em 959px (div by 16)
 
   .grid__item {
     @include flex(1 0 50%);

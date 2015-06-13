@@ -24,6 +24,7 @@
 
       self.toggle = '.nav__toggle';
       self.items = $('.overlay__item');
+      self.mobilewidth = 700; // used to be 959
 
     },
 
@@ -52,9 +53,10 @@
           horizontal = key,
           vertical = self.itemsHeight * row,
           winWidth = $(window).width(),
-          itemsAcross = (winWidth <= 959)? 2 : 3,
-          multiplier = (winWidth <= 959)? 50 : 33.3333,
-          rowKey = (winWidth <= 959)? 1 : 2;
+          thewidth = self.mobilewidth, //used to be 959
+          itemsAcross = (winWidth <= thewidth)? 2 : 3,
+          multiplier = (winWidth <= thewidth)? 50 : 33.3333,
+          rowKey = (winWidth <= thewidth)? 1 : 2;
 
       // horizontal move is either 0, 1, or 2 times 33.33333% or 50%
       if (key % itemsAcross === 0 && key > rowKey) {
@@ -80,7 +82,8 @@
           target = self.toggle,
           $items = self.items,
           winWidth = $(window).width(),
-          itemsAcross = (winWidth <= 959)? 2 : 3;
+          thewidth = self.mobilewidth,
+          itemsAcross = (winWidth <= thewidth)? 2 : 3;
 
       self.multiStepAnimation({
         selector: '.overlay',
