@@ -6,6 +6,8 @@
 }
 
 %callout {
+  position: relative;
+  z-index: 500;
   @include marpad(0 auto 10px, 15px);
   @include borderRadius(5px);
   font-size: 1.4em;

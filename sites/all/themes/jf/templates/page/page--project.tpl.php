@@ -5,8 +5,13 @@
  */
 
 $content_styles = '';
+$text_styles = '';
 if (isset($fields['field_background_colour']['value'])) {
   $content_styles = "style='background-color: #" . $fields['field_background_colour']['value'] . "'";
+}
+
+if (isset($fields['field_text_colour']['value'])) {
+  $text_styles = "style='color: #" . $fields['field_text_colour']['value'] . "'";
 }
 
 $content_class = '-basic';
@@ -53,9 +58,11 @@ if ($fields['field_case_study_template']['value'] === 'full') {
       </h2>
     <?php print render($title_suffix); ?>
 
-    <div class="intro__image <?php print $img_wrap_class; ?>">
-      <img src="<?php print $intro_img; ?>" alt="<?php print $title; ?>" />
-    </div>
+    <?php if (isset($intro_img)): ?>
+      <div class="intro__image <?php print $img_wrap_class; ?>">
+        <img src="<?php print $intro_img; ?>" alt="<?php print $title; ?>" />
+      </div>
+    <?php endif; ?>
 
     <?php if (isset($fields['body'])): ?>
       <div class="intro__body container">

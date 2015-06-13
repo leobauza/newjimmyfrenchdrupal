@@ -114,6 +114,7 @@ function jf_preprocess_page(&$vars) {
       'field_case_study_template',
       'field_content_row',
       'field_background_colour',
+      'field_text_colour',
     ));
     // field collection
     if (isset($fields['field_content_row']['value'])) {
@@ -133,11 +134,17 @@ function jf_preprocess_page(&$vars) {
       'field_row_split',
     ));
     // images
-    $intro_img = file_create_url($fields['field_intro_image']['uri']);
+    if (isset($fields['field_intro_image']['uri'])) {
+      $intro_img = file_create_url($fields['field_intro_image']['uri']);
+    } else {
+      $intro_img = NULL;
+    }
+
 
     $vars['fields'] = $fields;
     $vars['content_rows'] = $content_rows;
     $vars['intro_img'] = $intro_img;
+
   }
 
 }
