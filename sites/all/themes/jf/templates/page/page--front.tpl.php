@@ -41,8 +41,11 @@
   <?php print $messages; ?>
 
   <section class="grid">
-
-    <?php foreach ($projects as $key => $project): ?>
+    <?php
+    $hp_projects = $projects;
+    array_shift($hp_projects);
+    ?>
+    <?php foreach ($hp_projects as $key => $project): ?>
       <a href="/<?php print $project['url']; ?>" class="grid__item">
         <img src="<?php print $project['thumbnail']; ?>" alt="<?php print $project['title']; ?>" />
       </a>
