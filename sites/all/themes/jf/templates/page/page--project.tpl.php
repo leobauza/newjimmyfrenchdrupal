@@ -5,7 +5,7 @@
  */
 
 $content_styles = '';
-$text_styles = '';
+
 if (isset($fields['field_background_colour']['value'])) {
   $content_styles = "style='background-color: #" . $fields['field_background_colour']['value'] . "'";
 }
@@ -65,7 +65,11 @@ if ($fields['field_case_study_template']['value'] === 'full') {
     <?php endif; ?>
 
     <?php if (isset($fields['body'])): ?>
-      <div class="intro__body container">
+      <?php if (isset($text_styles)): ?>
+        <div class="intro__body container inherit" <?php print $text_styles; ?>>
+      <?php else: ?>
+        <div class="intro__body container" <?php print $text_styles; ?>>
+      <?php endif; ?>
         <?php print $fields['body']['value']; ?>
       </div>
     <?php endif; ?>
@@ -73,7 +77,12 @@ if ($fields['field_case_study_template']['value'] === 'full') {
   </header>
 
   <section <?php print $content_styles; ?> class="content__rows <?php print $content_class; ?>">
-    <div class="container">
+      <?php if (isset($text_styles)): ?>
+        <div class="container inherit" <?php print $text_styles; ?>>
+      <?php else: ?>
+        <div class="container">
+      <?php endif; ?>
+
       <?php if ($fields['field_case_study_template']['value'] === 'full' ) : ?>
         <?php require_once path_to_theme('jf') . "/templates/partials/rows.tpl.inc"; ?>
       <?php else : ?>

@@ -140,7 +140,6 @@ function jf_preprocess_page(&$vars) {
       $intro_img = NULL;
     }
 
-
     $vars['fields'] = $fields;
     $vars['content_rows'] = $content_rows;
     $vars['intro_img'] = $intro_img;
