@@ -68,7 +68,7 @@ if ($fields['field_case_study_template']['value'] === 'full') {
       <?php if (isset($text_styles)): ?>
         <div class="intro__body container inherit" <?php print $text_styles; ?>>
       <?php else: ?>
-        <div class="intro__body container" <?php print $text_styles; ?>>
+        <div class="intro__body container">
       <?php endif; ?>
         <?php print $fields['body']['value']; ?>
       </div>
