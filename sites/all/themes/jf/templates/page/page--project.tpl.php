@@ -29,6 +29,21 @@ if ($fields['field_case_study_template']['value'] === 'full') {
 
 <section class="main-content -internal">
 
+  <?php if (isset($text_styles)): ?>
+  <style>
+    .override p, .override li {
+      color: #<?php print $fields['field_text_colour']['value']; ?>;
+    }
+    .override a {
+      /*color: #<?php print $fields['field_text_colour']['value']; ?>;*/
+    }
+    .override h1, .override h2, .override h3, .override h4, .override h5, .override h6 {
+      /*color: #<?php print $fields['field_text_colour']['value']; ?>;*/
+    }
+  </style>
+  <?php endif; ?>
+
+
   <div class="drupal__required">
     <?php if (!empty($page['highlighted'])): ?>
       <div class="highlighted hero-unit"><?php print render($page['highlighted']); ?></div>
@@ -66,7 +81,7 @@ if ($fields['field_case_study_template']['value'] === 'full') {
 
     <?php if (isset($fields['body'])): ?>
       <?php if (isset($text_styles)): ?>
-        <div class="intro__body container inherit" <?php print $text_styles; ?>>
+        <div class="intro__body container override">
       <?php else: ?>
         <div class="intro__body container">
       <?php endif; ?>
@@ -77,11 +92,11 @@ if ($fields['field_case_study_template']['value'] === 'full') {
   </header>
 
   <section <?php print $content_styles; ?> class="content__rows <?php print $content_class; ?>">
-      <?php if (isset($text_styles)): ?>
-        <div class="container inherit" <?php print $text_styles; ?>>
-      <?php else: ?>
-        <div class="container">
-      <?php endif; ?>
+    <?php if (isset($text_styles)): ?>
+      <div class="container override">
+    <?php else: ?>
+      <div class="container">
+    <?php endif; ?>
 
       <?php if ($fields['field_case_study_template']['value'] === 'full' ) : ?>
         <?php require_once path_to_theme('jf') . "/templates/partials/rows.tpl.inc"; ?>
