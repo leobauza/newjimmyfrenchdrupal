@@ -39,8 +39,13 @@
 
     },
 
+    /**
+     * Changes the page called by processClick() or browserEvent()
+     * @param  {string} href  The destination path
+     * @param  {string} where The destination
+     * @return {null}       null
+     */
     pageChange: function (href, where) {
-
 
       var self = this,
           route = where.split('/')[0],
@@ -54,7 +59,7 @@
       // Start Transitioning
       $('body').addClass('loading');
       self.transitioning = true;
-
+      $('html,body').animate({ scrollTop: 0 }, 500);
       // check if destination equals previous location
       self.cache.locs[self.cache.count] = self.where; // set cache to determine direction
       if (where === self.cache.locs[self.cache.count - 1]) {
