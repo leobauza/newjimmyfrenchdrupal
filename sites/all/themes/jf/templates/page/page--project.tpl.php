@@ -100,11 +100,14 @@ if ($fields['field_case_study_template']['value'] === 'full') {
       <div class="container">
     <?php endif; ?>
 
+    <?php if (isset($content_rows)): ?>
       <?php if ($fields['field_case_study_template']['value'] === 'full' ) : ?>
         <?php require_once path_to_theme('jf') . "/templates/partials/rows.tpl.inc"; ?>
       <?php else : ?>
         <?php require_once path_to_theme('jf') . "/templates/partials/rows--basic.tpl.inc"; ?>
       <?php endif; ?>
+    <?php endif; ?>
+
     </div>
   </section>
 

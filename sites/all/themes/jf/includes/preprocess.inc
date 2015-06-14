@@ -128,13 +128,18 @@ function jf_preprocess_page(&$vars) {
     } else {
       $ids = $fields['field_content_row'];
     }
-    $content_rows = $jf->loadCollectionItems($ids, array(
-      'field_image_one',
-      'field_image_two',
-      'field_row_text',
-      'field_image_caption',
-      'field_row_split',
-    ));
+
+    if (isset($ids)) {
+      $content_rows = $jf->loadCollectionItems($ids, array(
+        'field_image_one',
+        'field_image_two',
+        'field_row_text',
+        'field_image_caption',
+        'field_row_split',
+      ));
+    } else {
+      $content_rows = NULL;
+    }
     // images
     if (isset($fields['field_intro_image']['uri'])) {
       $intro_img = file_create_url($fields['field_intro_image']['uri']);
