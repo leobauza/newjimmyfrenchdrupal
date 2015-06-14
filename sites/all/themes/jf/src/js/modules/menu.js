@@ -26,6 +26,10 @@
       self.items = $('.overlay__item');
       self.mobilewidth = 700; // used to be 959
 
+      $(window).resize(function () {
+        if (self.menu === 1) { self.closeMenu(); }
+      });
+
     },
 
     multiStepAnimation: function (conf) {

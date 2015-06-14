@@ -48,6 +48,9 @@
     <?php foreach ($hp_projects as $key => $project): ?>
       <a href="/<?php print $project['url']; ?>" class="grid__item">
         <img src="<?php print $project['thumbnail']; ?>" alt="<?php print $project['title']; ?>" />
+        <div class="item__title">
+          <span><?php print $project['title']; ?></span>
+        </div>
       </a>
     <?php endforeach; ?>
 

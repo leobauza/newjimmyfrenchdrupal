@@ -26,6 +26,17 @@
     width: 100%; // temporary hopefully
     display: block;
   }
+
+  &:hover {
+    .item__title {
+      height: 100%;
+      opacity: 1;
+      span {
+        opacity: 1;
+      }
+    }
+  }
+
 }
 
 .overlay__background {
