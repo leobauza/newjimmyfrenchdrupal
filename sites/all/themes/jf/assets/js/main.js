@@ -987,6 +987,7 @@
         }, T);
 
         self.transitioning = false;
+        document.title = $data.filter('title').text();
         self.where = where; // set location on Navigation object
         Flyweight.history.navigate(href, { trigger: true });
 
