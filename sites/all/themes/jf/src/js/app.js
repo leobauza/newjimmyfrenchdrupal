@@ -42,9 +42,9 @@
 
       default:
         if (typeof svg === 'object' && 'initialize' in svg) {
-          // svg.initialize();
+          svg.initialize();
         } else {
-          // svg = new Svg();
+          svg = new Svg();
         }
         break;
     }
@@ -85,11 +85,10 @@
     home: function () {
 
       if (Land === 0) {
-        // svg = new Svg();
+        svg = new Svg();
         Land = 1; // capture when we land in a non-ajaxy way
       } else {
         $body.removeClass('node-type-project');
-        // $('.main-content').removeClass('-internal');
       }
 
       $footer.removeClass().addClass('container -home');
@@ -103,7 +102,6 @@
         Land = 1; // capture when we land in a non-ajaxy way
       } else {
         $body.removeClass('node-type-project');
-        // $('.main-content').removeClass('-internal');
       }
 
       $footer.removeClass().addClass('container -information');
@@ -116,7 +114,6 @@
         Land = 1; // capture when we land in a non-ajaxy way
       } else {
         $body.addClass('node-type-project');
-        // $('.main-content').addClass('-internal');
       }
 
       $footer.removeClass().addClass('container');
