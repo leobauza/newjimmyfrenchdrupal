@@ -46,14 +46,14 @@
 }
 
 .nav__toggle {
-  position: fixed;
+  position: absolute;
   left: 100px;
   top: 41px;
   z-index: 500;
   // @include sprite($icon_grid);
   // text-indent: -9999px;
   .admin-menu & {
-    top: (41 + 20) + px;//(41 + 29) + px;
+    top: 41px;//(41 + 20) + px;//(41 + 29) + px;
   }
 }
 
