@@ -115,6 +115,8 @@ function jf_preprocess_page(&$vars) {
       'field_content_row',
       'field_background_colour',
       'field_text_colour',
+      'field_header_colour',
+      'field_link_colour',
     ));
     // field collection
     if (isset($fields['field_content_row']['value'])) {

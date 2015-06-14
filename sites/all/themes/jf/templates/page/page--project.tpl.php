@@ -11,7 +11,9 @@ if (isset($fields['field_background_colour']['value'])) {
 }
 
 if (isset($fields['field_text_colour']['value'])) {
-  $text_styles = "style='color: #" . $fields['field_text_colour']['value'] . "'";
+  $text_colour_override = "#" . $fields['field_text_colour']['value'];
+  $link_colour_override = (isset($fields['field_link_colour']['value']))? "#" . $fields['field_link_colour']['value'] : $text_colour_override;
+  $header_colour_override = (isset($fields['field_header_colour']['value']))? "#" . $fields['field_header_colour']['value'] : $text_colour_override;
 }
 
 $content_class = '-basic';
@@ -29,16 +31,16 @@ if ($fields['field_case_study_template']['value'] === 'full') {
 
 <section class="main-content -internal">
 
-  <?php if (isset($text_styles)): ?>
+  <?php if (isset($text_colour_override)): ?>
   <style>
     .override p, .override li {
-      color: #<?php print $fields['field_text_colour']['value']; ?>;
+      color: <?php print $text_colour_override; ?>;
     }
     .override a {
-      /*color: #<?php print $fields['field_text_colour']['value']; ?>;*/
+      color: <?php print $link_colour_override; ?>;
     }
     .override h1, .override h2, .override h3, .override h4, .override h5, .override h6 {
-      /*color: #<?php print $fields['field_text_colour']['value']; ?>;*/
+      color: <?php print $header_colour_override; ?>;
     }
   </style>
   <?php endif; ?>
@@ -80,7 +82,7 @@ if ($fields['field_case_study_template']['value'] === 'full') {
     <?php endif; ?>
 
     <?php if (isset($fields['body'])): ?>
-      <?php if (isset($text_styles)): ?>
+      <?php if (isset($text_colour_override)): ?>
         <div class="intro__body container override">
       <?php else: ?>
         <div class="intro__body container">
@@ -92,7 +94,7 @@ if ($fields['field_case_study_template']['value'] === 'full') {
   </header>
 
   <section <?php print $content_styles; ?> class="content__rows <?php print $content_class; ?>">
-    <?php if (isset($text_styles)): ?>
+    <?php if (isset($text_colour_override)): ?>
       <div class="container override">
     <?php else: ?>
       <div class="container">
