@@ -30,13 +30,22 @@
     }
     .twitter {
       @include sprite($twitter);
+      &:hover {
+        @include sprite($twitter_hover);
+      }
       // @include sprite(twitter);
     }
     .dribbble {
       @include sprite($dribbble);
+      &:hover {
+        @include sprite($dribbble_hover);
+      }
     }
     .instagram {
       @include sprite($instagram);
+      &:hover {
+        @include sprite($instagram_hover);
+      }
     }
   }
 }
