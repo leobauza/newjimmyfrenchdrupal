@@ -21,8 +21,8 @@
         count: 0,
         locs: []
       };
-
-      this.markIgnored(['.nav-tabs a', '#admin-menu a', '.nav__toggle', '.footer__social a', '.info__social a', '.info__section a']);
+      this.ignoreList = ['.nav-tabs a', '#admin-menu a', '.nav__toggle', '.footer__social a', '.info__social a', '.info__section a', '.content__header a', '.content__rows a'];
+      this.markIgnored();
 
       // window.addEventListener('popstate', function (e) {
       //   self.loadPage.apply(self, [e]);
@@ -122,12 +122,19 @@
           $(document).trigger('pageChange', { route: route });
         }, T);
 
+        /**
+         * Mark ignored links of incoming page
+         */
+        self.markIgnored();
+
         self.transitioning = false;
         document.title = $data.filter('title').text();
         self.where = where; // set location on Navigation object
         Flyweight.history.navigate(href, { trigger: true });
 
-      }, 'html');
+      }, 'html').fail(function (x, e) {
+        console.log(x.status);
+      });
 
     },
 
@@ -158,11 +165,15 @@
 
     },
 
-    markIgnored: function (selectors) {
+    markIgnored: function (arr) {
       // find all links that should'd be ajaxyfied
+      var selectors = arr || this.ignoreList;
       setTimeout(function () {
         $.each(selectors, function (i, selector) {
-          $(selector).addClass('-ignored');
+          var $selector = $(selector);
+          if (!$selector.hasClass('-ignored')) {
+            $selector.addClass('-ignored');
+          }
         });
       }, 1000); // find a better way to wait for the admin menu to load...
 
