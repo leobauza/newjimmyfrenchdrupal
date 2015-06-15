@@ -172,6 +172,9 @@ $T: .5s;
     @include translate(100%, 0%);
     opacity: 0;
   }
+  .page-user & {
+    padding-top: 107px;
+  }
 }
 
 .admin-menu .main-content {
@@ -328,11 +331,18 @@ $T: .5s;
   }
   .webform-component-textarea {
     label {
-      bottom: 12px;
+      top: 12px;
+      left: 12px;
     }
   }
   textarea {
+    height: 200px;
+    padding: 6px 10px;
     resize: none;
+    border: 2px solid #1b2633;
+    &:focus {
+      border: 2px solid $focus_border;
+    }
   }
 }
 
