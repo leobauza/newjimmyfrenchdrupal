@@ -53,7 +53,7 @@
   // @include sprite($icon_grid);
   // text-indent: -9999px;
   .admin-menu & {
-    top: 41px;//(41 + 20) + px;//(41 + 29) + px;
+    //top: 41px;//(41 + 20) + px;//(41 + 29) + px;
   }
 }
 
@@ -123,7 +123,7 @@
 
 }
 
-@media (max-width: 43.75em) { // 700px (div by 16)
+@media (max-width: $firstBreakpoint) { // 700px (div by 16)
 
   .site__header {
     padding: 20px 0px 15px;
@@ -142,7 +142,6 @@
     i {
       font-style: normal;
       display: block;
-      text-transform: none;
     }
     &:hover {
       border:none;
@@ -151,6 +150,7 @@
   .nav__toggle {
     left: 20px;
     top: 21px;
+
   }
 
 }

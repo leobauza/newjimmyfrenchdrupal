@@ -40,7 +40,7 @@
           <h2><?php print $subtitle; ?></h2>
           <?php print $body; ?>
         </article>
-        <article class="info__section row-fluid">
+        <article class="info__section row-fluid l">
           <div class="span4">
             <h4>Capabilities</h4>
             <ul>
@@ -60,7 +60,7 @@
             </ul>
           </div>
         </article>
-        <article class="info__section l">
+        <!-- <article class="info__section l">
           <h4>Connect</h4>
           <ul class="info__social">
             <li><a target="_blank" class="twitter" href="<?php print theme_get_setting('twitter'); ?>">Twitter</a></li>
@@ -68,7 +68,7 @@
             <li><a target="_blank" class="instagram" href="<?php print theme_get_setting('instagram'); ?>">Instagram</a></li>
             <li><a target="_blank" class="linkedin" href="<?php print theme_get_setting('linkedin'); ?>">LinkedIn</a></li>
           </ul>
-        </article>
+        </article> -->
       </div>
     </section>
     <aside class="span5">
