@@ -54,6 +54,12 @@
             slideOut: 'slide-out'
           };
 
+      if (route === '') {
+        $('.nav__toggle').addClass('home');
+      } else {
+        $('.nav__toggle').removeClass('home');
+      }
+
       if (self.land === true) { self.land = false; }
 
       // Start Transitioning

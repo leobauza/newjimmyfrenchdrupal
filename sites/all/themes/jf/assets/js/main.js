@@ -88,6 +88,7 @@
       if (Land === 0) {
         svg = new Svg();
         Land = 1; // capture when we land in a non-ajaxy way
+        $('.nav__toggle').addClass('home');
       } else {
         $body.removeClass('node-type-project');
       }
@@ -848,6 +849,12 @@
           time = 0,
           row = 0;
 
+      if ($(this).hasClass('home')) {
+        var animHeight = $('.site__hero').height();
+        $('html,body').animate({ scrollTop: animHeight }, 500);
+        return;
+      }
+
       self.itemsHeight = $items.height();
 
       if (self.menu === 0) {
@@ -929,6 +936,12 @@
             next: 'next',
             slideOut: 'slide-out'
           };
+
+      if (route === '') {
+        $('.nav__toggle').addClass('home');
+      } else {
+        $('.nav__toggle').removeClass('home');
+      }
 
       if (self.land === true) { self.land = false; }
 

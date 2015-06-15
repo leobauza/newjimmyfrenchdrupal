@@ -87,6 +87,7 @@
       if (Land === 0) {
         svg = new Svg();
         Land = 1; // capture when we land in a non-ajaxy way
+        $('.nav__toggle').addClass('home');
       } else {
         $body.removeClass('node-type-project');
       }
