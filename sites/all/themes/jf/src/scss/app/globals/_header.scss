@@ -78,20 +78,25 @@
     letter-spacing: 2px;
   }
   .underline {
-    @include transition (transform .5s);
+    @include transition (all .5s ease-in-out 0s);
+    @include scale (0, 1);
     position: absolute;
+    visibility: hidden;
     display: block;
     bottom: 0%;
-    right: 100%;
+    // right: 100%;
+    left: 0%;
     height: 2px;
-    width: 200%;
+    // width: 200%;
+    width: 100%;
     background: $white;
   }
   &:hover, &.active {
     color: $white;
     text-decoration: none;
     .underline {
-      @include translate (50%);
+      visibility: visible;
+      @include scale (1, 1);
       // width: 200%;
     }
   }
