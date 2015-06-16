@@ -58,6 +58,7 @@
 }
 
 .info__toggle {
+  overflow: hidden;
   position: absolute;
   right: 100px;
   top: 48px;
@@ -65,12 +66,28 @@
   font-weight: 600;
   text-transform: uppercase;
   color: $white;
-  letter-spacing: 2px;
-  padding: 0 0 4px;
+  padding: 0 0 (4px + 2px); // plus 2 for border and overflow hidden
+  span {
+    display: block;
+    letter-spacing: 2px;
+  }
+  .underline {
+    @include transition (transform .5s);
+    position: absolute;
+    display: block;
+    bottom: 0%;
+    right: 100%;
+    height: 2px;
+    width: 200%;
+    background: $white;
+  }
   &:hover, &.active {
     color: $white;
     text-decoration: none;
-    border-bottom: 2px solid $white;
+    .underline {
+      @include translate (50%);
+      // width: 200%;
+    }
   }
 }
 
