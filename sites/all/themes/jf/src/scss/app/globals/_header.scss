@@ -21,10 +21,16 @@
         color: $text_colour;
       }
     }
+    // .info__toggle {
+    //   color: $text_colour;
+    //   &:hover {
+    //     border-bottom: 2px solid $text_colour;
+    //   }
+    // }
     .info__toggle {
       color: $text_colour;
-      &:hover {
-        border-bottom: 2px solid $text_colour;
+      .underline {
+        background: $text_colour;
       }
     }
     .icon--grid .square {
