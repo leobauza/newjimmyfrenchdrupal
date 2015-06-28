@@ -224,4 +224,18 @@ $path_to_images: "../images/";
   }
 }
 
+$grid-fx-time: .75s;
+%img-fx {
+  transition: $grid-fx-time filter linear;
+  -webkit-transition: $grid-fx-time -webkit-filter linear;
+  // -moz-transition: $grid-fx-time -moz-filter linear;
+  // -ms-transition: $grid-fx-time -ms-filter linear;
+  // -o-transition: $grid-fx-time -o-filter linear;
+}
+%img-fx-hover {
+  -webkit-filter: blur(3px);
+  filter: blur(3px);
+  // max-width: none;
+  // width: 105%;
+}
 /* end */

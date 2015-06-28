@@ -1,4 +1,5 @@
 /* app/modules/nav */
+
 .overlay {
   position: absolute;
   top: 107px;
@@ -16,6 +17,7 @@
 
 .overlay__item {
   @include transition(all .2s);
+  overflow: hidden;
   display: block;
   width: 33.3333%;
   position: absolute;
@@ -23,11 +25,15 @@
   top: 100%;
   z-index: 150;
   img {
+    @extend %img-fx;
     width: 100%; // temporary hopefully
     display: block;
   }
 
   &:hover {
+    img {
+      @extend %img-fx-hover;
+    }
     .item__title {
       height: 100%;
       opacity: 1;
