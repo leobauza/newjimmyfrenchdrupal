@@ -276,9 +276,10 @@ $T: .5s;
     margin: 0px;
   }
   a {
-    display: block;
+    // display: block;
+    color: $info_links_colour;
     &:hover {
-      text-decoration: none;
+      // text-decoration: none;
     }
   }
   .info__social {

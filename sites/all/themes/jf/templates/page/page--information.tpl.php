@@ -50,6 +50,7 @@
             </ul>
           </div>
           <div class="span6">
+            <?php if (!empty($featured_on)): ?>
             <h4>Featured On</h4>
             <ul>
               <?php foreach ($featured_on as $feature): ?>
@@ -58,6 +59,7 @@
                 </li>
               <?php endforeach; ?>
             </ul>
+            <?php endif; ?>
           </div>
         </article>
         <!-- <article class="info__section l">

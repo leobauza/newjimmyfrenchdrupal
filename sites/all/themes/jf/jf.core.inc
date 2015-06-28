@@ -66,6 +66,16 @@ class jfBaseClass
   public static function loadCollectionItems($items, $fields = NULL)
   {
 
+    // protect against only one value
+    if (isset($items['value'])) {
+      $items = array(
+        0 => array(
+          'value' => $items['value'],
+        ),
+      );
+    }
+
+
     $out = array();
     foreach ($items as $key => $item) {
       $field_collection_item = field_collection_item_load($item['value'], $reset = FALSE);
