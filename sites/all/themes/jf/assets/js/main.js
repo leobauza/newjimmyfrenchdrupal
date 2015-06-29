@@ -10,12 +10,14 @@
       Menu = require('modules/menu'),
       Svg = require('modules/svg'),
       Forms = require('modules/forms'),
-      Navigation = require('modules/navigation');
+      Navigation = require('modules/navigation'),
+      Banner = require('modules/banner');
 
   var Land = 0, // landing marker
       svg, // homepage svg
       form,
       menu,
+      banner,
       Router;
 
   /**
@@ -77,8 +79,10 @@
 
       if (Land === 0) {
         menu = new Menu();
+        banner = new Banner();
       } else {
         if (menu.menu === 1) { menu.closeMenu(); }
+        // if (banner.state === 1) { banner.closeBanner(); }
       }
 
     },
@@ -131,12 +135,14 @@
   });
 
   if (Flyweight.history._usePushState) {
-    var nav = new Navigation();
+    var nav = new Navigation(document, {
+      banner: banner // pass the banner to close on page change
+    });
   }
 
 })(jQuery);
 
-},{"libs/flyweight":2,"modules/forms":3,"modules/menu":4,"modules/navigation":5,"modules/svg":6}],2:[function(require,module,exports){
+},{"libs/flyweight":2,"modules/banner":3,"modules/forms":4,"modules/menu":5,"modules/navigation":6,"modules/svg":7}],2:[function(require,module,exports){
 /**
  * The Flyweight Class
  */
@@ -593,6 +599,50 @@
 
   "use strict";
 
+  var Flyweight = require('../libs/flyweight');
+
+  var Banner = Flyweight.Module.extend({
+
+    name: 'Banner',
+    initialize: function () {
+
+      var self = this;
+      if ($('.banner').length) {
+        self.state = 1; // only if it exists!!!
+      } else {
+        self.state = 0;
+      }
+
+    },
+    closeBanner: function (e) {
+
+      if (typeof e === 'object') {
+        e.preventDefault();
+      }
+
+      var self = (typeof e === 'object')? e.data.context : this;
+
+      $('body').removeClass('banner-on');
+      $('.banner').addClass('closed');
+
+      self.state = 0;
+
+    },
+    events: {
+      'click .banner .dismiss': 'closeBanner'
+    }
+
+  });
+
+  module.exports = Banner;
+
+})(jQuery);
+
+},{"../libs/flyweight":2}],4:[function(require,module,exports){
+(function ($) {
+
+  "use strict";
+
   var Flyweight;
 
   if (typeof require === 'function' && typeof Flyweight !== 'function') {
@@ -668,7 +718,7 @@
 
 })(jQuery);
 
-},{"../libs/flyweight":2}],4:[function(require,module,exports){
+},{"../libs/flyweight":2}],5:[function(require,module,exports){
 (function ($) {
 
   "use strict";
@@ -880,7 +930,7 @@
   module.exports = Menu;
 
 })(jQuery);
-},{"../libs/flyweight":2}],5:[function(require,module,exports){
+},{"../libs/flyweight":2}],6:[function(require,module,exports){
 (function ($) {
 
   "use strict";
@@ -890,9 +940,9 @@
   var Navigation = Flyweight.Module.extend({
 
     name: 'Navigation',
-    // el: '.site__hero',
-    debug: true,
-
+    options: {
+      banner: {} // passing in the banner to close on page change
+    },
     initialize: function () {
 
       var self = this;
@@ -904,7 +954,16 @@
         count: 0,
         locs: []
       };
-      this.ignoreList = ['.nav-tabs a', '#admin-menu a', '.nav__toggle', '.footer__social a', '.info__social a', '.info__section a', '.content__header a', '.content__rows a'];
+      this.ignoreList = [
+        '.nav-tabs a',
+        '#admin-menu a',
+        '.nav__toggle',
+        '.footer__social a',
+        '.info__social a',
+        '.info__section a',
+        '.content__header a',
+        '.content__rows a',
+        '.banner a'];
       this.markIgnored();
 
       // window.addEventListener('popstate', function (e) {
@@ -936,6 +995,12 @@
             next: 'next',
             slideOut: 'slide-out'
           };
+
+      // close banner if there is one
+      console.log("banner state:", self.banner.state);
+      if (self.banner.state === 1) {
+        self.banner.closeBanner();
+      }
 
       if (route === '') {
         $('.nav__toggle').addClass('home');
@@ -1075,7 +1140,7 @@
   module.exports = Navigation;
 
 })(jQuery);
-},{"../libs/flyweight":2}],6:[function(require,module,exports){
+},{"../libs/flyweight":2}],7:[function(require,module,exports){
 (function ($) {
 
   "use strict";
@@ -1090,7 +1155,6 @@
 
     name: 'Svg',
     el: '.site__hero',
-    debug: true,
 
     initialize: function () {
       var $hero = $(this.el),

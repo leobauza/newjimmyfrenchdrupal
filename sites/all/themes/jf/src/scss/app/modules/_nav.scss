@@ -13,6 +13,9 @@
   .admin-menu & {
     top: (20 + 107) + px; // 29px;
   }
+  .admin-menu.banner-on & {
+    top: (20 + 107 + $bannerHeight) + px; // 29px;
+  }
 }
 
 .overlay__item {

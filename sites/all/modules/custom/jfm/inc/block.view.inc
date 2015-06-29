@@ -12,15 +12,15 @@ function moduleView($delta) {
   switch ($delta) {
 
     case 'alert_banner':
-      $vars = array(
-        'something' => 'this is a sample!',
-      );
+      $fields = array('text', 'url', 'background', 'colour', 'show');
       break;
 
   }
 
+  // if not setting the variables yourself set them according
+  // to the fields array
   if (empty($vars)) {
-    $vars = mainModuleBaseClass::getBlockFields($fields, $delta, $uri_fields);
+    $vars = jfmModuleBaseClass::getBlockFields($fields, $delta, $uri_fields);
     $vars['delta'] = $delta;
   }
 

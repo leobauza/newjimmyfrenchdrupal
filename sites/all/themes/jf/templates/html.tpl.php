@@ -20,9 +20,8 @@
 </head>
 <?php
   // check if banner is on
-  // $banner_on = variable_get('??');
-  $banner_on = TRUE;
-  if ($banner_on === TRUE) {
+  $banner_status = variable_get('alert_banner_show', FALSE);
+  if ($banner_status) {
     $classes .= ' banner-on';
   }
 ?>

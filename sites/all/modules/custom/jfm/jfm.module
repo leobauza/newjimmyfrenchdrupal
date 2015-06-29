@@ -45,20 +45,20 @@ function jfm_block_view($delta = '') {
  *  @todo
  *    - add documentation about block.conf and moduleConfigure()
  */
-// function jfm_block_configure($delta = '') {
-//   module_load_include('inc', 'jfm', 'inc/block.conf');
-//   return moduleConfigure($delta);
-// }
+function jfm_block_configure($delta = '') {
+  module_load_include('inc', 'jfm', 'inc/block.conf');
+  return moduleConfigure($delta);
+}
 
 /**
  * Implements hook_block_save()
  * @todo
  *   - add documentation about block.conf and moduleSave()
  */
-// function jfm_block_save($delta = '', $edit = array()) {
-//   module_load_include('inc', 'jfm', 'inc/block.conf');
-//   moduleSave($delta, $edit);
-// }
+function jfm_block_save($delta = '', $edit = array()) {
+  module_load_include('inc', 'jfm', 'inc/block.conf');
+  moduleSave($delta, $edit);
+}
 
 
 /**

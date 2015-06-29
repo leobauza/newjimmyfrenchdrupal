@@ -9,12 +9,14 @@
       Menu = require('modules/menu'),
       Svg = require('modules/svg'),
       Forms = require('modules/forms'),
-      Navigation = require('modules/navigation');
+      Navigation = require('modules/navigation'),
+      Banner = require('modules/banner');
 
   var Land = 0, // landing marker
       svg, // homepage svg
       form,
       menu,
+      banner,
       Router;
 
   /**
@@ -76,8 +78,10 @@
 
       if (Land === 0) {
         menu = new Menu();
+        banner = new Banner();
       } else {
         if (menu.menu === 1) { menu.closeMenu(); }
+        // if (banner.state === 1) { banner.closeBanner(); }
       }
 
     },
@@ -130,7 +134,9 @@
   });
 
   if (Flyweight.history._usePushState) {
-    var nav = new Navigation();
+    var nav = new Navigation(document, {
+      banner: banner // pass the banner to close on page change
+    });
   }
 
 })(jQuery);

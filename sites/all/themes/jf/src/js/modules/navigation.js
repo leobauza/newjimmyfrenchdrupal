@@ -7,9 +7,9 @@
   var Navigation = Flyweight.Module.extend({
 
     name: 'Navigation',
-    // el: '.site__hero',
-    debug: true,
-
+    options: {
+      banner: {} // passing in the banner to close on page change
+    },
     initialize: function () {
 
       var self = this;
@@ -21,7 +21,16 @@
         count: 0,
         locs: []
       };
-      this.ignoreList = ['.nav-tabs a', '#admin-menu a', '.nav__toggle', '.footer__social a', '.info__social a', '.info__section a', '.content__header a', '.content__rows a'];
+      this.ignoreList = [
+        '.nav-tabs a',
+        '#admin-menu a',
+        '.nav__toggle',
+        '.footer__social a',
+        '.info__social a',
+        '.info__section a',
+        '.content__header a',
+        '.content__rows a',
+        '.banner a'];
       this.markIgnored();
 
       // window.addEventListener('popstate', function (e) {
@@ -53,6 +62,12 @@
             next: 'next',
             slideOut: 'slide-out'
           };
+
+      // close banner if there is one
+      console.log("banner state:", self.banner.state);
+      if (self.banner.state === 1) {
+        self.banner.closeBanner();
+      }
 
       if (route === '') {
         $('.nav__toggle').addClass('home');

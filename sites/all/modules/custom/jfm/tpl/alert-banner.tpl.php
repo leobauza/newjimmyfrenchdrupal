@@ -4,5 +4,9 @@
  * Alert Banner
  */
 ?>
-<a class="link" href="#">Bloodlines: Custom Playing Cards are now on Kickstarter - Reserve a deck today!</a>
-<a href="#" class="dismiss">&times;</a>
+<?php if ($show): ?>
+  <div style="background-color: <?php print $background; ?>" class="banner__inner">
+    <a style="color: <?php print $colour; ?>" class="link" target="_blank" href="<?php print $url; ?>"><?php print $text; ?></a>
+    <a href="#" class="dismiss">&times;</a>
+  </div>
+<?php endif; ?>

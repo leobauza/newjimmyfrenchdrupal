@@ -146,6 +146,7 @@ body.loading {
  */
 $T: .5s;
 .main-content {
+  @include transition(margin-top .5s);
   @include square(100%, 100%);
   &.-internal {
     padding-top: 107px;
@@ -185,9 +186,13 @@ $T: .5s;
   .page-user & {
     padding-top: 107px;
   }
+  .banner-on & {
+    margin-top: $bannerHeight + px;
+  }
 }
+
 .banner-on.admin-menu .main-content {
-  margin-top: 62px;
+  margin-top: (20 + $bannerHeight) + px; // will animate on admin logged in...
   &.next, &.slide-in, &.slide-out, &.prepare {
     top: 0px;
   }

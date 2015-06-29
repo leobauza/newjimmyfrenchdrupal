@@ -143,13 +143,19 @@
  * Banner
  */
 .banner {
+  @include transition(margin-top .5s);
   position: relative;
-  background: #015061; // temporary this gets set by the module
-  padding: 12px 0px 13px;
+  &.closed {
+    margin-top: -($bannerHeight) + px;
+  }
+  .banner__inner {
+    // background: #015061; // temporary this gets set by the module
+  }
   .link {
     display: block;
     font-size: 1.4em;
-    color: #2bde73; // temporary this gets set by the module
+    padding: 12px 0px 13px;
+    // color: #2bde73; // temporary this gets set by the module
     text-align: center;
   }
   .dismiss {
@@ -164,7 +170,6 @@
     }
   }
 }
-
 
 .mobile {
   display: none;

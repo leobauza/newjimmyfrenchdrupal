@@ -12,7 +12,6 @@
 
     name: 'Svg',
     el: '.site__hero',
-    debug: true,
 
     initialize: function () {
       var $hero = $(this.el),
