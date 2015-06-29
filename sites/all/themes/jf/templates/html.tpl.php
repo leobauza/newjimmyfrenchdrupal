@@ -18,6 +18,14 @@
     <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
   <![endif]-->
 </head>
+<?php
+  // check if banner is on
+  // $banner_on = variable_get('??');
+  $banner_on = TRUE;
+  if ($banner_on === TRUE) {
+    $classes .= ' banner-on';
+  }
+?>
 <body id="none" class="<?php print $classes; ?>" <?php print $attributes;?>>
   <?php print $page_top; ?>
   <?php print $page; ?>

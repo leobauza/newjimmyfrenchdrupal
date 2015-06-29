@@ -1,18 +1,30 @@
 <?php
 /**
  * @file
- * socialbar include
+ * Block View Include
  */
 
-function getThemeSocialBar($delta) {
+function moduleView($delta) {
 
-  $out = '';
+  $vars = array();
+  $uri_fields = array();
 
   switch ($delta) {
-    case 'social_bar':
-      $out =  theme('social_bar');
+
+    case 'alert_banner':
+      $vars = array(
+        'something' => 'this is a sample!',
+      );
       break;
+
   }
 
+  if (empty($vars)) {
+    $vars = mainModuleBaseClass::getBlockFields($fields, $delta, $uri_fields);
+    $vars['delta'] = $delta;
+  }
+
+  $out = theme($delta, $vars);
   return $out;
+
 }

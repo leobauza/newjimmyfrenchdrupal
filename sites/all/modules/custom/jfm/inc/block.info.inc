@@ -1,15 +1,14 @@
 <?php
 /**
  * @file
- * socialbar include
+ * Block Info Include
  */
 
-function getSocialBarInfo() {
-
-  myfunction();
+function makeInfo($name) {
 
   return array(
-    'info' => t('Social Bar'),
+    'info' => t($name),
     'cache' => DRUPAL_CACHE_PER_PAGE,
   );
+
 }

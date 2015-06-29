@@ -1,11 +1,14 @@
 /* app/globals/header */
 .site__header {
   position: absolute;
-  padding: 38px 0px 33px 0px;
   top: 0;
   left: 0;
   width: 100%;
   z-index: 500;
+  .inner {
+    position: relative;
+    padding: 38px 0px 33px 0px;
+  }
   .admin-menu & {
     top: 20px;// 29px;
   }
@@ -135,6 +138,33 @@
     }
   }
 }
+
+/**
+ * Banner
+ */
+.banner {
+  position: relative;
+  background: #015061; // temporary this gets set by the module
+  padding: 12px 0px 13px;
+  .link {
+    display: block;
+    font-size: 1.4em;
+    color: #2bde73; // temporary this gets set by the module
+    text-align: center;
+  }
+  .dismiss {
+    position: absolute;
+    right: 100px;
+    top: 1px;
+    color: $white;
+    font-weight: 600;
+    font-size: 3em;
+    &:hover {
+      text-decoration: none;
+    }
+  }
+}
+
 
 .mobile {
   display: none;

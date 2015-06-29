@@ -158,7 +158,7 @@ function jf_preprocess_page(&$vars) {
 function jf_preprocess_region(&$vars, $hook) {
 
   // Use a bare template for these regions.
-  $regions = array('form');
+  $regions = array('form', 'header');
 
   if (in_array($vars['region'], $regions)) {
     $vars['theme_hook_suggestions'][] = 'region__no_wrapper';
@@ -168,8 +168,14 @@ function jf_preprocess_region(&$vars, $hook) {
 
 function jf_preprocess_block(&$vars, $hook) {
 
+  $block = $vars['block'];
+
   if (isset($vars['block']) && $vars['block']->region === 'form') {
     $vars['theme_hook_suggestions'][] = 'block__forms';
+  }
+
+  if ($block->module === 'jfm') {
+    $vars['theme_hook_suggestions'][] = 'block__no_wrap';
   }
 
 }

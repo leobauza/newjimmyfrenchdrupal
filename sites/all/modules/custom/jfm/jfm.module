@@ -8,8 +8,8 @@ require_once 'jfm.core.inc';
 
 function jfm_theme($existing, $type, $theme, $path) {
   $theme = array(
-    'social_bar' => array(
-      'template' => 'social-bar',
+    'alert_banner' => array(
+      'template' => 'alert-banner',
       'path' => drupal_get_path('module', 'jfm') . '/tpl'
     ),
   );
@@ -24,20 +24,41 @@ function jfm_theme($existing, $type, $theme, $path) {
 function jfm_block_info() {
   module_load_include('inc', 'jfm', 'inc/block.info');
   $blocks = array();
-  $blocks['social_bar'] = getSocialBarInfo();
-
+  $blocks['alert_banner'] = makeInfo('Alert Banner');
   return $blocks;
 }
 
 /**
  *  Implements hook_block_view()
+ *  @todo
+ *    - add documentation about block.view and moduleView()
  */
 function jfm_block_view($delta = '') {
   module_load_include('inc', 'jfm', 'inc/block.view');
   $block = array();
-  $block['content'] = getThemeSocialBar($delta);
+  $block['content'] = moduleView($delta); // delta must mach theme key
   return $block;
 }
+
+/**
+ *  Implements hook_block_configure()
+ *  @todo
+ *    - add documentation about block.conf and moduleConfigure()
+ */
+// function jfm_block_configure($delta = '') {
+//   module_load_include('inc', 'jfm', 'inc/block.conf');
+//   return moduleConfigure($delta);
+// }
+
+/**
+ * Implements hook_block_save()
+ * @todo
+ *   - add documentation about block.conf and moduleSave()
+ */
+// function jfm_block_save($delta = '', $edit = array()) {
+//   module_load_include('inc', 'jfm', 'inc/block.conf');
+//   moduleSave($delta, $edit);
+// }
 
 
 /**

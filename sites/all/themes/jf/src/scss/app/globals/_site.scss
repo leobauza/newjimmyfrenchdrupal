@@ -153,7 +153,7 @@ $T: .5s;
   }
   &.next, &.slide-in, &.prepare, &.slide-out {
     position: absolute;
-    top: 0%;
+    top: 0px;
   }
   &.next {
     @include transition(all $T ease-in-out);
@@ -184,6 +184,12 @@ $T: .5s;
   }
   .page-user & {
     padding-top: 107px;
+  }
+}
+.banner-on.admin-menu .main-content {
+  margin-top: 62px;
+  &.next, &.slide-in, &.slide-out, &.prepare {
+    top: 0px;
   }
 }
 
