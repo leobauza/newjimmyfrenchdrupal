@@ -224,10 +224,10 @@ $path_to_images: "../images/";
   }
 }
 
-$grid-fx-time: .75s;
+$grid-fx-time: .5s;
 %img-fx {
-  transition: $grid-fx-time filter linear;
   -webkit-transition: $grid-fx-time -webkit-filter linear;
+  transition: $grid-fx-time filter linear;
   // -moz-transition: $grid-fx-time -moz-filter linear;
   // -ms-transition: $grid-fx-time -ms-filter linear;
   // -o-transition: $grid-fx-time -o-filter linear;
