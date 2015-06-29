@@ -64,8 +64,7 @@
           };
 
       // close banner if there is one
-      console.log("banner state:", self.banner.state);
-      if (self.banner.state === 1) {
+      if (self.banner.hasOwnProperty('state') && self.banner.state === 1) {
         self.banner.closeBanner();
       }
 

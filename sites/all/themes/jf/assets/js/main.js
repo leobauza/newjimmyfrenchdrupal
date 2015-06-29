@@ -78,8 +78,10 @@
     any: function () {
 
       if (Land === 0) {
-        menu = new Menu();
         banner = new Banner();
+        menu = new Menu(document, {
+          banner: banner
+        });
       } else {
         if (menu.menu === 1) { menu.closeMenu(); }
         // if (banner.state === 1) { banner.closeBanner(); }
@@ -620,10 +622,19 @@
         e.preventDefault();
       }
 
-      var self = (typeof e === 'object')? e.data.context : this;
+      var self = (typeof e === 'object')? e.data.context : this,
+          $banner = $('.banner'),
+          height = $banner.height();
 
       $('body').removeClass('banner-on');
-      $('.banner').addClass('closed');
+
+      $banner.css({
+        'margin-top': -(height) + 'px'
+      });
+
+      setTimeout(function () {
+        $banner.remove();
+      }, 550); // remove in case of resize
 
       self.state = 0;
 
@@ -736,7 +747,8 @@
     debug: true,
     options: {
       menu: 0, // menu state 0 === closed
-      delay: 100 // delay between items sliding in
+      delay: 100, // delay between items sliding in
+      banner: {}
     },
 
     initialize: function () {
@@ -899,6 +911,12 @@
           time = 0,
           row = 0;
 
+      // close banner if there is one
+      if (self.banner.hasOwnProperty('state') && self.banner.state === 1) {
+        self.banner.closeBanner();
+        console.log("yep");
+      }
+
       if ($(this).hasClass('home')) {
         var animHeight = $('.site__hero').height();
         $('html,body').animate({ scrollTop: animHeight }, 500);
@@ -997,8 +1015,7 @@
           };
 
       // close banner if there is one
-      console.log("banner state:", self.banner.state);
-      if (self.banner.state === 1) {
+      if (self.banner.hasOwnProperty('state') && self.banner.state === 1) {
         self.banner.closeBanner();
       }
 

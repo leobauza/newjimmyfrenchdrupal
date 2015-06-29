@@ -23,10 +23,19 @@
         e.preventDefault();
       }
 
-      var self = (typeof e === 'object')? e.data.context : this;
+      var self = (typeof e === 'object')? e.data.context : this,
+          $banner = $('.banner'),
+          height = $banner.height();
 
       $('body').removeClass('banner-on');
-      $('.banner').addClass('closed');
+
+      $banner.css({
+        'margin-top': -(height) + 'px'
+      });
+
+      setTimeout(function () {
+        $banner.remove();
+      }, 550); // remove in case of resize
 
       self.state = 0;
 

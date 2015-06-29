@@ -15,7 +15,8 @@
     debug: true,
     options: {
       menu: 0, // menu state 0 === closed
-      delay: 100 // delay between items sliding in
+      delay: 100, // delay between items sliding in
+      banner: {}
     },
 
     initialize: function () {
@@ -177,6 +178,12 @@
           self = e.data.context,
           time = 0,
           row = 0;
+
+      // close banner if there is one
+      if (self.banner.hasOwnProperty('state') && self.banner.state === 1) {
+        self.banner.closeBanner();
+        console.log("yep");
+      }
 
       if ($(this).hasClass('home')) {
         var animHeight = $('.site__hero').height();

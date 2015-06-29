@@ -145,23 +145,24 @@
 .banner {
   @include transition(margin-top .5s);
   position: relative;
-  &.closed {
-    margin-top: -($bannerHeight) + px;
-  }
+  // &.closed {
+  //   margin-top: -($bannerHeight) + px;
+  // }
   .banner__inner {
     // background: #015061; // temporary this gets set by the module
   }
   .link {
     display: block;
     font-size: 1.4em;
-    padding: 12px 0px 13px;
+    padding: 12px 200px 13px;
     // color: #2bde73; // temporary this gets set by the module
     text-align: center;
   }
   .dismiss {
     position: absolute;
     right: 100px;
-    top: 1px;
+    top: 50%;
+    margin-top: -19px;
     color: $white;
     font-weight: 600;
     font-size: 3em;
@@ -184,12 +185,23 @@
     left: 50px;
   }
 
+  .banner {
+    .link {
+      padding: 12px 100px 13px;
+    }
+    .dismiss {
+      right: 50px;
+    }
+  }
+
 }
 
 @media (max-width: $firstBreakpoint) { // 700px (div by 16)
 
   .site__header {
-    padding: 20px 0px 15px;
+    .inner {
+      padding: 20px 0px 15px;
+    }
   }
   #brand {
     width: 65%;

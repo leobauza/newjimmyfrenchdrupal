@@ -77,8 +77,10 @@
     any: function () {
 
       if (Land === 0) {
-        menu = new Menu();
         banner = new Banner();
+        menu = new Menu(document, {
+          banner: banner
+        });
       } else {
         if (menu.menu === 1) { menu.closeMenu(); }
         // if (banner.state === 1) { banner.closeBanner(); }
