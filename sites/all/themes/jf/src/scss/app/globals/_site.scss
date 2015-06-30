@@ -386,6 +386,14 @@ $T: .5s;
     max-width: 50%;
   }
 
+  .item__title {
+    display: none;
+    span {
+      font-size: 1.2em;
+      padding: 0 5px;
+    }
+  }
+
   .main-content {
     overflow: hidden;
     &.-internal {

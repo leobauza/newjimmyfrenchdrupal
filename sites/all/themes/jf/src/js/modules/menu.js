@@ -21,14 +21,25 @@
 
     initialize: function () {
 
-      var self = this;
+      var self = this,
+          winWidth = $(window).width();
 
       self.toggle = '.nav__toggle';
       self.items = $('.overlay__item');
       self.mobilewidth = 700; // used to be 959
 
+
       $(window).resize(function () {
+        var newWinWidth = $(window).width();
+
+        if (winWidth === newWinWidth) {
+          return;
+        }
+
         if (self.menu === 1) { self.closeMenu(); }
+
+        winWidth = newWinWidth;
+
       });
 
     },
@@ -182,7 +193,6 @@
       // close banner if there is one
       if (self.banner.hasOwnProperty('state') && self.banner.state === 1) {
         self.banner.closeBanner();
-        console.log("yep");
       }
 
       if ($(this).hasClass('home')) {
@@ -201,10 +211,6 @@
 
       self.menu = 2; //transition period cancels all clicks
 
-    },
-
-    onDelegated: function (e) {
-      // hi
     },
 
     events: {

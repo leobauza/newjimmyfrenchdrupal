@@ -203,11 +203,13 @@
       padding: 20px 0px 15px;
     }
   }
+
   #brand {
     width: 65%;
     font-size: 2em;
     padding: 2px 0px;
   }
+
   .info__toggle {
     right: 20px;
     top: 25px;
@@ -222,10 +224,22 @@
       border:none;
     }
   }
+
   .nav__toggle {
     left: 20px;
     top: 21px;
+  }
 
+  .banner {
+    .link {
+      padding: 10px 20px 10px;
+      font-size: 1.2em;
+    }
+    .dismiss {
+      font-size: 2em;
+      margin-top: -12px;
+      right: 5px;
+    }
   }
 
 }
