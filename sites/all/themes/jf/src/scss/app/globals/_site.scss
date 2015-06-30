@@ -384,6 +384,12 @@ $T: .5s;
   .grid__item {
     @include flex(1 0 50%);
     max-width: 50%;
+    &:hover {
+      img {
+        -webkit-filter: blur(0px);
+        filter: blur(0px);
+      }
+    }
   }
 
   .item__title {

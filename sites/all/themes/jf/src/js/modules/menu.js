@@ -99,7 +99,8 @@
           $items = self.items,
           winWidth = $(window).width(),
           thewidth = self.mobilewidth,
-          itemsAcross = (winWidth <= thewidth)? 2 : 3;
+          itemsAcross = (winWidth <= thewidth)? 2 : 3,
+          $mainHeight = $('.main-content').height();
 
       self.multiStepAnimation({
         selector: '.overlay',
@@ -115,6 +116,7 @@
         method: 'addClass'
       });
 
+      $('.overlay__background').height($mainHeight);
 
       $.each($items, function (key, item) {
 
@@ -142,6 +144,8 @@
           target = self.toggle,
           $items = self.items,
           $reverseItems = $items.get().reverse(); // in reverse!
+
+      $('.overlay__background').height(0);
 
       $.each($reverseItems, function (key, item) {
 
@@ -213,8 +217,13 @@
 
     },
 
+    blurImageHelper: function (e) {
+
+    },
+
     events: {
-      'click .nav__toggle' : 'toggleMenu'
+      'click .nav__toggle' : 'toggleMenu',
+      'mouseenter .grid__item' : 'blurImageHelper'
     }
 
   });
