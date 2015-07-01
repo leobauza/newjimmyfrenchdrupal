@@ -412,6 +412,17 @@ $T: .5s;
       padding-top: 63px;
     }
   }
+  .banner-on {
+    .main-content {
+      margin-top: 33px;
+    }
+    &.admin-menu {
+      .main-content {
+        margin-top: 53px;
+      }
+    }
+  }
+
 
   .site__hero, .intro__image {
     width: 150%;
