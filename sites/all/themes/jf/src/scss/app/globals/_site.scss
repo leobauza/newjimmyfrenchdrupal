@@ -29,18 +29,17 @@ body.loading {
 .grid__item {
   overflow: hidden;
   @include flex(1 0 33.3333333%);
-  background: $offblack;
+  // background: $offblack;
   position: relative;
   max-width: 33.333333%;
   img {
     @extend %img-fx;
-    // @include transition(all .25);
     display: block;
     width: 100%;
   }
   &:hover {
     img {
-      @extend %img-fx-hover;
+      // @extend %img-fx-hover;
     }
     .item__title {
       // height: 100%;
@@ -48,6 +47,11 @@ body.loading {
       span {
         opacity: 1;
       }
+    }
+  }
+  &.hover-helper {
+    img {
+      @extend %img-fx-hover;
     }
   }
 }

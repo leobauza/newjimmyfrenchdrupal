@@ -183,7 +183,7 @@
         return check;
       };
       // if it is NOT mobile pageChange
-      if (!mobi) {
+      if (!mobi()) {
         self.pageChange(href, where);
       } else {
         location.href = "/" + href;
