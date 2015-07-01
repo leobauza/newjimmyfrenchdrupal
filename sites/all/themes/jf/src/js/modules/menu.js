@@ -231,6 +231,16 @@
         return;
       }
 
+      var ua = navigator.userAgent.toLowerCase();
+        if (ua.indexOf('safari') != -1) {
+          if (ua.indexOf('chrome') > -1) {
+            // don't disable chrome
+          } else {
+            return; //disable safari for now
+          }
+        }
+
+
       var $this = $(this),
           styles = {
             top: $this.css('top'),
@@ -242,9 +252,15 @@
           h = $this.height();
 
       if (!data.state || data.state === false) {
+
+        $this.css({
+          width: w + 'px',
+          height: h + 'px'
+        }).addClass('hover-helper');
         data.state = true;
-        $this.width(w).height(h).addClass('hover-helper');
+
       } else {
+
         $this.removeClass('hover-helper');
         setTimeout(function () {
           if (styles.top !== 'auto' && styles.left !== 'auto') {
@@ -257,14 +273,17 @@
           }
         }, 500);
         data.state = false;
+
       }
 
     },
 
     events: {
       'click .nav__toggle' : 'toggleMenu',
-      'mouseenter .grid__item, .overlay__item' : 'blurImageHelper',
-      'mouseleave .grid__item, .overlay__item' : 'blurImageHelper'
+      'mouseenter .grid__item' : 'blurImageHelper',
+      'mouseleave .grid__item' : 'blurImageHelper',
+      'mouseenter .overlay__item' : 'blurImageHelper',
+      'mouseleave .overlay__item' : 'blurImageHelper'
     }
 
   });

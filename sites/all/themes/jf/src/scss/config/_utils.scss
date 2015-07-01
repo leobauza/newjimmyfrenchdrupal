@@ -237,8 +237,8 @@ $grid-fx-time: .5s;
   // -o-transition: $grid-fx-time -o-filter linear;
 }
 %img-fx-hover {
-  @include scale(1.25, 1.25);
-  max-width: none;
+  @include scale(1.25);
+  // max-width: none;
   // -webkit-filter: blur(1px);
   // filter: blur(1px);
   // max-width: none;
