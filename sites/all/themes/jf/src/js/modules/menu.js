@@ -254,7 +254,6 @@
       if (!data.state || data.state === false) {
 
         if ($this.hasClass('hover-helper')) { return; }
-        console.log(e, this);
         $this.addClass('hover-helper');
         $this.find('.item__title').width(w).height(h);
         data.state = true;

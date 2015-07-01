@@ -2,6 +2,7 @@ var gulp = require('gulp'),
     rename = require('gulp-rename'),
     browserify = require('browserify'),
     watchify = require('watchify'),
+    uglify = require('gulp-uglify'),
     transform = require('vinyl-transform'),
     handleErrors = require('../util/handleErrors'),
     bundleLogger = require('../util/bundleLogger'),
@@ -53,6 +54,8 @@ gulp.task('browserify', function () {
 
       return gulp.src([bundleConfig.entry])
         .pipe(bundle)
+        .on('error', handleErrors)
+        .pipe(uglify())
         .on('error', handleErrors)
         .pipe(rename(bundleConfig.outputName))
         .pipe(gulp.dest(bundleConfig.dest))
