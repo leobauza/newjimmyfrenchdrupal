@@ -42,7 +42,7 @@ body.loading {
       // @extend %img-fx-hover;
     }
     .item__title {
-      height: 100%;
+      // height: 100%;
       opacity: 1;
       span {
         opacity: 1;
@@ -59,7 +59,7 @@ body.loading {
 }
 
 .item__title {
-  @include transition(height $grid-fx-time, opacity $grid-fx-time);
+  @include transition(opacity $grid-fx-time);
   opacity: 0;
   position: absolute;
   bottom: 0;

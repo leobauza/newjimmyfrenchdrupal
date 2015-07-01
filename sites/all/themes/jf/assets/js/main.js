@@ -968,7 +968,7 @@
           if (ua.indexOf('chrome') > -1) {
             // don't disable chrome
           } else {
-            return; //disable safari for now
+            // return; //disable safari for now
           }
         }
 
@@ -985,24 +985,25 @@
 
       if (!data.state || data.state === false) {
 
-        $this.css({
-          width: w + 'px',
-          height: h + 'px'
-        }).addClass('hover-helper');
+        if ($this.hasClass('hover-helper')) { return; }
+        console.log(e, this);
+        $this.addClass('hover-helper');
+        $this.find('.item__title').width(w).height(h);
         data.state = true;
 
-      } else {
+      } else if (data.state === true) {
 
         $this.removeClass('hover-helper');
         setTimeout(function () {
-          if (styles.top !== 'auto' && styles.left !== 'auto') {
-            $this.attr('style', '').css({
-              top: styles.top,
-              left: styles.left
-            });
-          } else {
-            $this.attr('style', '');
-          }
+          $this.find('.item__title').attr('style', '');
+          // if (styles.top !== 'auto' && styles.left !== 'auto') {
+          //   $this.attr('style', '').css({
+          //     top: styles.top,
+          //     left: styles.left
+          //   });
+          // } else {
+          //   $this.attr('style', '');
+          // }
         }, 500);
         data.state = false;
 
