@@ -101,7 +101,8 @@
             $clone = $('.main-content').clone()
               .addClass(transitionClasses.next)
               .html($incomingMain.html()),
-            T = 750;
+            T = 750,
+            $title = $data.filter('title').text();
 
         /**
          * Prepare original for departure
@@ -133,7 +134,11 @@
           $original.remove();
           $clone.removeClass(transitionClasses.next + ' slide-in');
           // popstate changes address bar prematurely (normalize that)
-          $(document).trigger('pageChange', { route: route });
+          $(document).trigger('pageChange', {
+            route: route,
+            path: where,
+            title: $title
+          });
         }, T);
 
         /**
@@ -142,7 +147,7 @@
         self.markIgnored();
 
         self.transitioning = false;
-        document.title = $data.filter('title').text();
+        document.title = $title;
         self.where = where; // set location on Navigation object
         Flyweight.history.navigate(href, { trigger: true });
 

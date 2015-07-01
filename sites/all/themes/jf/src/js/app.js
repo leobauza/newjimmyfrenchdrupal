@@ -30,6 +30,12 @@
    */
   $(document).on('pageChange', function (e, params) {
 
+
+    // update google analytics
+    if (typeof ga === 'function') {
+      ga('send', 'pageview', {'page': '/' + params.path, 'title': params.title + ' -- Ajax Load'});
+    }
+
     switch (params.route) {
       case 'about':
         if (typeof form === 'object' && 'initialize' in form) {
